@@ -1,5 +1,5 @@
 //Evan Bottomley
-//Updated Oct. 10, 2015
+//Updated Oct. 12, 2015
 
 import java.util.*;
 public class Simulation {
