@@ -56,10 +56,10 @@ public class Simulation {
 		int r;
 		for (int i = 0; i < 5; i++) {
 			r = rand.nextInt(allUser.size());
-			u = new Consumer(("Consumer"+i), availableTags.get(r));
+			u = new Consumer(("Consumer"+i), availableTags.get(r), this);
 			allUser.add(u);
 			r = rand.nextInt(allUser.size());
-			u = new Producer(("Producer"+i), availableTags.get(r));
+			u = new Producer(("Producer"+i), availableTags.get(r), this);
 			allUser.add(u);
 		}
 		//Add documents
