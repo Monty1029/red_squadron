@@ -30,7 +30,7 @@ public abstract class User {
 	private String taste;				//a single tag they are interested in
 	private HashSet<User> following;		//list of users this user is following, list is implemented as an ArrayList
 	private int followed;				//number of users this user has followed
-	
+	private Simulation sim;
 	
 	//////////////////////////////////////////////
 	//											//
@@ -62,18 +62,19 @@ public abstract class User {
 	 * @param username the username to assign this user
 	 * @param taste the tag the user is most interested in
 	 */
-	User(String username, String taste)
+	User(String username, String taste, Simulation sim)
 	{
 		this.username = username;			//set user's username
 		this.taste = taste;					//set user's taste
 		following = new HashSet<>();		//empty ArrayList to maintain who they follow
 		followed = 0;						//user has not followed anyone as soon as the account is created
+		this.sim = sim;
 	}
 	
 	/**
 	 * Default constructor, setting the username and taste to "none" as no parameters are passed, call stronger constructor
 	 */
-	User(){this("none","none");}
+	User(Simulation sim){this("none","none", sim);}
 	
 	
 	//////////////////////////////////////////////
@@ -118,6 +119,14 @@ public abstract class User {
 	 */
 	public void wasFollowed(){followed++;}
 	
-	
+	/**
+	 * Method to determine if the User has liked any documents
+	 * @return whether this user has liked any documents
+	 */
+	public boolean hasLiked()
+	{
+		if(this.sim.getHash().get(this) != null){return true;}
+		return false;
+	}
 	
 }
