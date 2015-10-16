@@ -26,11 +26,11 @@ public abstract class User {
 	//											//
 	//////////////////////////////////////////////
 	
-	private String username;			//name of the user, not unique to a user
-	private String taste;				//a single tag they are interested in
-	private HashSet<User> following;	//list of users this user is following, list is implemented as an ArrayList
-	private int followed;				//number of users this user has followed
-	private Simulation sim;				//reference to the simulation
+	protected String username;			//name of the user, not unique to a user
+	protected String taste;				//a single tag they are interested in
+	protected HashSet<User> following;	//list of users this user is following, list is implemented as an ArrayList
+	protected int followed;				//number of users this user has followed
+	protected Simulation sim;			//reference to the simulation
 	
 	//////////////////////////////////////////////
 	//											//
@@ -41,14 +41,15 @@ public abstract class User {
 	/**
 	 * Method to separately define the action for each subclass of User
 	 * @param documents list of Document objects to perform user's action with
+	 * @return 
 	 */
-	public abstract void act(List<Document> documents);
+	public abstract List<Document> act(List<Document> documents);
 	
 	/**
 	 * Method to separately define the payoff calculation for each subclass of User
 	 * @param documents list of Document objects to perform user's action with
 	 */
-	public abstract void payoff(List<Document> documents);
+	public abstract int payoff(List<Document> documents);
 	
 	
 	//////////////////////////////////////////////
@@ -125,7 +126,7 @@ public abstract class User {
 	 * Method to determine if the User has liked any documents
 	 * @return whether this user has liked any documents
 	 */
-	public boolean hasLiked()
+	public boolean hasLikedAny()
 	{
 		if(this.sim.getHash().get(this) != null){return true;}
 		return false;
