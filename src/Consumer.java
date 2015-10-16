@@ -7,10 +7,9 @@
 import java.util.*;
 
 public class Consumer extends User {
-	
-	public Consumer(String username, String taste) {
-		super(String username, String taste);
 
+	public Consumer(String username, String taste, Simulation sim) {
+		super(username, taste, sim);
 	}
 
 	public ArrayList<Document> act(ArrayList<Document> d) {
@@ -40,7 +39,14 @@ public class Consumer extends User {
 	 */
 
 	public int payoff(ArrayList<Document> d) {
-		return 0;
+		int pointCounter = 0;
+
+		for (Document d : docs) {
+			if ((d.getTag().equals(super.getTaste())) && (super.hasLiked())) {
+				pointCounter++;
+			}
+		}
+		return pointerCounter;
 	}
 
 }

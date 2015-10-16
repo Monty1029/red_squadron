@@ -10,8 +10,8 @@ public class Producer extends User {
 
 	private List<Document> produced;
 
-	public Producer(String username, String taste) {
-		super(String username, String taste);
+	public Producer(String username, String taste, Simulation sim) {
+		super(username, taste, sim);
 		produced = new ArrayList<Document>();
 	}
 
@@ -56,12 +56,14 @@ public class Producer extends User {
 		 * 	return counter value
 		 */
 		
-		/*int pointCounter = 0;
+		int pointCounter = 0;
 		
 		for (Document d : docs) {
-			if ((d.getTag().equals(super.getTaste())) && 
-		}*/
-		return 0;
+			if ((d.getTag().equals(super.getTaste())) && (super.hasLiked())) {
+				pointCounter++;
+			}
+		}
+		return pointerCounter;
 	}
 
 }
