@@ -37,6 +37,16 @@ public class Consumer extends User {
 		for (Document d : allDocs) {
 			if (d.getTag().equals(super.getTaste())) {
 				sameTagDocs.add(d);
+				
+				//follow people who like the document
+				for(User u: d.getLikedUsers())
+				{
+					if(!u.equals(this))	//if that user is not this user
+					{
+						follow(u);
+					}
+				}
+				
 				d.likeDoc(this);
 				toprint += d.getName() + "(" + d.getTag() + ") ";
 			}

@@ -69,6 +69,15 @@ public class Document implements Comparable<Document> {
 	public boolean hasLiked(User u){
 		return list.contains(u);
 	}
+	
+	/**
+	 * Gets the users who have liked the document
+	 * @return the HashSet of users who like the document
+	 */
+	public HashSet<User> getLikedUsers()
+	{
+		return list;
+	}
 
 	/**
 	 * Comparison method

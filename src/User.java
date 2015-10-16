@@ -118,7 +118,11 @@ public abstract class User {
 	 * Method to add a User to the list of followed Users
 	 * @param user the User that the user the method is called on wishes to follow
 	 */
-	public void follow(User user){following.add(user);}
+	public void follow(User user)
+	{
+		following.add(user);		//follow the User
+		user.wasFollowed();			//let them know they were followed
+	}
 	
 	/**
 	 * If the User is followed, increment the number of people who have followed this User

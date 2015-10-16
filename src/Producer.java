@@ -43,7 +43,18 @@ public class Producer extends User {
 			if (d.getTag().equals(super.getTaste())) {
 				sameTagDocs.add(d);
 				if(!d.hasLiked(this)){	//like the document if they have not liked it before
+					
+					//follow people who like the document
+					for(User u: d.getLikedUsers())
+					{
+						if(!u.equals(this))	//if that user is not this user
+						{
+							follow(u);
+						}
+					}
+					
 					d.likeDoc(this);
+					
 				}
 				
 				toprint += d.getName() + "(" + d.getTag() + ") ";
