@@ -5,7 +5,13 @@
 
 import java.util.*;
 
+/**
+ * Sub-class of a User that likes and ranks other documents
+ * @author Monty Dhanani
+ *
+ */
 public class Consumer extends User {
+	
 	/**
 	 * Creates a Consumer object
 	 * @param username of the Consumer
@@ -19,6 +25,7 @@ public class Consumer extends User {
 	/**
 	 * Cycles through all the existing documents and returns an ArrayList
 	 * of Documents with the same taste as the Consumer
+	 * @param allDocs list of all existing documents
 	 */
 	public List<Document> act(List<Document> allDocs) {
 		String toprint = "" + super.getName() + "(" + super.getTaste() + ") " + " likes: ";

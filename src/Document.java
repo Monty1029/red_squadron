@@ -3,6 +3,12 @@ import java.util.HashSet;
 
 //Author: Bronwyn Skelley
 //Version:1 Date: October 12th
+
+/**
+ * A Document object, that has a tag, name, and people who like it
+ * @author Bronwyn Skelley
+ *
+ */
 public class Document implements Comparable<Document> {
 	private int like;
 	private String name;
@@ -23,7 +29,7 @@ public class Document implements Comparable<Document> {
 	
 	
 	/**
-	 * gets the tag of document
+	 * Gets the tag of document
 	 * @return tag of document 
 	 */
 	public String getTag(){
@@ -31,7 +37,7 @@ public class Document implements Comparable<Document> {
 	}
 	
 	/**
-	 * gets name of document
+	 * Gets name of document
 	 * @return name of document
 	 */
 	public String getName(){
@@ -39,7 +45,7 @@ public class Document implements Comparable<Document> {
 	}
 	
 	/**
-	 * gets how many times the document has been liked
+	 * Gets how many times the document has been liked
 	 * @return how many times the document has been liked
 	 */
 	public int getLikes(){
@@ -48,7 +54,7 @@ public class Document implements Comparable<Document> {
 	
 	
 	/**
-	 * increments by one the likes of the document
+	 * Increments by one the likes of the document
 	 * @param u the user liking the document
 	 */
 	public void likeDoc(User u){
@@ -56,7 +62,7 @@ public class Document implements Comparable<Document> {
 	}
 
 	/**
-	 * determiens if user has liked document before
+	 * Determines if user has liked document before
 	 * @param u the user checking if it likes it
 	 * @return if the user has liked it
 	 */
@@ -65,9 +71,9 @@ public class Document implements Comparable<Document> {
 	}
 
 	/**
-	 * comparison method
+	 * Comparison method
 	 * @param arg0 the document to compare to
-	 * @return
+	 * @return comparison value
 	 */
 	public int compareTo(Document arg0) {
 		return arg0.getLikes() - this.getLikes() ;

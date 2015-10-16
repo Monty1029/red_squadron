@@ -5,10 +5,21 @@
 
 import java.util.*;
 
+/**
+ * Sub-class of a User that creates Documents and likes them as soon as they are created, can also like and rank other document
+ * @author Monty Dhanani
+ *
+ */
 public class Producer extends User {
 
 	private List<Document> produced;
 
+	/**
+	 * Creates a new Producer object
+	 * @param username name of user
+	 * @param taste preferred taste of user
+	 * @param sim the simulation
+	 */
 	public Producer(String username, String taste, Simulation sim) {
 		super(username, taste, sim);
 		produced = new ArrayList<Document>();
@@ -18,6 +29,7 @@ public class Producer extends User {
 	 * Cycles through all the existing documents and returns an ArrayList
 	 * of Documents with the same taste as the Consumer.
 	 * Producer also likes every Document it creates
+	 * @param allDocs list of all existing documents
 	 */
 	public List<Document> act(List<Document> allDocs) {
 		String toprint = "" + super.getName() + "(" + super.getTaste() + ") " + " likes: ";
@@ -98,11 +110,5 @@ public class Producer extends User {
 		System.out.println("" + super.getName() + " payoff: " + pointCounter + "");
 		return pointCounter;
 	}
-
-
-
-
-
-	
 
 }

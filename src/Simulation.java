@@ -2,6 +2,12 @@
 //Updated Oct. 16, 2015
 
 import java.util.*;
+
+/**
+ * Manages a collection of Users and Documents
+ * @author Evan Bottomley
+ *
+ */
 public class Simulation {
 
 	private List<String> allTags;
@@ -10,12 +16,18 @@ public class Simulation {
 	private List<Document> allDoc;
 	private List<User> allUser;
 	
+	/**
+	 * Default constructor, arbitrarily set to 5
+	 */
 	public Simulation() {
 		this(5);
 	}
 	
-	//Create new Simulation, fill out allTags list and availableTags list. Integer passed is the number
-	//of tags that will be used (stored in availableTags).
+	
+	/**
+	 * Primary constructor, create new Simulations, fills out allTags list and availableTags list
+	 * @param n number of different tags that will be used in the simulation
+	 */
 	public Simulation(int n) {
 		allTags = new ArrayList<String>();
 		availableTags = new ArrayList<String>();
@@ -39,7 +51,11 @@ public class Simulation {
 		}
 	}
 	
-	//Add a user's document like to the hashmap
+	/**
+	 * Add a user's document like to the hashmap
+	 * @param user the User key
+	 * @param doc the Document to add
+	 */
 	public void addLike(User user, Document doc) {
 		if (map.containsKey(user)) { //If user is in the hashmap, add document to the ArrayList
 			map.get(user).add(doc);
@@ -51,7 +67,13 @@ public class Simulation {
 		}
 	}
 	
-	//Seed the simulation with n1 consumers, n2 producers and n3 documents.
+	
+	/**
+	 * Seed the simulation with n1 consumers, n2 producers and n3 documents
+	 * @param n1 number of consumers
+	 * @param n2 number of producers
+	 * @param n3 number of documents to begin the simulation with
+	 */
 	public void seed(int n1, int n2, int n3) {
 		//Add users
 		User u;
@@ -87,7 +109,10 @@ public class Simulation {
 		System.out.println("\n");
 	}
 	
-	//Print the list of available tags in the simulation
+	
+	/**
+	 * Print the list of available tags in the simulation
+	 */
 	private void printTags() {
 		System.out.print("Available Tags:");
 		for(int i = 0; i < availableTags.size(); i++) {
@@ -96,13 +121,17 @@ public class Simulation {
 		System.out.println("");
 	}
 	
-	//Return the hashMap of users and liked documents
+
+	/**
+	 * Return the hashMap of users and liked documents
+	 * @return the hashMap of users and liked documents
+	 */
 	public HashMap<User, ArrayList<Document>> getHash() {
 		return map;
 	}
 	
 	/**
-	 * method for a producer to add the new document
+	 * Method for a producer to add the new document
 	 * @param doc document to add
 	 */
 	public void addDoc(Document doc)
@@ -111,7 +140,11 @@ public class Simulation {
 	}
 	
 
-	//Main function creates a simulation, seeds it and runs for x iterations
+	
+	/**
+	 * Main function creates a simulation, seeds it and runs for x iterations
+	 * @param args not used currently
+	 */
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
 		Simulation sim = new Simulation(5);
@@ -130,9 +163,6 @@ public class Simulation {
 			}
 			loops++;
 		}
-		
-		
-		
 		
 		
 		System.out.println("End simulation.");

@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Abstract class with Consumer and Producer inheriting from class User
+ * @author Garrett Steele
  */
 public abstract class User {
 
@@ -41,13 +42,14 @@ public abstract class User {
 	/**
 	 * Method to separately define the action for each subclass of User
 	 * @param documents list of Document objects to perform user's action with
-	 * @return 
+	 * @return list of documents the User likes
 	 */
 	public abstract List<Document> act(List<Document> documents);
 	
 	/**
 	 * Method to separately define the payoff calculation for each subclass of User
 	 * @param documents list of Document objects to perform user's action with
+	 * @return the value of the User's payoff for the list of documents passed
 	 */
 	public abstract int payoff(List<Document> documents);
 	
@@ -75,7 +77,8 @@ public abstract class User {
 	
 	/**
 	 * Default constructor, setting the username and taste to "none" as no parameters are passed, call stronger constructor
-	 *  * @param sim reference to the simulation
+	 * @param sim reference to the simulation
+	 *  
 	 */
 	User(Simulation sim){this("none","none", sim);}
 	
