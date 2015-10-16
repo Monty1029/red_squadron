@@ -20,6 +20,21 @@ public class Simulation {
 		map = new HashMap<User, ArrayList<Document>>();
 		allDoc = new ArrayList<Document>();
 		allUser = new ArrayList<User>();
+		allTags.add("Jazz");
+		allTags.add("Techno");
+		allTags.add("Metal");
+		allTags.add("Classical");
+		allTags.add("Rock");
+		Random rand = new Random();
+		int r;
+		String s;
+		if (n > allTags.size()) n = allTags.size();
+		for (int i = 0; i < n; i++) {
+			r = rand.nextInt(allTags.size());
+			s = allTags.get(i);
+			availableTags.add(s);
+			allTags.remove(s);
+		}
 	}
 	
 	//Add a user's document like to the hashmap
@@ -35,30 +50,29 @@ public class Simulation {
 	}
 	
 	public void seed() {
-		allTags.add("Jazz");
-		allTags.add("Techno");
-		allTags.add("Metal");
-		allTags.add("Classical");
-		allTags.add("Rock");
 		//Add users
 		User u;
 		Random rand = new Random();
 		int r;
 		for (int i = 0; i < 5; i++) {
 			r = rand.nextInt(allUser.size());
-			u = new Consumer(("Consumer"+i), allTags.get(r));
+			u = new Consumer(("Consumer"+i), availableTags.get(r));
 			allUser.add(u);
 			r = rand.nextInt(allUser.size());
-			u = new Producer(("Producer"+i), allTags.get(r));
+			u = new Producer(("Producer"+i), availableTags.get(r));
 			allUser.add(u);
 		}
 		//Add documents
 		Document d;
 		for (int i = 0; i < 5; i++) {
 			r = rand.nextInt(allUser.size());
-			d = new Document(("Doc" + i), allTags.get(r));
+			d = new Document(("Doc" + i), availableTags.get(r));
 			allDoc.add(d);
 		}
+	}
+	
+	public HashMap<User, ArrayList<Document>> getHash() {
+		return map;
 	}
 
 	public static void main(String[] args) {
@@ -69,7 +83,7 @@ public class Simulation {
 		int x;
 		int loops = 0;
 		List<Document> liked;
-		while(loops < 100) {
+		while(loops < 50) {
 			x = rand.nextInt(sim.allUser.size());
 			User acting = sim.allUser.get(x);
 			liked = acting.act(sim.allDoc);
