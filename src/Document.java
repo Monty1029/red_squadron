@@ -6,8 +6,7 @@ public class Document {
 	private String tag;
 	
 	
-	//Contrsuctors
-	public Document(){}
+	//Contrsuctor
 	
 	public Document(String name, String tag){
 		this.name = name;
