@@ -61,7 +61,7 @@ public abstract class User {
 	//////////////////////////////////////////////
 	
 	/**
-	 * Constructor for when
+	 * Constructor for when username, taste, and the Simulation are passed
 	 * @param username the username to assign this user
 	 * @param taste the tag the user is most interested in
 	 * @param sim reference to the simulation
