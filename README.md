@@ -62,7 +62,7 @@
 	   - the same ".jar" is executable in a Java console where the Simulation class is the start of execution with the main(String[] args) method
 	   - a "User_Manual_M1.pdf" detailing how to extract and execute the ".jar" file
 	   - a "Design_Decisions_M1.pdf" detailing the design decisions made for the project as a whole, and in the individual Java classes
-	
+	   - a "Milestone1_UML.jpg" of the project design
 	
 	
 	//////////////////////////////////////////////////////////////////////////
