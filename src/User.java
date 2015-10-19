@@ -120,8 +120,11 @@ public abstract class User {
 	 */
 	public void follow(User user)
 	{
-		following.add(user);		//follow the User
-		user.wasFollowed();			//let them know they were followed
+		if(!following.contains(user)){
+			user.wasFollowed();			//let them know they were followed
+			following.add(user);		//follow the User
+		}
+		
 	}
 	
 	/**
