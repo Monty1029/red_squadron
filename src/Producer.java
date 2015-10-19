@@ -102,21 +102,17 @@ public class Producer extends User {
 	}
 
 	/**
-	 * Cycles through the list of ranked documents and every time it sees
-	 * a document that matches the Producer's taste, and if the Producer hasn't liked it yet,
-	 * increment a counter by 1.
+	 * Calculates a payoff based on followers and documents liked that were produced
 	 * @param docs is a list of ranked documents
 	 * @return the number of documents that appear in the ranked list that
 	 * 			match the Producer's taste
 	 */
 	public int payoff(List<Document> docs) {
 		
-		int pointCounter = 0; //Keeps track of how many documents appear that match the Producer's taste
+		int pointCounter = super.followed; //keeps track of how many likes there are in the produced documents
 		
-		for (Document d : docs) {
-			if ((d.getTag().equals(super.getTaste())) && (!d.hasLiked(this))) {
-				pointCounter++;
-			}
+		for (Document d : produced) {
+				pointCounter+= d.getLikes();
 		}
 		System.out.println("" + super.getName() + " payoff: " + pointCounter + "");
 		return pointCounter;
