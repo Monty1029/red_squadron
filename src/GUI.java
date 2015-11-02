@@ -7,6 +7,18 @@ import java.awt.*;
 import javax.swing.*;
 
 public class GUI {
+	
+	public static JLabel consumersLabel;
+	public static JTextField consumersField;
+	public static JLabel producersLabel;
+	public static JTextField producersField;
+	public static JLabel iterationsLabel;
+	public static JTextField iterationsField;
+	public static JLabel rankLabel;
+	public static JTextField rankField;
+	public static JButton startButton;
+	public static JButton stepButton;
+	public static JTextArea textArea;
 
     public static void addComponentsToPane(Container pane) {
     	pane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -15,14 +27,14 @@ public class GUI {
     	
     	Color textColor = new Color(225,225,225);
     	
-    	JLabel consumersLabel = new JLabel("Number of Consumers");
+    	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 0;
     	pane.add(consumersLabel, c);
     	
-    	JTextField consumersField = new JTextField();
+    	consumersField = new JTextField();
     	consumersField.setColumns(8);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.weightx = 3.0;
@@ -30,14 +42,14 @@ public class GUI {
     	c.gridy = 0;
     	pane.add(consumersField, c);
     	
-    	JLabel producersLabel = new JLabel("Number of Producers");
+    	producersLabel = new JLabel("Number of Producers");
     	producersLabel.setForeground(textColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 1;
     	pane.add(producersLabel, c);
     	
-    	JTextField producersField = new JTextField();
+    	producersField = new JTextField();
     	producersField.setColumns(8);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.weightx = 3.0;
@@ -45,14 +57,14 @@ public class GUI {
     	c.gridy = 1;
     	pane.add(producersField, c);
     	
-    	JLabel iterationsLabel = new JLabel("Number of Iterations");
+    	iterationsLabel = new JLabel("Number of Iterations");
     	iterationsLabel.setForeground(textColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 2;
     	pane.add(iterationsLabel, c);
     	
-    	JTextField iterationsField = new JTextField();
+    	iterationsField = new JTextField();
     	iterationsField.setColumns(8);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.weightx = 3.0;
@@ -60,28 +72,28 @@ public class GUI {
     	c.gridy = 2;
     	pane.add(iterationsField, c);
     	
-    	JLabel rankLabel = new JLabel("Max Top Ranks");
+    	rankLabel = new JLabel("Max Top Ranks");
     	rankLabel.setForeground(textColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 3;
     	pane.add(rankLabel, c);
     	
-    	JTextField rankField = new JTextField();
+    	rankField = new JTextField();
     	rankField.setColumns(8);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 1;
     	c.gridy = 3;
     	pane.add(rankField, c);
     	
-    	JButton startButton = new JButton("<html><font color=#960000>Start Simulation</font></html>");
+    	startButton = new JButton("<html><font color=#960000>Start Simulation</font></html>");
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 4;
     	startButton.setBackground(new Color(255,200,200));
     	pane.add(startButton, c);
     	
-    	JButton stepButton = new JButton("<html><font color=#960000>Next Step</font></html>");
+    	stepButton = new JButton("<html><font color=#960000>Next Step</font></html>");
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridwidth = 2;
     	c.gridx = 1;
@@ -89,7 +101,7 @@ public class GUI {
     	stepButton.setBackground(new Color(255,200,200));
     	pane.add(stepButton, c);
     	
-    	JTextArea textArea = new JTextArea(10,1);
+    	textArea = new JTextArea(10,1);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridwidth = 2;
     	c.gridx = 0;
