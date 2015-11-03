@@ -8,18 +8,18 @@ import javax.swing.*;
 
 public class GUI {
 	
-	public JLabel consumersLabel;
-	public JTextField consumersField;
-	public JLabel producersLabel;
-	public JTextField producersField;
-	public JLabel iterationsLabel;
-	public JTextField iterationsField;
-	public JLabel rankLabel;
-	public JTextField rankField;
-	public JButton startButton;
-	public JButton stepButton;
-	public JTextArea textArea;
-	public JFrame frame;
+	private JLabel consumersLabel;
+	private JSpinner consumersSpinner;
+	private JLabel producersLabel;
+	private JSpinner producersSpinner;
+	private JLabel iterationsLabel;
+	private JSpinner iterationsSpinner;
+	private JLabel rankLabel;
+	private JSpinner rankSpinner;
+	private JButton startButton;
+	private JButton stepButton;
+	private JTextArea textArea;
+	private JFrame frame;
 	
 	public GUI() {
 		createAndShowGUI();
@@ -32,6 +32,11 @@ public class GUI {
     	
     	Color textColor = new Color(225,225,225);
     	
+    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 2000000, 1);
+    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 2000000, 1);
+    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 2000000, 1);
+    	SpinnerModel sm4 = new SpinnerNumberModel(0, 0, 2000000, 1);
+    	
     	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
@@ -39,13 +44,12 @@ public class GUI {
     	c.gridy = 0;
     	pane.add(consumersLabel, c);
     	
-    	consumersField = new JTextField();
-    	consumersField.setColumns(8);
+    	consumersSpinner = new JSpinner(sm1);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.weightx = 3.0;
     	c.gridx = 1;
     	c.gridy = 0;
-    	pane.add(consumersField, c);
+    	pane.add(consumersSpinner, c);
     	
     	producersLabel = new JLabel("Number of Producers");
     	producersLabel.setForeground(textColor);
@@ -54,13 +58,12 @@ public class GUI {
     	c.gridy = 1;
     	pane.add(producersLabel, c);
     	
-    	producersField = new JTextField();
-    	producersField.setColumns(8);
+    	producersSpinner = new JSpinner(sm2);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.weightx = 3.0;
     	c.gridx = 1;
     	c.gridy = 1;
-    	pane.add(producersField, c);
+    	pane.add(producersSpinner, c);
     	
     	iterationsLabel = new JLabel("Number of Iterations");
     	iterationsLabel.setForeground(textColor);
@@ -69,13 +72,12 @@ public class GUI {
     	c.gridy = 2;
     	pane.add(iterationsLabel, c);
     	
-    	iterationsField = new JTextField();
-    	iterationsField.setColumns(8);
+    	iterationsSpinner = new JSpinner(sm3);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.weightx = 3.0;
     	c.gridx = 1;
     	c.gridy = 2;
-    	pane.add(iterationsField, c);
+    	pane.add(iterationsSpinner, c);
     	
     	rankLabel = new JLabel("Max Top Ranks");
     	rankLabel.setForeground(textColor);
@@ -84,18 +86,18 @@ public class GUI {
     	c.gridy = 3;
     	pane.add(rankLabel, c);
     	
-    	rankField = new JTextField();
-    	rankField.setColumns(8);
+    	rankSpinner = new JSpinner(sm4);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 1;
     	c.gridy = 3;
-    	pane.add(rankField, c);
+    	pane.add(rankSpinner, c);
     	
     	startButton = new JButton("<html><font color=#960000>Start Simulation</font></html>");
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 4;
     	startButton.setBackground(new Color(255,200,200));
+    	startButton.setActionCommand("start");
     	pane.add(startButton, c);
     	
     	stepButton = new JButton("<html><font color=#960000>Next Step</font></html>");
@@ -104,6 +106,7 @@ public class GUI {
     	c.gridx = 1;
     	c.gridy = 4;
     	stepButton.setBackground(new Color(255,200,200));
+    	stepButton.setActionCommand("step");
     	pane.add(stepButton, c);
     	
     	textArea = new JTextArea(10,1);
@@ -131,14 +134,9 @@ public class GUI {
         //Set up the content pane.
         addComponentsToPane(frame.getContentPane());
         
-    }
+    }    
 
     public static void main(String[] args) {
-        /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });*/
-    	GUI g = new GUI();
+        GUI g = new GUI();
     }
 }
