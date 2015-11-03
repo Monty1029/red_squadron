@@ -37,7 +37,7 @@ public class UserTest {
 		
 		//create the consumers to test with
 		Consumer consumer1 = new Consumer("Consumer 1", "Taste 1", sim);	//will be followed by 0 people
-		Consumer consumer2 = new Consumer("Consumer 2", "Taste 1", sim);	//will be followed by the other 4 people
+		Consumer consumer2 = new Consumer("Consumer 2", "Taste 1", sim);	//will be followed by the other 3 people
 		Consumer consumer3 = new Consumer("Consumer 3", "Taste 1", sim);	//will be followed by 2 other people, but those people shall try to follow that person twice
 		Consumer consumer4 = new Consumer("Consumer 4", "Taste 1", sim);	//followed by 1 person
 		Consumer consumer5 = new Consumer("Consumer 5", "Taste 1", sim);	//followed by 3 people
@@ -46,7 +46,6 @@ public class UserTest {
 		consumer1.follow(consumer2);
 		consumer3.follow(consumer2);
 		consumer4.follow(consumer2);
-		consumer5.follow(consumer2);
 		
 		//do the following for consumer 3
 		consumer1.follow(consumer3);
@@ -72,13 +71,12 @@ public class UserTest {
 		
 		//check the number of times each consumer is followed
 		assertEquals(0,consumer1.getFollowed());					//consumer1 is followed 0
-		assertEquals(4,consumer2.getFollowed());					//consumer2 is followed 4
+		assertEquals(3,consumer2.getFollowed());					//consumer2 is followed 3
 		assertEquals(2,consumer3.getFollowed());					//consumer3 is followed 2
 		assertEquals(1,consumer4.getFollowed());					//consumer4 is followed 1
 		assertEquals(3,consumer5.getFollowed());					//consumer5 is followed 3
 		
 	}
-
 
 	
 	@Test
@@ -102,7 +100,7 @@ public class UserTest {
 		sim.addLike(consumer, doc);
 		
 		//check if the user has liked any document
-		assertEquals(false, consumer.hasLikedAny());		//it should have like a document at this point
+		assertEquals(true, consumer.hasLikedAny());		//it should have like a document at this point
 		
 	}
 
