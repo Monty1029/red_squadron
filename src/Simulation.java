@@ -1,22 +1,27 @@
 //Evan Bottomley
-//Updated Oct. 16, 2015
+//Updated Nov. 3, 2015
 
 import java.util.*;
+
+/**
+ * Manages a collection of Users and Documents
+ * @author Evan Bottomley
+ *
+ */
 public class Simulation {
 
 	private List<String> allTags;
 	private List<String> availableTags;
-	private HashMap<User, List<Document>> map;
+	private HashMap<User, ArrayList<Document>> map;
 	private List<Document> allDoc;
 	private List<User> allUser;
 	
-	public Simulation() {
-		this(5);
-	}
 	
-	//Create new Simulation, fill out allTags list and availableTags list. Integer passed is the number
-	//of tags that will be used (stored in availableTags).
-	public Simulation(int n) {
+	/**
+	 * Primary constructor, create new Simulations, fills out allTags list
+	 * @param n number of different tags that will be used in the simulation
+	 */
+	public Simulation() {
 		allTags = new ArrayList<String>();
 		availableTags = new ArrayList<String>();
 		map = new HashMap<User, ArrayList<Document>>();
@@ -27,31 +32,47 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
+	}
+	
+	/**
+	 * Fills out availableTags list with a certain number of tags from allTags
+	 * @param n number of different tags that will be used in the simulation
+	 */
+	public void selectTags(int n) {
 		Random rand = new Random();
 		int r;
 		String s;
-		if (n > allTags.size()) n = allTags.size();
+		if (n > allTags.size()) n = allTags.size(); //n cannot exceed max number of tags
 		for (int i = 0; i < n; i++) {
 			r = rand.nextInt(allTags.size());
-			s = allTags.get(i);
+			s = allTags.get(r);
 			availableTags.add(s);
 			allTags.remove(s);
 		}
 	}
-	
-	//Add a user's document like to the hashmap
+	/**
+	 * Add a user's document like to the hashmap
+	 * @param user the User key
+	 * @param doc the Document to add
+	 */
 	public void addLike(User user, Document doc) {
 		if (map.containsKey(user)) { //If user is in the hashmap, add document to the ArrayList
 			map.get(user).add(doc);
 		}
 		else {
-			List<Document> l = new ArrayList<Document>(); //If not, create new ArrayList and put the user in the map
+			ArrayList<Document> l = new ArrayList<Document>(); //If not, create new ArrayList and put the user in the map
 			l.add(doc);
 			map.put(user, l);
 		}
 	}
 	
-	//Seed the simulation with n1 consumers, n2 producers and n3 documents.
+	
+	/**
+	 * Seed the simulation with n1 consumers, n2 producers and n3 documents
+	 * @param n1 number of consumers
+	 * @param n2 number of producers
+	 * @param n3 number of documents to begin the simulation with
+	 */
 	public void seed(int n1, int n2, int n3) {
 		//Add users
 		User u;
@@ -60,7 +81,7 @@ public class Simulation {
 		//Add n1 Consumers
 		System.out.print("Consumers:");
 		for (int i = 0; i < n1; i++) {
-			r = rand.nextInt(allUser.size());
+			r = rand.nextInt(availableTags.size());
 			u = new Consumer(("Consumer"+i), availableTags.get(r), this);
 			System.out.print(" " + u.getName() + "(" + u.getTaste() + ") ");
 			allUser.add(u);
@@ -68,23 +89,29 @@ public class Simulation {
 		//Add n2 Producers
 		System.out.print("\nProducers:");
 		for (int i = 0; i < n2; i++) {
-			r = rand.nextInt(allUser.size());
+			r = rand.nextInt(availableTags.size());
 			u = new Producer(("Producer"+i), availableTags.get(r), this);
 			System.out.print(" " + u.getName() + "(" + u.getTaste() + ") ");
 			allUser.add(u);
 		}
 		//Add n3 documents
 		Document d;
-		System.out.print("\nDocuments:");
+		System.out.print("\nSeed Documents:");
 		for (int i = 0; i < n3; i++) {
-			r = rand.nextInt(allUser.size());
+			r = rand.nextInt(availableTags.size());
 			d = new Document(("Doc" + i), availableTags.get(r));
 			System.out.print(" " + d.getName() + "(" + d.getTag() + ") ");
 			allDoc.add(d);
 		}
+		System.out.println("\n");
+		System.out.println("----------------------------------------------------------------------");
+		System.out.println("\n");
 	}
 	
-	//Print the list of available tags in the simulation
+	
+	/**
+	 * Print the list of available tags in the simulation
+	 */
 	private void printTags() {
 		System.out.print("Available Tags:");
 		for(int i = 0; i < availableTags.size(); i++) {
@@ -93,15 +120,55 @@ public class Simulation {
 		System.out.println("");
 	}
 	
-	//Return the hashMap of users and liked documents
+
+	/**
+	 * Return the hashMap of users and liked documents
+	 * @return the hashMap of users and liked documents
+	 */
 	public HashMap<User, ArrayList<Document>> getHash() {
 		return map;
 	}
+	
+	/**
+	 * Method for a producer to add the new document
+	 * @param doc document to add
+	 */
+	public void addDoc(Document doc)
+	{
+		allDoc.add(doc);
+	}
+	
+	public void start(int tags, int cons, int prods, int docs) {
+		this.selectTags(tags);
+		this.printTags();
+		this.seed(cons, prods, docs);
+	}
+	
+	public void step(int n) {
+		Random rand = new Random();
+		int x;
+		for (int i = 0; i < n; i++) {
+			x = rand.nextInt(allUser.size());
+			User acting = allUser.get(x);
+			liked = acting.act(allDoc);
+			for(Document doc: liked) {
+				addLike(acting, doc);
+			}
+		}
+	}
 
-	//Main function creates a simulation, seeds it and runs for x iterations
+	
+	/**
+	 * Main function creates a simulation and GUI
+	 * @param args not used currently
+	 */
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
-		Simulation sim = new Simulation(5);
+		Simulation sim = new Simulation();
+		GUI g = new GUI(sim);
+		
+		/*
+		sim.selectTags(5);
 		sim.printTags();
 		sim.seed(5, 5, 10);
 		Random rand = new Random();
@@ -117,6 +184,9 @@ public class Simulation {
 			}
 			loops++;
 		}
+		
+		
 		System.out.println("End simulation.");
+		*/
 	}
 }
