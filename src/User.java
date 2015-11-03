@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Oct 9, 2015
+//Date: Nov 3, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -107,6 +107,11 @@ public abstract class User {
 	 */
 	public List getFollowing(){return new ArrayList<User>(following);}
 	
+	/**
+	 * Method to access the number of times a user is followed
+	 * @return the number of times the user is followed
+	 */
+	public int getFollowed(){return followed;}
 	
 	//////////////////////////////////////////////
 	//											//
