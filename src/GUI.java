@@ -8,19 +8,24 @@ import javax.swing.*;
 
 public class GUI {
 	
-	public static JLabel consumersLabel;
-	public static JTextField consumersField;
-	public static JLabel producersLabel;
-	public static JTextField producersField;
-	public static JLabel iterationsLabel;
-	public static JTextField iterationsField;
-	public static JLabel rankLabel;
-	public static JTextField rankField;
-	public static JButton startButton;
-	public static JButton stepButton;
-	public static JTextArea textArea;
+	public JLabel consumersLabel;
+	public JTextField consumersField;
+	public JLabel producersLabel;
+	public JTextField producersField;
+	public JLabel iterationsLabel;
+	public JTextField iterationsField;
+	public JLabel rankLabel;
+	public JTextField rankField;
+	public JButton startButton;
+	public JButton stepButton;
+	public JTextArea textArea;
+	public JFrame frame;
+	
+	public GUI() {
+		createAndShowGUI();
+	}
 
-    public static void addComponentsToPane(Container pane) {
+    public void addComponentsToPane(Container pane) {
     	pane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     	pane.setLayout(new GridBagLayout());
     	GridBagConstraints c = new GridBagConstraints();
@@ -111,17 +116,17 @@ public class GUI {
     	JScrollPane scroll = new JScrollPane (textArea,
     			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     	pane.add(scroll, c);
+    	frame.setVisible(true);
     }
 
-    private static void createAndShowGUI() {
+    private void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Social Network");
+        frame = new JFrame("Social Network");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,312);
         Color bgColor = new Color(150,0,0);
         frame.getContentPane().setBackground(bgColor);
         frame.setResizable(false);
-        frame.setVisible(true);
         
         //Set up the content pane.
         addComponentsToPane(frame.getContentPane());
@@ -129,10 +134,11 @@ public class GUI {
     }
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
             }
-        });
+        });*/
+    	GUI g = new GUI();
     }
 }
