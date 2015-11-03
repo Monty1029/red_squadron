@@ -24,6 +24,9 @@ public class Producer extends User {
 		super(username, taste, sim);
 		produced = new ArrayList<Document>();
 	}
+	
+	public List<Document> getProduced(){return produced;}
+	
 
 	/**
 	 * Cycles through all the existing documents and returns an ArrayList
