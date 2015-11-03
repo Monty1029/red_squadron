@@ -24,7 +24,7 @@ public class GUI {
 	public GUI() {
 		createAndShowGUI();
 	}
-
+	
     public void addComponentsToPane(Container pane) {
     	pane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
     	pane.setLayout(new GridBagLayout());
@@ -135,6 +135,22 @@ public class GUI {
         addComponentsToPane(frame.getContentPane());
         
     }    
+    
+    public JSpinner getConsumersSpinner() {
+		return consumersSpinner;
+	}
+	
+	public JSpinner getProducersSpinner() {
+		return producersSpinner;
+	}
+	
+	public JSpinner getInterationsSpinner() {
+		return iterationsSpinner;
+	}
+	
+	public JSpinner getRankSpinner() {
+		return rankSpinner;
+	}
 
     public static void main(String[] args) {
         GUI g = new GUI();
