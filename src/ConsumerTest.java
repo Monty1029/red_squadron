@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 3, 2015
+//Date: Nov 5, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -14,24 +14,39 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * JUnit test class for the Consumer class.
+ * @author Garrett Steele
+ *
+ */
 public class ConsumerTest {
 
-	@Test
+	Simulation sim;				//a simulation to reference
+	List<Document> docs;		//create a list of pre-fab documents
+	
+	/**
+	 * Method to create a simulation to reference and the list of documents to use.
+	 */
+	@Before
+	public void setUp()
+	{
+		sim = new Simulation();									//create a simulation to reference
+		docs = createDocList();								//create a list of pre-fab documents
+	}
+	
+	
 	/**
 	 * Unit test to ensure the act method returns as expected for a number of test cases.
 	 * This will be the documents in the list that match the Consumer's taste
 	 */
+	@Test
 	public void testAct() {
 		
 		
-		Simulation sim = new Simulation();									//create a simulation to reference
-		List<Document> docs = createDocList();								//create a list of pre-fab documents
-		
-		//create 4 consumers to test a variety of cases for the return
+		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);
 		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);
 		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);
@@ -65,16 +80,14 @@ public class ConsumerTest {
 		
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the payoff works as expected for a consumer for pre-made lists of documents.
 	 */
+	@Test
 	public void testPayoff() {
 		
-		Simulation sim = new Simulation();									//create a simulation to reference
-		List<Document> docs = createDocList();								//create a list of pre-fab documents
-		
-		//create 4 consumers to test a variety of cases for the return
+		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);
 		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);
 		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);
@@ -88,16 +101,16 @@ public class ConsumerTest {
 		
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the Consumer constructor acts as expected. Tests the getName() and getTaste() methods of User at the same time
 	 */
+	@Test
 	public void testConsumer() {
 		
-		//create a simulation to reference
-		Simulation sim = new Simulation();									
+									
 		
-		//create some consumers
+		//create some consumers, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);
 		Consumer consumer2 = new Consumer("", "taste2",sim);
 		Consumer consumer3 = new Consumer("consumer3", "",sim);
@@ -117,17 +130,16 @@ public class ConsumerTest {
 		
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the popularity ranking acts as intended for a User on a list of pre-made documents.
 	 */
+	@Test
 	public void testPopularityRank() {
 		
-		Simulation sim = new Simulation();									//create a simulation to reference
-		List<Document> docs = createDocList();								//create a list of pre-fab documents, there are 10 in this list
 		List<Document> ranked;
 		
-		//create 4 consumers to test a variety of cases for the return
+		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);
 		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);
 		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);
@@ -198,22 +210,22 @@ public class ConsumerTest {
 	private List<Document> createDocList()
 	{
 		//create the list for documents to use.
-		List<Document> docs = new ArrayList<>();
+		List<Document> documents = new ArrayList<>();
 		
 		//create the documents
-		docs.add(new Document("name1", "taste1"));
-		docs.add(new Document("name2", "taste2"));
-		docs.add(new Document("name3", "taste2"));
-		docs.add(new Document("name4", "taste3"));
-		docs.add(new Document("name5", "taste3"));
-		docs.add(new Document("name6", "taste3"));
-		docs.add(new Document("name7", "taste3"));
-		docs.add(new Document("name8", "taste4"));
-		docs.add(new Document("name9", "taste4"));
-		docs.add(new Document("name10", "taste4"));
+		documents.add(new Document("name1", "taste1"));
+		documents.add(new Document("name2", "taste2"));
+		documents.add(new Document("name3", "taste2"));
+		documents.add(new Document("name4", "taste3"));
+		documents.add(new Document("name5", "taste3"));
+		documents.add(new Document("name6", "taste3"));
+		documents.add(new Document("name7", "taste3"));
+		documents.add(new Document("name8", "taste4"));
+		documents.add(new Document("name9", "taste4"));
+		documents.add(new Document("name10", "taste4"));
 		
 		
-		return docs;
+		return documents;
 	}
 	
 	

@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 4, 2015
+//Date: Nov 5, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -15,20 +15,36 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * JUnit test class for the Producer class.
+ * @author Garrett Steele
+ *
+ */
 public class ProducerTest {
 
-	@Test
+	Simulation sim;				//a simulation to reference
+	List<Document> docs;		//create a list of pre-fab documents
+	
+	/**
+	 * Method to create a simulation to reference and the list of documents to use.
+	 */
+	@Before
+	public void setUp()
+	{
+		sim = new Simulation();									//create a simulation to reference
+		docs = createDocList();								//create a list of pre-fab documents
+	}
+	
+	
 	/**
 	 * Unit test to ensure the act method returns as expected for a number of test cases.
 	 */
+	@Test
 	public void testAct() {
 		
-		
-		Simulation sim = new Simulation();									//create a simulation to reference
-		List<Document> docs = createDocList();								//create a list of pre-fab documents, there are 10 in this list
 		List<Document> actedOn;												//create a list to hold the documents acted upon
 		
 		Producer producer1 = new Producer("producer1", "taste1",sim);		//create a producer
@@ -45,19 +61,15 @@ public class ProducerTest {
 		assertEquals(0, producer1.getFollowed());							//the User should not be following itself, and there is no-one else to follow them
 		assertEquals(0, producer1.getFollowing().size());					//nor does the document have any people who like it to follow
 		
-		
-		
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the payoff works as expected for a consumer for pre-made lists of documents.
 	 */
+	@Test
 	public void testPayoff() {
 		
-		//create a simulation to reference
-		Simulation sim = new Simulation();									
-				
 		//create some producers
 		Producer producer1 = new Producer("producer1", "taste1",sim);
 		Producer producer2 = new Producer("producer2", "taste2",sim);
@@ -86,13 +98,12 @@ public class ProducerTest {
 		
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the Consumer constructor acts as expected.
 	 */
+	@Test
 	public void testProducer() {
-		//create a simulation to reference
-		Simulation sim = new Simulation();									
 		
 		//create some consumers
 		Producer producer1 = new Producer("producer1", "taste1",sim);
@@ -120,13 +131,13 @@ public class ProducerTest {
 				
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the produce method works as intended and creates a new document of the correct attributes, also tests getProduced() as part of the process.
 	 */
+	@Test
 	public void testProduce() {
 		
-		Simulation sim = new Simulation();								//create a simulation to reference
 		Producer producer1 = new Producer("producer1", "taste1",sim);	//create a producer to test
 		
 		assertEquals(0, producer1.getProduced().size());				//should have no created documents at this point
@@ -137,10 +148,11 @@ public class ProducerTest {
 			
 	}
 
-	@Test
+	
 	/**
 	 * Tests whether the popularity ranking acts as intended for a User on a list of pre-made documents.
 	 */
+	@Test
 	public void testRank() {
 
 		Simulation sim = new Simulation();									//create a simulation to reference
@@ -217,21 +229,21 @@ public class ProducerTest {
 	private List<Document> createDocList()
 	{
 		//create the list for documents to use
-		List<Document> docs = new ArrayList<>();
+		List<Document> documents = new ArrayList<>();
 		
 		//create the documents
-		docs.add(new Document("name1", "taste1"));
-		docs.add(new Document("name2", "taste2"));
-		docs.add(new Document("name3", "taste2"));
-		docs.add(new Document("name4", "taste3"));
-		docs.add(new Document("name5", "taste3"));
-		docs.add(new Document("name6", "taste3"));
-		docs.add(new Document("name7", "taste3"));
-		docs.add(new Document("name8", "taste4"));
-		docs.add(new Document("name9", "taste4"));
-		docs.add(new Document("name10", "taste4"));
+		documents.add(new Document("name1", "taste1"));
+		documents.add(new Document("name2", "taste2"));
+		documents.add(new Document("name3", "taste2"));
+		documents.add(new Document("name4", "taste3"));
+		documents.add(new Document("name5", "taste3"));
+		documents.add(new Document("name6", "taste3"));
+		documents.add(new Document("name7", "taste3"));
+		documents.add(new Document("name8", "taste4"));
+		documents.add(new Document("name9", "taste4"));
+		documents.add(new Document("name10", "taste4"));
 		
-		return docs;
+		return documents;
 
 	}
 	

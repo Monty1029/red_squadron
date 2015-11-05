@@ -7,7 +7,8 @@ import java.util.*;
 
 /**
  * Sub-class of a User that likes and ranks other documents
- * @author Monty Dhanani
+ * @author Monty Dhanani, Contributors: Garrett Steele (method refactoring where stated)
+ * 
  *
  */
 public class Consumer extends User {
@@ -24,37 +25,17 @@ public class Consumer extends User {
 
 	/**
 	 * Cycles through all the existing documents and returns an ArrayList
-	 * of Documents with the same taste as the Consumer
+	 * of Documents with the same taste as the Consumer.
+	 * Method modified by Garrett Steele on Nov 5th, 2015 to reduce duplicate code
 	 * @param allDocs list of all existing documents
 	 */
 	public List<Document> act(List<Document> allDocs) {
-		String toprint = "" + super.getName() + "(" + super.getTaste() + ") " + " likes: ";
-		ArrayList<Document> sameTagDocs = new ArrayList<Document>();
 
 		ArrayList<Document> ranked = popularityRank(allDocs);
 		int payoff = this.payoff(ranked);	//rank them and get payoff
 		
-		for (Document d : allDocs) {
-			if (d.getTag().equals(super.getTaste())) {
-				sameTagDocs.add(d);
-				
-				//follow people who like the document
-				for(User u: d.getLikedUsers())
-				{
-					if(!u.equals(this))	//if that user is not this user
-					{
-						follow(u);
-					}
-				}
-				
-				d.likeDoc(this);
-				toprint += d.getName() + "(" + d.getTag() + ") ";
-			}
-		}
 		
-		System.out.println(toprint + "\n");
-		
-		return sameTagDocs;
+		return basicAct(allDocs);
 	}
 
 	/**

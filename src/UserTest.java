@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 3, 2015
+//Date: Nov 5, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 
 /**
- * JUnit test class for User objects.
+ * JUnit test class for the User class.
  * @author Garrett Steele
  *
  */
@@ -24,18 +24,19 @@ public class UserTest {
 
 	//This class does not test it's own constructors as it is an abstract class and can not be instantiated
 
-	@Test
+	
 	/**
 	 * Tests whether a User successfully follows another user only once, this also tests getFollowing() and getFollowed() as part of the process.
 	 * This also checks that the user in question was followed.
 	 * As one cannot instantiate a User, this test is performed on a Consumer, which has no additions from the User class
 	 */
+	@Test
 	public void testFollow() {
 		
 		//create a simulation to reference
 		Simulation sim = new Simulation();
 		
-		//create the consumers to test with
+		//create the consumers to test with, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("Consumer 1", "Taste 1", sim);	//will be followed by 0 people
 		Consumer consumer2 = new Consumer("Consumer 2", "Taste 1", sim);	//will be followed by the other 3 people
 		Consumer consumer3 = new Consumer("Consumer 3", "Taste 1", sim);	//will be followed by 2 other people, but those people shall try to follow that person twice
@@ -79,11 +80,12 @@ public class UserTest {
 	}
 
 	
-	@Test
+	
 	/**
 	 * Tests whether a user liking a document is implemented correctly.
 	 * As one cannot instantiate a User, this test is performed on a Consumer, which has no additions from the User class
 	 */
+	@Test
 	public void testHasLikedAny() {
 		
 		//create a simulation to reference

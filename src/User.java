@@ -147,4 +147,43 @@ public abstract class User {
 		return false;
 	}
 	
+	/**
+	 * The basic action performed by Users and Consumers in Milestone 2, removing duplication. 
+	 * Based on the code previously in Monty Dhanani's Consumer and Producer classes.
+	 * @param documents the list of documents to run through
+	 * @return the list of documents for the User to like
+	 */
+	public List<Document> basicAct(List<Document> allDocs)
+	{
+		String toprint = "" + getName() + "(" + getTaste() + ") " + " likes: ";
+		ArrayList<Document> sameTagDocs = new ArrayList<Document>();
+
+		
+		
+		for (Document d : allDocs) {
+			if (d.getTag().equals(getTaste())) {
+				sameTagDocs.add(d);
+				
+				//follow people who like the document
+				for(User u: d.getLikedUsers())
+				{
+					if(!u.equals(this))	//if that user is not this user
+					{
+						follow(u);
+					}
+				}
+				
+				d.likeDoc(this);
+				toprint += d.getName() + "(" + d.getTag() + ") ";
+			}
+		}
+		
+		System.out.println(toprint + "\n");
+		
+		return sameTagDocs;
+		
+	}
+	
+	
+	
 }

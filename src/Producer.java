@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * Sub-class of a User that creates Documents and likes them as soon as they are created, can also like and rank other document
- * @author Monty Dhanani
+ * @author Monty Dhanani, Contributors: Garrett Steele (method refactoring where stated)
  *
  */
 public class Producer extends User {
@@ -25,6 +25,11 @@ public class Producer extends User {
 		produced = new ArrayList<Document>();
 	}
 	
+	/**
+	 * Fetch the number of produced documents.
+	 * Method added Nov 3, 2015 by Garrett Steele during unit testing
+	 * @return the number of documents produced by the producer
+	 */
 	public List<Document> getProduced(){return produced;}
 	
 
@@ -32,42 +37,17 @@ public class Producer extends User {
 	 * Cycles through all the existing documents and returns an ArrayList
 	 * of Documents with the same taste as the Consumer.
 	 * Producer also likes every Document it creates
+	 * Method modified by Garrett Steele on Nov 5th, 2015 to reduce duplicate code
 	 * @param allDocs list of all existing documents
 	 */
 	public List<Document> act(List<Document> allDocs) {
-		String toprint = "" + super.getName() + "(" + super.getTaste() + ") " + " likes: ";
-		ArrayList<Document> sameTagDocs = new ArrayList<Document>();
 
 		produce();									//make a doc
 		ArrayList<Document> ranked = rank(allDocs);
 		int payoff = this.payoff(ranked);	//rank them and get payoff
 		
-		for (Document d : allDocs) {
-			if (d.getTag().equals(super.getTaste())) {
-				sameTagDocs.add(d);
-				if(!d.hasLiked(this)){	//like the document if they have not liked it before
-					
-					//follow people who like the document
-					for(User u: d.getLikedUsers())
-					{
-						if(!u.equals(this))	//if that user is not this user
-						{
-							follow(u);
-						}
-					}
-					
-					d.likeDoc(this);
-					
-				}
-				
-				toprint += d.getName() + "(" + d.getTag() + ") ";
-			}
-		}
 		
-		System.out.println(toprint + "\n");
-		
-		
-		return sameTagDocs;
+		return basicAct(allDocs);
 	}
 	/**
 	 * Creates a new Document of the Producer's favourite taste and adds
