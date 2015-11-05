@@ -23,7 +23,7 @@ public class Simulation {
 	 * Primary constructor, create new Simulations, fills out allTags list
 	 * @param n number of different tags that will be used in the simulation
 	 */
-	public Simulation() {
+	public Simulation(GUI g) {
 		allTags = new ArrayList<String>();
 		availableTags = new ArrayList<String>();
 		map = new HashMap<User, ArrayList<Document>>();
@@ -34,7 +34,7 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
-		gui = new GUI(this);
+		gui = g;
 		results = new StringBuffer();
 	}
 	
@@ -186,7 +186,8 @@ public class Simulation {
 	 */
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
-		Simulation sim = new Simulation();
+		GUI g = new GUI();
+		Simulation sim = new Simulation(g);
 		while(true){} //Loop forever
 		/*
 		sim.selectTags(5);
