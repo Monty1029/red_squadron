@@ -33,7 +33,7 @@ public class ConsumerTest {
 	@Before
 	public void setUp()
 	{
-		sim = new Simulation();									//create a simulation to reference
+		sim = new Simulation(null);									//create a simulation to reference
 		docs = createDocList();								//create a list of pre-fab documents
 	}
 	

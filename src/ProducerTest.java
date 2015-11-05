@@ -34,7 +34,7 @@ public class ProducerTest {
 	@Before
 	public void setUp()
 	{
-		sim = new Simulation();									//create a simulation to reference
+		sim = new Simulation(null);									//create a simulation to reference
 		docs = createDocList();								//create a list of pre-fab documents
 	}
 	
@@ -155,8 +155,6 @@ public class ProducerTest {
 	@Test
 	public void testRank() {
 
-		Simulation sim = new Simulation();									//create a simulation to reference
-		List<Document> docs = createDocList();								//create a list of pre-fab documents, there are 10 in this list
 		List<Document> ranked;
 		
 		//create 4 producers to test a variety of cases for the return

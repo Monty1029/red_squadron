@@ -34,7 +34,7 @@ public class UserTest {
 	public void testFollow() {
 		
 		//create a simulation to reference
-		Simulation sim = new Simulation();
+		Simulation sim = new Simulation(null);
 		
 		//create the consumers to test with, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("Consumer 1", "Taste 1", sim);	//will be followed by 0 people
@@ -89,7 +89,7 @@ public class UserTest {
 	public void testHasLikedAny() {
 		
 		//create a simulation to reference
-		Simulation sim = new Simulation();
+		Simulation sim = new Simulation(null);
 		
 		 
 		Document doc = new Document("name1", "taste1");					//create a document to add to the simulation with the consumer
