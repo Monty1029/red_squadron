@@ -19,10 +19,13 @@ public class ButtonListener implements ActionListener {
 		JButton but = (JButton) e.getSource(); //Get the button pressed and the action command (button number).
         String command = but.getActionCommand();
         if (command.equals("start")) { //Do something
-        	int n1 = getConsumersSpinner().getValue();
-        	int n2 = getProducersSpinner().getValue();
-        	int n3 = getRankSpinner().getValue();
-        	sim.start(1,1,1,1);
+        	int n1 = getTagSpinner().getValue();
+        	int n2 = getConsumersSpinner().getValue();
+        	int n3 = getProducersSpinner().getValue();
+        	int n4 = getDocumentsSpinner().getValue();       	
+        	int n5 = getRankSpinner().getValue();
+        	getStepButton().setEnabled(true);
+        	sim.start(n1,n2,n3,n4);
         }
         else if (command.equals("step")) {
         	int n = getIterationsSpinner().getValue();

@@ -15,6 +15,8 @@ public class Simulation {
 	private HashMap<User, ArrayList<Document>> map;
 	private List<Document> allDoc;
 	private List<User> allUser;
+	private GUI gui;
+	private StringBuffer results;
 	
 	
 	/**
@@ -32,6 +34,8 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
+		gui = new GUI(this);
+		results = new StringBuffer();
 	}
 	
 	/**
@@ -80,32 +84,39 @@ public class Simulation {
 		int r;
 		//Add n1 Consumers
 		System.out.print("Consumers:");
+		results.append("Consumers:" );
 		for (int i = 0; i < n1; i++) {
 			r = rand.nextInt(availableTags.size());
 			u = new Consumer(("Consumer"+i), availableTags.get(r), this);
 			System.out.print(" " + u.getName() + "(" + u.getTaste() + ") ");
+			results.append(" " + u.getName() + "(" + u.getTaste() + ") ");
 			allUser.add(u);
 		}
 		//Add n2 Producers
 		System.out.print("\nProducers:");
+		results.append("\nProducers:");
 		for (int i = 0; i < n2; i++) {
 			r = rand.nextInt(availableTags.size());
 			u = new Producer(("Producer"+i), availableTags.get(r), this);
 			System.out.print(" " + u.getName() + "(" + u.getTaste() + ") ");
+			results.append(" " + u.getName() + "(" + u.getTaste() + ") ");
 			allUser.add(u);
 		}
 		//Add n3 documents
 		Document d;
 		System.out.print("\nSeed Documents:");
+		results.append("\nSeed Documents:");
 		for (int i = 0; i < n3; i++) {
 			r = rand.nextInt(availableTags.size());
 			d = new Document(("Doc" + i), availableTags.get(r));
 			System.out.print(" " + d.getName() + "(" + d.getTag() + ") ");
+			results.append(" " + d.getName() + "(" + d.getTag() + ") ");
 			allDoc.add(d);
 		}
 		System.out.println("\n");
 		System.out.println("----------------------------------------------------------------------");
 		System.out.println("\n");
+		results.append("\n\n----------------------------------------------------------------------\n\n");
 	}
 	
 	
@@ -114,10 +125,13 @@ public class Simulation {
 	 */
 	private void printTags() {
 		System.out.print("Available Tags:");
+		results.append("Available Tags:");
 		for(int i = 0; i < availableTags.size(); i++) {
 			System.out.print(" " + availableTags.get(i));
+			results.append(" " + availableTags.get(i));
 		}
 		System.out.println("");
+		results.append("\n");
 	}
 	
 
@@ -129,6 +143,10 @@ public class Simulation {
 		return map;
 	}
 	
+	public StringBuffer getResults() {
+		return results;
+	}
+	
 	/**
 	 * Method for a producer to add the new document
 	 * @param doc document to add
@@ -136,6 +154,10 @@ public class Simulation {
 	public void addDoc(Document doc)
 	{
 		allDoc.add(doc);
+	}
+	
+	private void update() {
+		gui.getTextArea.setText(results.toString());
 	}
 	
 	public void start(int tags, int cons, int prods, int docs) {
@@ -165,8 +187,7 @@ public class Simulation {
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
 		Simulation sim = new Simulation();
-		GUI g = new GUI(sim);
-		
+		while(true){} //Loop forever
 		/*
 		sim.selectTags(5);
 		sim.printTags();
