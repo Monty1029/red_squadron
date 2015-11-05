@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Oct 9, 2015
+//Date: Nov 3, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -107,6 +107,11 @@ public abstract class User {
 	 */
 	public List getFollowing(){return new ArrayList<User>(following);}
 	
+	/**
+	 * Method to access the number of times a user is followed
+	 * @return the number of times the user is followed
+	 */
+	public int getFollowed(){return followed;}
 	
 	//////////////////////////////////////////////
 	//											//
@@ -141,5 +146,44 @@ public abstract class User {
 		if(this.sim.getHash().get(this) != null){return true;}
 		return false;
 	}
+	
+	/**
+	 * The basic action performed by Users and Consumers in Milestone 2, removing duplication. 
+	 * Based on the code previously in Monty Dhanani's Consumer and Producer classes.
+	 * @param documents the list of documents to run through
+	 * @return the list of documents for the User to like
+	 */
+	public List<Document> basicAct(List<Document> allDocs)
+	{
+		String toprint = "" + getName() + "(" + getTaste() + ") " + " likes: ";
+		ArrayList<Document> sameTagDocs = new ArrayList<Document>();
+
+		
+		
+		for (Document d : allDocs) {
+			if (d.getTag().equals(getTaste())) {
+				sameTagDocs.add(d);
+				
+				//follow people who like the document
+				for(User u: d.getLikedUsers())
+				{
+					if(!u.equals(this))	//if that user is not this user
+					{
+						follow(u);
+					}
+				}
+				
+				d.likeDoc(this);
+				toprint += d.getName() + "(" + d.getTag() + ") ";
+			}
+		}
+		
+		System.out.println(toprint + "\n");
+		
+		return sameTagDocs;
+		
+	}
+	
+	
 	
 }
