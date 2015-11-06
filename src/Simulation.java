@@ -18,12 +18,37 @@ public class Simulation {
 	private GUI gui;
 	private StringBuffer results;
 	
+	//getters
+	/**
+	 * Get the list of all possible tags
+	 * @return all possible tags
+	 */
+	public List<String> getAllTags(){return allTags;}
+	/**
+	 * Get the Hashmap of all User and liked Documents
+	 * @return the Hashmap of all User and liked Documents
+	 */
+	public HashMap<User, ArrayList<Document>> getMap(){return map;}
+	/**
+	 * Get the list of all Documents
+	 * @return the list of all Documents
+	 */
+	public  List<Document> getAllDoc(){return allDoc;}
+	/**
+	 * Get the list of all Users
+	 * @return the list of all Users
+	 */
+	public  List<User> getAllUser(){return allUser;}
+	
+	
+	
+	
 	
 	/**
 	 * Primary constructor, create new Simulations, fills out allTags list
 	 * @param n number of different tags that will be used in the simulation
 	 */
-	public Simulation(GUI g) {
+	public Simulation() {
 		allTags = new ArrayList<String>();
 		availableTags = new ArrayList<String>();
 		map = new HashMap<User, ArrayList<Document>>();
@@ -34,9 +59,18 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
-		gui = g;
+		
 		results = new StringBuffer();
 	}
+	
+	/**
+	 * Method to set the GUI
+	 * @param g GUIto reference
+	 */
+	public void setGUI(GUI g) {
+		gui = g;
+	}
+	
 	
 	/**
 	 * Fills out availableTags list with a certain number of tags from allTags
@@ -143,6 +177,10 @@ public class Simulation {
 		return map;
 	}
 	
+	/**
+	 * Get the results String.
+	 * @return the results String
+	 */
 	public StringBuffer getResults() {
 		return results;
 	}
@@ -156,6 +194,9 @@ public class Simulation {
 		allDoc.add(doc);
 	}
 	
+	/**
+	 * Print the update to the GUI.
+	 */
 	private void update() {
 		gui.getTextArea().setText(results.toString());
 		System.out.println(gui.getTextArea().getText());
@@ -168,6 +209,10 @@ public class Simulation {
 		update();
 	}
 	
+	/**
+	 * Perform n steps.
+	 * @param n number of steps to perform
+	 */
 	public void step(int n) {
 		Random rand = new Random();
 		int x;
@@ -179,6 +224,12 @@ public class Simulation {
 			for(Document doc: liked) {
 				addLike(acting, doc);
 			}
+			results.append("Name: " + acting.getName() + ", Taste: " + acting.getTaste() + "\n");
+			results.append("Following: " + acting.getFollowing().toString() + "\n");
+			results.append("Followed: " + acting.getFollowed() + "\n");
+			results.append("Likes: " + liked.toString() + "\n");
+			results.append("Payoff: " + acting.payoff(allDoc)+ "\n");
+			results.append("\n");
 		}
 		update();
 	}
@@ -190,8 +241,11 @@ public class Simulation {
 	 */
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
-		GUI g = new GUI();
-		Simulation sim = new Simulation(g);
+		
+		Simulation sim = new Simulation();
+		GUI g = new GUI(sim);
+		sim.setGUI(g);
+		
 		while(true){} //Loop forever
 		/*
 		sim.selectTags(5);

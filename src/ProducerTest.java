@@ -34,7 +34,7 @@ public class ProducerTest {
 	@Before
 	public void setUp()
 	{
-		sim = new Simulation(null);									//create a simulation to reference
+		sim = new Simulation();									//create a simulation to reference
 		docs = createDocList();								//create a list of pre-fab documents
 	}
 	

@@ -184,6 +184,14 @@ public abstract class User {
 		
 	}
 	
+	/**
+	 * Changed toString method()
+	 */
+	public String toString()
+	{
+		return username;
+	}
+	
 	
 	
 }
