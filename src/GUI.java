@@ -42,12 +42,12 @@ public class GUI {
     	
     	Color textColor = new Color(225,225,225);
     	
-    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm4 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm5 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm6 = new SpinnerNumberModel(0, 0, 2000000, 1);
+    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm4 = new SpinnerNumberModel(0, 0, 2000000, 1);										//1 TO 5
+    	SpinnerModel sm5 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm6 = new SpinnerNumberModel(0, 0, 2000000, 1);										//10, 10, 10
     	
     	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
