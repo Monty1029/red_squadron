@@ -26,14 +26,20 @@ public class GUI {
 	private JFrame frame;
 	private Simulation sim;																					//MONTY, WE HAD TO ADD THIS
 	private ButtonListener bl;																				//CREATE BUTTON LISTENER
-	
+	/**
+	 * Creates the GUI
+	 * @param sim is the reference to Simulation that will run the operations
+	 */
 	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
 		this.sim = sim;																						//HAD TO SAVE THE SIMULATION
 		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
 		createAndShowGUI();
 		
 	}
-	
+	/**
+	 * Creates and adds all of the components of the GUI to the Container
+	 * @param pane is the Container that holds all of the components of the GUI
+	 */
 	//Adds all the components of the GUI to a container
     public void addComponentsToPane(Container pane) {
     	pane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -42,12 +48,12 @@ public class GUI {
     	
     	Color textColor = new Color(225,225,225);
     	
-    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
-    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
-    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
-    	SpinnerModel sm4 = new SpinnerNumberModel(0, 0, 2000000, 1);										//1 TO 5
-    	SpinnerModel sm5 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
-    	SpinnerModel sm6 = new SpinnerNumberModel(0, 0, 2000000, 1);										//10, 10, 10
+    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 50, 1);
+    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 50, 1);
+    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 50, 1);
+    	SpinnerModel sm4 = new SpinnerNumberModel(1, 1, 50, 1);
+    	SpinnerModel sm5 = new SpinnerNumberModel(0, 0, 50, 1);
+    	SpinnerModel sm6 = new SpinnerNumberModel(10, 10, 10, 1);
     	
     	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
@@ -162,7 +168,7 @@ public class GUI {
     	//Text area that will display the output at each step of the simulation
     	textArea = new JTextArea(10,1);
     	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.ipady = 100;																							//HAD TO ADJUST WIDTH OF TEXT AREA
+    	c.ipady = 152;																							//HAD TO ADJUST WIDTH OF TEXT AREA
     	c.gridwidth = 2;
     	c.gridx = 0;
     	c.gridy = 7;
@@ -175,7 +181,9 @@ public class GUI {
     	frame.setVisible(true);
     }
 
-    //Creates the frame of the GUI and sets frame restrictions
+    /**
+     * Creates the frame of the GUI and sets frame restrictions
+     */
     private void createAndShowGUI() {
         //Create and set up the window.
         frame = new JFrame("Social Network");
@@ -191,34 +199,66 @@ public class GUI {
     }    
     
     //Accessor methods for each of the spinners, text area, and the "Next Step" button
+    /**
+     * 
+     * @return the Spinner for number of consumers
+     */
     public JSpinner getConsumersSpinner() {
 		return consumersSpinner;
 	}
 	
+    /**
+     * 
+     * @return the Spinner for number of producers
+     */
 	public JSpinner getProducersSpinner() {
 		return producersSpinner;
 	}
 	
+	/**
+     * 
+     * @return the Spinner for number of iterations
+     */
 	public JSpinner getIterationsSpinner() {
 		return iterationsSpinner;
 	}
 	
+	/**
+     * 
+     * @return the Spinner for max ranks
+     */
 	public JSpinner getRankSpinner() {
 		return rankSpinner;
 	}
 	
+	/**
+     * 
+     * @return the Spinner for number of documents
+     */
 	public JSpinner getDocumentsSpinner() {
 		return docSpinner;
 	}
 	
+	/**
+     * 
+     * @return the Spinner for number of tags
+     */
 	public JSpinner getTagSpinner() {
 		return tagSpinner;
 	}
 	
+	/**
+     * 
+     * @return the Button that allows you to step through each iteration
+     */
 	public JButton getStepButton() {
 		return stepButton;
 	}
 	
+	/**
+     * 
+     * @return the TextArea for the output of the iteration
+     */
 	public JTextArea getTextArea() {
 		return textArea;
 	}
