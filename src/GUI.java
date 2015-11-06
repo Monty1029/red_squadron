@@ -24,7 +24,7 @@ public class GUI {
 	private JButton stepButton;
 	private JTextArea textArea;
 	private JFrame frame;
-	
+	//test
 	public GUI() {
 		createAndShowGUI();
 	}
