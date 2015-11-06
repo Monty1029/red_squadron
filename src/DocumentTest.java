@@ -15,7 +15,7 @@ public class DocumentTest {
 	@Test
 	public void testGetLikeData() {
 		Document doc = new Document("name", "tag");
-		Simulation sim = new Simulation(null);
+		Simulation sim = new Simulation();
 		Consumer con = new Consumer("user", "tag", sim);
 		doc.likeDoc(con);
 		assertTrue(doc.hasLiked(con));

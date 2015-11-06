@@ -7,7 +7,7 @@ public class SimulationTest {
 
 	@Test
 	public void testSelectTags() {
-		Simulation sim = new Simulation(null);
+		Simulation sim = new Simulation();
 		sim.selectTags(1);
 		sim.getAllTags();
 	}
