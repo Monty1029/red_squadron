@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 
 /**
  * Abstract class with Consumer and Producer inheriting from class User
@@ -27,11 +29,15 @@ public abstract class User {
 	//											//
 	//////////////////////////////////////////////
 	
-	protected String username;			//name of the user, not unique to a user
-	protected String taste;				//a single tag they are interested in
-	protected HashSet<User> following;	//list of users this user is following, list is implemented as an ArrayList
-	protected int followed;				//number of users this user has followed
-	protected Simulation sim;			//reference to the simulation
+	protected String username;				//name of the user, not unique to a user
+	protected String taste;					//a single tag they are interested in
+	protected HashSet<User> following;		//list of users this user is following, list is implemented as an ArrayList
+	protected int followed;					//number of users this user has followed
+	protected Simulation sim;				//reference to the simulation
+	protected int cumulative;				//cumulative payoff
+	protected JFrame frame;					//create a JFrame to update graph
+	protected int payoff;					//the last payoff calculated
+	protected ArrayList<Integer> payoffs;
 	
 	//////////////////////////////////////////////
 	//											//
@@ -54,6 +60,7 @@ public abstract class User {
 	public abstract int payoff(List<Document> documents);
 	
 	
+	
 	//////////////////////////////////////////////
 	//											//
 	//				Constructors				//
@@ -73,6 +80,9 @@ public abstract class User {
 		following = new HashSet<>();		//empty ArrayList to maintain who they follow
 		followed = 0;						//user has not followed anyone as soon as the account is created
 		this.sim = sim;
+		cumulative = 0;
+		payoff = 0;
+		payoffs = new ArrayList<>();
 	}
 	
 	/**
@@ -112,6 +122,24 @@ public abstract class User {
 	 * @return the number of times the user is followed
 	 */
 	public int getFollowed(){return followed;}
+	
+	/**
+	 * Fetch the last payoff calculated
+	 * @return the last payoff calculated
+	 */
+	public int getPayoff(){return payoff;}
+	
+	/**
+	 * Get the arrayList of payoffs over iterations
+	 * @return the arrayList of payoffs over iterations
+	 */
+	public ArrayList<Integer> getPayoffArr(){return payoffs;}
+	
+	/**
+	 * Get the cumulative payoff
+	 * @return the cumulative payoff
+	 */
+	public int getCumulative(){return cumulative;}
 	
 	//////////////////////////////////////////////
 	//											//

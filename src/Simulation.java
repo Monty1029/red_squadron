@@ -3,6 +3,8 @@
 
 import java.util.*;
 
+import javax.swing.JFrame;
+
 /**
  * Manages a collection of Users and Documents
  * @author Evan Bottomley
@@ -17,6 +19,9 @@ public class Simulation {
 	private List<User> allUser;
 	private GUI gui;
 	private StringBuffer results;
+	
+	private JFrame graph;														//added by Garrett and Bronwyn on Nov 6
+	private User graphable;														//added by Garrett and Bronwyn on Nov 6
 	
 	//getters
 	/**
@@ -199,7 +204,26 @@ public class Simulation {
 	private void update() {
 		gui.getTextArea().setText(results.toString());
 		System.out.println(gui.getTextArea().getText());
+		
 	}
+	
+	/**
+	 * Method to update the graph of a specific User. Added by Garrett and Bronwyn on Nov 6
+	 */
+	private void updateGraph()
+	{
+		graph.dispose();
+		
+		graph = new JFrame("Graph: " + graphable.getName());
+		graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		graph.setSize(500, 500);
+		
+		graph.add(new PayoffGraph(graphable.getPayoffArr(), graph));
+		graph.setVisible(true);
+		
+	}
+	
+	
 	
 	public void start(int tags, int cons, int prods, int docs) {
 		this.selectTags(tags);
@@ -227,8 +251,13 @@ public class Simulation {
 			results.append("Following: " + acting.getFollowing().toString() + "\n");
 			results.append("Followed: " + acting.getFollowed() + "\n");
 			results.append("Likes: " + liked.toString() + "\n");
-			results.append("Payoff: " + acting.payoff(allDoc)+ "\n");
+			results.append("Payoff: " + acting.getPayoff()+ "\n");
 			results.append("\n");
+			
+			//added by Garrett and Bronwyn on Nov 6
+			for(User u: allUser){
+				u.getPayoffArr().add(u.getCumulative());
+			}
 		}
 		update();
 	}
