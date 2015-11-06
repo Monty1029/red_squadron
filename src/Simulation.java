@@ -1,5 +1,5 @@
 //Evan Bottomley
-//Updated Oct. 16, 2015
+//Updated Nov. 6, 2015
 
 import java.util.*;
 
@@ -15,20 +15,39 @@ public class Simulation {
 	private HashMap<User, ArrayList<Document>> map;
 	private List<Document> allDoc;
 	private List<User> allUser;
+	private GUI gui;
+	private StringBuffer results;
 	
+	//getters
 	/**
-	 * Default constructor, arbitrarily set to 5
+	 * Get the list of all possible tags
+	 * @return all possible tags
 	 */
-	public Simulation() {
-		this(5);
-	}
+	public List<String> getAllTags(){return allTags;}
+	/**
+	 * Get the list of all Documents
+	 * @return the list of all Documents
+	 */
+	public  List<Document> getAllDoc(){return allDoc;}
+	/**
+	 * Get the list of all Users
+	 * @return the list of all Users
+	 */
+	public  List<User> getAllUser(){return allUser;}
+	/**
+	 * Get the list of all tags used
+	 * @return the list of all tags used
+	 */
+	public List<String> getAvailableTags(){return availableTags;}
+	
+	
 	
 	
 	/**
-	 * Primary constructor, create new Simulations, fills out allTags list and availableTags list
+	 * Primary constructor, create new Simulations, fills out allTags list
 	 * @param n number of different tags that will be used in the simulation
 	 */
-	public Simulation(int n) {
+	public Simulation() {
 		allTags = new ArrayList<String>();
 		availableTags = new ArrayList<String>();
 		map = new HashMap<User, ArrayList<Document>>();
@@ -39,10 +58,28 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
+		
+		results = new StringBuffer();
+	}
+	
+	/**
+	 * Method to set the GUI
+	 * @param g GUIto reference
+	 */
+	public void setGUI(GUI g) {
+		gui = g;
+	}
+	
+	
+	/**
+	 * Fills out availableTags list with a certain number of tags from allTags
+	 * @param n number of different tags that will be used in the simulation
+	 */
+	public void selectTags(int n) {
 		Random rand = new Random();
 		int r;
 		String s;
-		if (n > allTags.size()) n = allTags.size();
+		if (n > allTags.size()) n = allTags.size(); //n cannot exceed max number of tags
 		for (int i = 0; i < n; i++) {
 			r = rand.nextInt(allTags.size());
 			s = allTags.get(r);
@@ -50,7 +87,6 @@ public class Simulation {
 			allTags.remove(s);
 		}
 	}
-	
 	/**
 	 * Add a user's document like to the hashmap
 	 * @param user the User key
@@ -81,32 +117,39 @@ public class Simulation {
 		int r;
 		//Add n1 Consumers
 		System.out.print("Consumers:");
+		results.append("Consumers:" );
 		for (int i = 0; i < n1; i++) {
 			r = rand.nextInt(availableTags.size());
 			u = new Consumer(("Consumer"+i), availableTags.get(r), this);
 			System.out.print(" " + u.getName() + "(" + u.getTaste() + ") ");
+			results.append(" " + u.getName() + "(" + u.getTaste() + ") ");
 			allUser.add(u);
 		}
 		//Add n2 Producers
 		System.out.print("\nProducers:");
+		results.append("\nProducers:");
 		for (int i = 0; i < n2; i++) {
 			r = rand.nextInt(availableTags.size());
 			u = new Producer(("Producer"+i), availableTags.get(r), this);
 			System.out.print(" " + u.getName() + "(" + u.getTaste() + ") ");
+			results.append(" " + u.getName() + "(" + u.getTaste() + ") ");
 			allUser.add(u);
 		}
 		//Add n3 documents
 		Document d;
 		System.out.print("\nSeed Documents:");
+		results.append("\nSeed Documents:");
 		for (int i = 0; i < n3; i++) {
 			r = rand.nextInt(availableTags.size());
 			d = new Document(("Doc" + i), availableTags.get(r));
 			System.out.print(" " + d.getName() + "(" + d.getTag() + ") ");
+			results.append(" " + d.getName() + "(" + d.getTag() + ") ");
 			allDoc.add(d);
 		}
 		System.out.println("\n");
 		System.out.println("----------------------------------------------------------------------");
 		System.out.println("\n");
+		results.append("\n\n----------------------------------------------------------------------\n\n");
 	}
 	
 	
@@ -115,10 +158,13 @@ public class Simulation {
 	 */
 	private void printTags() {
 		System.out.print("Available Tags:");
+		results.append("Available Tags:");
 		for(int i = 0; i < availableTags.size(); i++) {
 			System.out.print(" " + availableTags.get(i));
+			results.append(" " + availableTags.get(i));
 		}
 		System.out.println("");
+		results.append("\n");
 	}
 	
 
@@ -131,6 +177,14 @@ public class Simulation {
 	}
 	
 	/**
+	 * Get the results String.
+	 * @return the results String
+	 */
+	public StringBuffer getResults() {
+		return results;
+	}
+	
+	/**
 	 * Method for a producer to add the new document
 	 * @param doc document to add
 	 */
@@ -139,15 +193,61 @@ public class Simulation {
 		allDoc.add(doc);
 	}
 	
+	/**
+	 * Print the update to the GUI.
+	 */
+	private void update() {
+		gui.getTextArea().setText(results.toString());
+		System.out.println(gui.getTextArea().getText());
+	}
+	
+	public void start(int tags, int cons, int prods, int docs) {
+		this.selectTags(tags);
+		this.printTags();
+		this.seed(cons, prods, docs);
+		update();
+	}
+	
+	/**
+	 * Perform n steps.
+	 * @param n number of steps to perform
+	 */
+	public void step(int n) {
+		Random rand = new Random();
+		int x;
+		List<Document> liked;
+		for (int i = 0; i < n; i++) {
+			x = rand.nextInt(allUser.size());
+			User acting = allUser.get(x);
+			liked = acting.act(allDoc);
+			for(Document doc: liked) {
+				addLike(acting, doc);
+			}
+			results.append("Name: " + acting.getName() + ", Taste: " + acting.getTaste() + "\n");
+			results.append("Following: " + acting.getFollowing().toString() + "\n");
+			results.append("Followed: " + acting.getFollowed() + "\n");
+			results.append("Likes: " + liked.toString() + "\n");
+			results.append("Payoff: " + acting.payoff(allDoc)+ "\n");
+			results.append("\n");
+		}
+		update();
+	}
 
 	
 	/**
-	 * Main function creates a simulation, seeds it and runs for x iterations
+	 * Main function creates a simulation and GUI
 	 * @param args not used currently
 	 */
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
-		Simulation sim = new Simulation(5);
+		
+		Simulation sim = new Simulation();
+		GUI g = new GUI(sim);
+		sim.setGUI(g);
+		
+		while(true){} //Loop forever
+		/*
+		sim.selectTags(5);
 		sim.printTags();
 		sim.seed(5, 5, 10);
 		Random rand = new Random();
@@ -166,5 +266,6 @@ public class Simulation {
 		
 		
 		System.out.println("End simulation.");
+		*/
 	}
 }

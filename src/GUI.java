@@ -24,9 +24,14 @@ public class GUI {
 	private JButton stepButton;
 	private JTextArea textArea;
 	private JFrame frame;
+	private Simulation sim;																					//MONTY, WE HAD TO ADD THIS
+	private ButtonListener bl;																				//CREATE BUTTON LISTENER
 	
-	public GUI() {
+	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
+		this.sim = sim;																						//HAD TO SAVE THE SIMULATION
+		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
 		createAndShowGUI();
+		
 	}
 	
 	//Adds all the components of the GUI to a container
@@ -37,12 +42,12 @@ public class GUI {
     	
     	Color textColor = new Color(225,225,225);
     	
-    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm4 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm5 = new SpinnerNumberModel(0, 0, 2000000, 1);
-    	SpinnerModel sm6 = new SpinnerNumberModel(0, 0, 2000000, 1);
+    	SpinnerModel sm1 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm2 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm3 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm4 = new SpinnerNumberModel(0, 0, 2000000, 1);										//1 TO 5
+    	SpinnerModel sm5 = new SpinnerNumberModel(0, 0, 2000000, 1);										//0 TO 50
+    	SpinnerModel sm6 = new SpinnerNumberModel(0, 0, 2000000, 1);										//10, 10, 10
     	
     	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
@@ -140,6 +145,7 @@ public class GUI {
     	c.gridy = 6;
     	startButton.setBackground(new Color(255,200,200));
     	startButton.setActionCommand("start");
+    	startButton.addActionListener(bl);																		//ADDED BUTTON LISTENER
     	pane.add(startButton, c);
     	    	
     	//Button to step through the simulation
@@ -150,11 +156,13 @@ public class GUI {
     	c.gridy = 6;
     	stepButton.setBackground(new Color(255,200,200));
     	stepButton.setActionCommand("step");
+    	stepButton.addActionListener(bl);																		//ADDED BUTTON LISTENER
     	pane.add(stepButton, c);    	
     	
     	//Text area that will display the output at each step of the simulation
     	textArea = new JTextArea(10,1);
     	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.ipady = 100;																							//HAD TO ADJUST WIDTH OF TEXT AREA
     	c.gridwidth = 2;
     	c.gridx = 0;
     	c.gridy = 7;
@@ -162,6 +170,7 @@ public class GUI {
     	textArea.setEditable(false);
     	JScrollPane scroll = new JScrollPane (textArea,
     			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    	
     	pane.add(scroll, c);
     	frame.setVisible(true);
     }
@@ -216,6 +225,6 @@ public class GUI {
 
 	
     public static void main(String[] args) {
-        GUI g = new GUI();
+        GUI g = new GUI(null);														//HAD TO PUT A NULL HERE, WE KNOW THIS WAS JUST FOR TESTING
     }
 }
