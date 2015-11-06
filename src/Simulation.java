@@ -1,5 +1,5 @@
 //Evan Bottomley
-//Updated Nov. 3, 2015
+//Updated Nov. 6, 2015
 
 import java.util.*;
 
@@ -157,18 +157,21 @@ public class Simulation {
 	}
 	
 	private void update() {
-		gui.getTextArea.setText(results.toString());
+		gui.getTextArea().setText(results.toString());
+		System.out.println(gui.getTextArea().getText());
 	}
 	
 	public void start(int tags, int cons, int prods, int docs) {
 		this.selectTags(tags);
 		this.printTags();
 		this.seed(cons, prods, docs);
+		update();
 	}
 	
 	public void step(int n) {
 		Random rand = new Random();
 		int x;
+		List<Document> liked;
 		for (int i = 0; i < n; i++) {
 			x = rand.nextInt(allUser.size());
 			User acting = allUser.get(x);
@@ -177,6 +180,7 @@ public class Simulation {
 				addLike(acting, doc);
 			}
 		}
+		update();
 	}
 
 	
