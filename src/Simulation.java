@@ -25,11 +25,6 @@ public class Simulation {
 	 */
 	public List<String> getAllTags(){return allTags;}
 	/**
-	 * Get the Hashmap of all User and liked Documents
-	 * @return the Hashmap of all User and liked Documents
-	 */
-	public HashMap<User, ArrayList<Document>> getMap(){return map;}
-	/**
 	 * Get the list of all Documents
 	 * @return the list of all Documents
 	 */
@@ -39,7 +34,11 @@ public class Simulation {
 	 * @return the list of all Users
 	 */
 	public  List<User> getAllUser(){return allUser;}
-	
+	/**
+	 * Get the list of all tags used
+	 * @return the list of all tags used
+	 */
+	public List<String> getAvailableTags(){return availableTags;}
 	
 	
 	
