@@ -1,13 +1,14 @@
 //Evan Bottomley
 //Updated Nov. 6, 2015
 
+import java.awt.Toolkit;
 import java.util.*;
 
 import javax.swing.JFrame;
 
 /**
  * Manages a collection of Users and Documents
- * @author Evan Bottomley
+ * @author Evan Bottomley, Contributors: Garrett Steele and Bronwyn Skelley
  *
  */
 public class Simulation {
@@ -45,7 +46,11 @@ public class Simulation {
 	 */
 	public List<String> getAvailableTags(){return availableTags;}
 	
-	
+	/**
+	 * Set which usert to graph
+	 * @param u the user to graph
+	 */
+	public void setGraphable(User u){graphable = u;}
 	
 	
 	/**
@@ -204,7 +209,7 @@ public class Simulation {
 	private void update() {
 		gui.getTextArea().setText(results.toString());
 		System.out.println(gui.getTextArea().getText());
-		
+		if(graphable != null){updateGraph();}					//line added by Garrett and Bronwyn on nov 6
 	}
 	
 	/**
@@ -212,11 +217,14 @@ public class Simulation {
 	 */
 	private void updateGraph()
 	{
-		graph.dispose();
+		if (graph != null){graph.dispose();}
 		
 		graph = new JFrame("Graph: " + graphable.getName());
 		graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		graph.setSize(500, 500);
+		
+		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		
+		graph.setSize(dub.intValue(), 700);
 		
 		graph.add(new PayoffGraph(graphable.getPayoffArr(), graph));
 		graph.setVisible(true);
@@ -224,7 +232,13 @@ public class Simulation {
 	}
 	
 	
-	
+	/**
+	 * Starts the simulation
+	 * @param tags number of tags
+	 * @param cons number of consumers
+	 * @param prods number of producers
+	 * @param docs number of documents
+	 */
 	public void start(int tags, int cons, int prods, int docs) {
 		this.selectTags(tags);
 		this.printTags();
