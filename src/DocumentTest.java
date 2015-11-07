@@ -2,47 +2,43 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-
+/**
+ * 
+ * @author Bronwyn
+ * Tests for Document class
+ */
 public class DocumentTest {
-
+	/**
+	 * tests to see if constructor works
+	 */
 	@Test
 	public void testDocument() {
-		fail("Not yet implemented");
+		Document doc = new Document("name", "tag");
+		assertTrue(doc.getName().equals("name")&&doc.getTag().equals("tag"));
 	}
 
+	/**
+	 * tests to see if document has been liked by a consumer, and is contained in the documents lists of which user liked it
+	 */
 	@Test
-	public void testGetTag() {
-		fail("Not yet implemented");
+	public void testGetLikeData() {
+		Document doc = new Document("name", "tag");
+		Simulation sim = new Simulation();
+		Consumer con = new Consumer("user", "tag", sim);
+		doc.likeDoc(con);
+		assertTrue(doc.hasLiked(con));
+		assertTrue(doc.getLikes()==1);
+		assertTrue(doc.getLikedUsers().contains(con));
 	}
 
-	@Test
-	public void testGetName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetLikes() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testLikeDoc() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasLiked() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetLikedUsers() {
-		fail("Not yet implemented");
-	}
-
+	/**	
+	 * makes two documents, see if they have same amount of likes
+	 */
 	@Test
 	public void testCompareTo() {
-		fail("Not yet implemented");
+		Document doc = new Document("name", "tag");
+		Document doc1 = new Document("name", "tag");
+		assertTrue(doc.compareTo(doc1)==0);
 	}
 
 }

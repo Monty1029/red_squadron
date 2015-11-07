@@ -1,11 +1,14 @@
 //Evan Bottomley
 //Updated Nov. 6, 2015
 
+import java.awt.Toolkit;
 import java.util.*;
+
+import javax.swing.JFrame;
 
 /**
  * Manages a collection of Users and Documents
- * @author Evan Bottomley
+ * @author Evan Bottomley, Contributors: Garrett Steele and Bronwyn Skelley
  *
  */
 public class Simulation {
@@ -18,12 +21,43 @@ public class Simulation {
 	private GUI gui;
 	private StringBuffer results;
 	
+	private JFrame graph;														//added by Garrett and Bronwyn on Nov 6
+	private User graphable;														//added by Garrett and Bronwyn on Nov 6
+	
+	//getters
+	/**
+	 * Get the list of all possible tags
+	 * @return all possible tags
+	 */
+	public List<String> getAllTags(){return allTags;}
+	/**
+	 * Get the list of all Documents
+	 * @return the list of all Documents
+	 */
+	public  List<Document> getAllDoc(){return allDoc;}
+	/**
+	 * Get the list of all Users
+	 * @return the list of all Users
+	 */
+	public  List<User> getAllUser(){return allUser;}
+	/**
+	 * Get the list of all tags used
+	 * @return the list of all tags used
+	 */
+	public List<String> getAvailableTags(){return availableTags;}
+	
+	/**
+	 * Set which usert to graph
+	 * @param u the user to graph
+	 */
+	public void setGraphable(User u){graphable = u;}
+	
 	
 	/**
 	 * Primary constructor, create new Simulations, fills out allTags list
 	 * @param n number of different tags that will be used in the simulation
 	 */
-	public Simulation(GUI g) {
+	public Simulation() {
 		allTags = new ArrayList<String>();
 		availableTags = new ArrayList<String>();
 		map = new HashMap<User, ArrayList<Document>>();
@@ -34,9 +68,18 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
-		gui = g;
+		
 		results = new StringBuffer();
 	}
+	
+	/**
+	 * Method to set the GUI
+	 * @param g GUIto reference
+	 */
+	public void setGUI(GUI g) {
+		gui = g;
+	}
+	
 	
 	/**
 	 * Fills out availableTags list with a certain number of tags from allTags
@@ -143,6 +186,10 @@ public class Simulation {
 		return map;
 	}
 	
+	/**
+	 * Get the results String.
+	 * @return the results String
+	 */
 	public StringBuffer getResults() {
 		return results;
 	}
@@ -156,11 +203,44 @@ public class Simulation {
 		allDoc.add(doc);
 	}
 	
+	/**
+	 * Print the update to the GUI.
+	 */
 	private void update() {
 		gui.getTextArea().setText(results.toString());
 		System.out.println(gui.getTextArea().getText());
+
+		if(graphable != null){updateGraph();}					//line added by Garrett and Bronwyn on nov 6
+
 	}
 	
+	/**
+	 * Method to update the graph of a specific User. Added by Garrett and Bronwyn on Nov 6
+	 */
+	private void updateGraph()
+	{
+		if (graph != null){graph.dispose();}
+		
+		graph = new JFrame("Graph: " + graphable.getName());
+		graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		
+		graph.setSize(dub.intValue(), 700);
+		
+		graph.add(new PayoffGraph(graphable.getPayoffArr(), graph));
+		graph.setVisible(true);
+		
+	}
+	
+	
+	/**
+	 * Starts the simulation
+	 * @param tags number of tags
+	 * @param cons number of consumers
+	 * @param prods number of producers
+	 * @param docs number of documents
+	 */
 	public void start(int tags, int cons, int prods, int docs) {
 		this.selectTags(tags);
 		this.printTags();
@@ -168,6 +248,10 @@ public class Simulation {
 		update();
 	}
 	
+	/**
+	 * Perform n steps.
+	 * @param n number of steps to perform
+	 */
 	public void step(int n) {
 		Random rand = new Random();
 		int x;
@@ -178,6 +262,17 @@ public class Simulation {
 			liked = acting.act(allDoc);
 			for(Document doc: liked) {
 				addLike(acting, doc);
+			}
+			results.append("Name: " + acting.getName() + ", Taste: " + acting.getTaste() + "\n");
+			results.append("Following: " + acting.getFollowing().toString() + "\n");
+			results.append("Followed: " + acting.getFollowed() + "\n");
+			results.append("Likes: " + liked.toString() + "\n");
+			results.append("Payoff: " + acting.getPayoff()+ "\n");
+			results.append("\n");
+			
+			//added by Garrett and Bronwyn on Nov 6
+			for(User u: allUser){
+				u.getPayoffArr().add(u.getCumulative());
 			}
 		}
 		update();
@@ -190,8 +285,11 @@ public class Simulation {
 	 */
 	public static void main(String[] args) {
 		//Create a new simulation and seed the simulation
-		GUI g = new GUI();
-		Simulation sim = new Simulation(g);
+		
+		Simulation sim = new Simulation();
+		GUI g = new GUI(sim);
+		sim.setGUI(g);
+		
 		while(true){} //Loop forever
 		/*
 		sim.selectTags(5);

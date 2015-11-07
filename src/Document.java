@@ -87,4 +87,12 @@ public class Document implements Comparable<Document> {
 	public int compareTo(Document arg0) {
 		return arg0.getLikes() - this.getLikes() ;
 	}
+	
+	/**
+	 * Overwrite of the toString method()
+	 */
+	public String toString(){
+		return name;
+	}
+	
 }

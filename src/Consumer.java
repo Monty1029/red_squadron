@@ -86,6 +86,8 @@ public class Consumer extends User {
 			}
 		}
 		System.out.println("" + super.getName() + " payoff: " + pointCounter + "");
+		cumulative += pointCounter;
+		payoff = pointCounter;
 		return pointCounter;
 	}
 
