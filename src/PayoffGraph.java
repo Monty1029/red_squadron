@@ -37,17 +37,28 @@ public class PayoffGraph extends JPanel{
 		Double dub = frame.getSize().getHeight();							//height of the frame
 		Double dubWidth = frame.getSize().getWidth();						//width of the frame
 		
-		int width = (dubWidth.intValue()-100) / arr.size();					//set the width to use, scales horizontally
-		int height = 10;													//height of each increment for the bars
+		int width = (dubWidth.intValue()-150) / arr.size();					//set the width to use, scales horizontally
+															
 		int bottom = dub.intValue() - 100 ;									//the bottom of the graph
-		
+		int height;
+		if(Collections.max(arr) != 0){
+			height = (bottom-150)/(Collections.max(arr));	//height of each increment for the bars
+		}else{
+			height = 0;
+		}
 		//create the bars
+		int scale = 1; //prints all labels if less than 50, otherwise prints 20 so x axis isn't too crowded 
+		if(arr.size() >50){
+			scale = arr.size()/20;
+			
+		}
 		for(int i = 0;  i < arr.size(); i++)
 		{
 			g.drawRect(100 + i*(width), bottom - (arr.get(i) * height), width , arr.get(i) * height);
-			
-			g.drawString("" + (i + 1), 105 + i*(width), bottom + 20);		//draw the iteration numbers
-			
+		
+			if((i+1)%scale == 0){ 
+				g.drawString("" + (i + 1), (100+width/(scale*2))+ i*(width), bottom + 20);		//draw the iteration numbers
+			}
 			
 		}
 		
@@ -57,8 +68,8 @@ public class PayoffGraph extends JPanel{
 			g.drawString("" + i, 80, bottom - i * height);
 		}
 		
-		g.drawLine(100,bottom, 100, bottom - Collections.max(arr) * height - height);	//vertical line
-		g.drawLine(100, bottom, 100 + arr.size() * 50, bottom);							//horizontal line
+		g.drawLine(100,bottom, 100, bottom - bottom + 100);	//vertical line
+		g.drawLine(100, bottom, 120 + arr.size() * width, bottom);							//horizontal line
 		
 		//labels
 		g.drawString("Acumulative Payoff vs. Iterations", 100, 50);

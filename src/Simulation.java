@@ -222,7 +222,7 @@ public class Simulation {
 		if (graph != null){graph.dispose();}
 		
 		graph = new JFrame("Graph: " + graphable.getName());
-		graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		
