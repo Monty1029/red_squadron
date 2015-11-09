@@ -6,7 +6,7 @@
 			//																	//
 			//					Course Project: Social Network					//
 			//							  Milestone: 2							//
-			//							  Nov 3, 2015							//
+			//							  Nov 7, 2015							//
 			//																	//
 			//  Monty Dhanani, Garrett Steele, Bronwyn Skelley, Even Bottomley	//
 			//																	//
@@ -30,21 +30,47 @@
 	Evan Bottomley		100943340				EvanBottomley@cmail.carleton.ca		evanbottomley
 
 	
+		//////////////////////////////////
+		//								//
+		//		Important Note			//
+		//								//
+		//////////////////////////////////
+		
+		If opening and running the code from within an IDE, the Simulation.java class is the
+	start of program execution and contains the main method to be executed.
+	
+	
 		//////////////////////////////////////////////////
 		//												//
 		//		Responsibilities for Milestone 2		//
 		//												//
 		//////////////////////////////////////////////////
 	
-	   The following are the primary responsibilities of each team member for "Milestone 2", project code is written separately 
-	with changes made as a team during team meetings.
+	   The following are the primary design responsibilities of each team member for "Milestone 2", project code is written individually,
+	or in pairs where stated in the code. Where stated in the code, another team member has made contribution(s) to another team member's code
+	where changes in the contributors class were directly related to that of another team member. The team member who had their code modified then reviewed the changes.
+	Where debugging activities were performed as a team during team meetings.
+	
 	
 	Monty Dhanani:		GUI interface (GUI.java)
-	Garrett Steele:		Unit tests (for User, Consumer, and Producer), Updated Readme.txt file, Design_Decisions_M2.pdf
+	Garrett Steele:		Unit tests (for User, Consumer, and Producer), User re-factoring, Updated Readme.txt file, Design_Decisions_M2.pdf
 	Bronwyn Skelley:	Unit Tests (for Document, and Simulation), Unit test Suite, User_Manual_M2.pdf
 	Evan Bottomley:		GUI Listener (ButtonListener.java), Simulation.java re-factoring
 	
-	   All team members are responsible for the JavaDoc commenting of their own code, 
+	   During integration testing and debugging as a team, additional requirements were discovered. These requirements resulted in the following
+	changes.
+	
+	Requirement					Resultant Changes						Team Member(s) Directly Responsible
+	Graphing User over time		 - PayoffGraph.java						Co-Authored by Garrett Steele and Bronwyn Skelley
+								 - Minor changes in Simulation to		Co-Contributed by Garrett Steele and Bronwyn Skelley
+								create and account for graph
+								 - Review of changes to Simulation		Evan Bottomley
+	
+	GUI support for selecting	- GUI alterations						Monty Dhanani
+	a User to graph				- SelectListener.java					Co-Authored by Garrett Steele and Monty Dhanani
+	
+	
+	   All team members are responsible for the JavaDoc commenting of their code, 
 	where the group reviews and edits the JavaDoc together prior to submission. The UML diagram was 
 	updated as a team at team meetings for "Milestone 2".
 	
@@ -76,9 +102,10 @@
 	   Since the first Milestone, the project has been altered to use a GUI to control the simulation,
 	with the ability to set a number of starting seed values for the number of documents and users in the simulation (a
 	feature suggested by the TA and is part of "Milestone 2" requirements). The output of the program has also been 
-	updated to use a text area within the GUI window to output the result as text to be interpreted by the user.
-	Furthermore, unit tests created using JUnit have been included for no GUI related classes (no unit tests for GUI 
-	or ButtonListener), and a test suite to run all unit tests.
+	updated to use a text area within the GUI window to output the result as text to be interpreted by the user, 
+	and the ability to graph the cumulative payoff of a chosen USer over time has been added.
+	Furthermore, unit tests created using JUnit have been included for no GUI related classes (no unit tests for GUI,
+	SelectionListener, or ButtonListener), and a test suite to run all unit tests.
 	
 	   The project documentation comprised of "User_Manual_M2.pdf", "Design_Decisions_M2.pdf", and "Milestone2_UML.jpg"
 	have also been updated from those for "Milestone 1" to reflect the above changes.
@@ -106,7 +133,6 @@
 	   - Re-factor the GUI to allow allow users to change a greater number of simulation factors, including:
 			- the ranking strategy of each User
 			- the Strategy used by Producers (a or b)
-	   - Allow the GUI to show the results of the simulation graphically over time with a line graph
 	   - Update all documentation to account for new project changes
 	   - Include suggestions made by SYSC 3110 TA's on "Milestone 2"
 
