@@ -55,7 +55,6 @@ public class Simulation {
 	
 	/**
 	 * Primary constructor, create new Simulations, fills out allTags list
-	 * @param n number of different tags that will be used in the simulation
 	 */
 	public Simulation() {
 		allTags = new ArrayList<String>();

@@ -178,7 +178,7 @@ public abstract class User {
 	/**
 	 * The basic action performed by Users and Consumers in Milestone 2, removing duplication. 
 	 * Based on the code previously in Monty Dhanani's Consumer and Producer classes.
-	 * @param documents the list of documents to run through
+	 * @param allDocs the list of documents to run through
 	 * @return the list of documents for the User to like
 	 */
 	public List<Document> basicAct(List<Document> allDocs)

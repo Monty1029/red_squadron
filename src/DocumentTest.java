@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * 
+ * Test the Document class
  * @author Bronwyn
  * Tests for Document class
  */

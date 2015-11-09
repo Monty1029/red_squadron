@@ -5,9 +5,20 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Listens to the start and step buttons, controlling the Simulation.
+ * @author Evan Bottomley
+ *
+ */
 public class ButtonListener implements ActionListener {
 	GUI gui;
 	Simulation sim;
+	
+	/**
+	 * Constructor
+	 * @param g gui to reference
+	 * @param s simulation to reference
+	 */
 	public ButtonListener(GUI g, Simulation s) {
 		gui = g;
 		sim = s;

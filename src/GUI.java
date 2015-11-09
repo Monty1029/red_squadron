@@ -6,6 +6,11 @@
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * The non-graph view of the MVC model.
+ * @author Monty Dhanani
+ *
+ */
 public class GUI {
 	
 	private JLabel consumersLabel;
