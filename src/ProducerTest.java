@@ -26,7 +26,8 @@ import org.junit.Test;
 public class ProducerTest {
 
 	Simulation sim;				//a simulation to reference
-	List<Document> docs;		//create a list of pre-fab documents
+	List<Document> docs;		//a list of pre-fab documents
+	Strategy strat;				//a strategy to reference
 	
 	/**
 	 * Method to create a simulation to reference and the list of documents to use.
@@ -34,8 +35,9 @@ public class ProducerTest {
 	@Before
 	public void setUp()
 	{
-		sim = new Simulation();									//create a simulation to reference
+		sim = new Simulation();								//create a simulation to reference
 		docs = createDocList();								//create a list of pre-fab documents
+		strat = new PopularityStrategy();					//create a strategy to reference
 	}
 	
 	
@@ -48,8 +50,9 @@ public class ProducerTest {
 		List<Document> actedOn;												//create a list to hold the documents acted upon
 		
 		Producer producer1 = new Producer("producer1", "taste1",sim);		//create a producer
+		producer1.setStrat(strat);
 		assertEquals(0, producer1.getProduced().size());					//ensure they have made no documents
-		actedOn = producer1.act(docs);										//request them to act
+		actedOn = producer1.act(docs,10);										//request them to act
 		
 		//check that produce() works within the act() method
 		assertEquals(1, producer1.getProduced().size());					//should have created and added their own document to their list of produced documents 
@@ -149,76 +152,6 @@ public class ProducerTest {
 	}
 
 	
-	/**
-	 * Tests whether the popularity ranking acts as intended for a User on a list of pre-made documents.
-	 */
-	@Test
-	public void testRank() {
-
-		List<Document> ranked;
-		
-		//create 4 producers to test a variety of cases for the return
-		Producer producer1 = new Producer("producer1", "taste1",sim);
-		Producer producer2 = new Producer("producer2", "taste2",sim);
-		Producer producer3 = new Producer("producer3", "taste3",sim);
-		Producer producer4 = new Producer("producer4", "taste4",sim);
-		
-		//any User can like any document regardless of their taste and the tag of the document, this is used in the next steps
-		
-		//////////////////////////////////////////////////////////////
-		//						Ranking test 1						//
-		//////////////////////////////////////////////////////////////
-		//7th document on will have no likes
-		
-		//1st document has 4 likes, this will be the top ranked document
-		docs.get(0).likeDoc(producer1);
-		docs.get(0).likeDoc(producer2);
-		docs.get(0).likeDoc(producer3);
-		docs.get(0).likeDoc(producer4);
-		
-		//2nd, 3rd, and 4th have 3 likes
-		docs.get(1).likeDoc(producer1);			//2nd document
-		docs.get(1).likeDoc(producer2);
-		docs.get(1).likeDoc(producer3);
-		docs.get(2).likeDoc(producer1);			//3rd document
-		docs.get(2).likeDoc(producer2);
-		docs.get(2).likeDoc(producer3);
-		docs.get(3).likeDoc(producer1);			//4th document
-		docs.get(3).likeDoc(producer2);
-		docs.get(3).likeDoc(producer3);
-		
-		//5th has 2 likes
-		docs.get(4).likeDoc(producer1);
-		docs.get(4).likeDoc(producer2);
-		
-		//6th has 1 like
-		docs.get(5).likeDoc(producer1);
-		
-		
-		ranked = producer1.rank(docs);						//rank the documents
-		assertEquals(4, ranked.get(0).getLikes());			//1st position is liked 4 times
-		assertEquals(3, ranked.get(1).getLikes());			//2nd position has 3 likes
-		assertEquals(3, ranked.get(3).getLikes());			//4th position has 3 likes
-		assertEquals(2, ranked.get(4).getLikes());			//5th has 2 likes
-		assertEquals(1, ranked.get(5).getLikes());			//6th has 1 like
-		assertEquals(0, ranked.get(6).getLikes());			//7th has no likes
-		assertEquals(0, ranked.get(9).getLikes());			//10th has no likes
-		
-		
-		//////////////////////////////////////////////////////////////
-		//						Ranking test 2						//
-		//////////////////////////////////////////////////////////////
-		//all document have no likes
-		
-		docs = createDocList();							//reset document list
-		ranked = producer1.rank(docs);		//rank the documents
-		
-		assertEquals(0, ranked.get(0).getLikes());		//1st position has no likes
-		assertEquals(0, ranked.get(4).getLikes());		//5th position has no likes
-		assertEquals(0, ranked.get(9).getLikes());		//10th position has no likes
-		
-		
-	}
 
 	/**
 	 * Create a pre-fabricated list of documents to perform actions with.

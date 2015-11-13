@@ -26,6 +26,7 @@ public class ConsumerTest {
 
 	Simulation sim;				//a simulation to reference
 	List<Document> docs;		//create a list of pre-fab documents
+	Strategy strat;
 	
 	/**
 	 * Method to create a simulation to reference and the list of documents to use.
@@ -33,8 +34,9 @@ public class ConsumerTest {
 	@Before
 	public void setUp()
 	{
-		sim = new Simulation();									//create a simulation to reference
+		sim = new Simulation();								//create a simulation to reference
 		docs = createDocList();								//create a list of pre-fab documents
+		strat = new PopularityStrategy();					//create a basic strategy to reference
 	}
 	
 	
@@ -46,18 +48,21 @@ public class ConsumerTest {
 	public void testAct() {
 		
 		
+		
 		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
-		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);
-		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);
-		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);
-		Consumer consumer4 = new Consumer("consumer4", "taste5",sim);		//no documents will match this taste
+		//no documents will match taste5
+		//also set a PopularityStategy for each consumer
+		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);	consumer1.setStrat(strat);
+		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);	consumer2.setStrat(strat);
+		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);	consumer3.setStrat(strat);
+		Consumer consumer4 = new Consumer("consumer4", "taste5",sim);	consumer4.setStrat(strat);
 		
 		
 		//act for each consumer
-		List<Document> list1 = consumer1.act(docs);				//size 1
-		List<Document> list2 = consumer2.act(docs);				//size 2
-		List<Document> list3 = consumer3.act(docs);				//size 4
-		List<Document> list4 = consumer4.act(docs);				//no documents, size 0
+		List<Document> list1 = consumer1.act(docs, 10);				//size 1
+		List<Document> list2 = consumer2.act(docs, 10);				//size 2
+		List<Document> list3 = consumer3.act(docs, 10);				//size 4
+		List<Document> list4 = consumer4.act(docs, 10);				//no documents, size 0
 		
 		//check list 1
 		assertEquals(1, list1.size());							//size is 1
@@ -97,8 +102,6 @@ public class ConsumerTest {
 		assertEquals(2, consumer2.payoff(docs));								//payoff is 2
 		assertEquals(4, consumer3.payoff(docs));								//payoff is 4
 		assertEquals(0, consumer4.payoff(docs));								//payoff is 0
-		
-		
 	}
 
 	
@@ -131,10 +134,10 @@ public class ConsumerTest {
 	}
 
 	
-	/**
+	/*/**
 	 * Tests whether the popularity ranking acts as intended for a User on a list of pre-made documents.
 	 */
-	@Test
+	/*@Test
 	public void testPopularityRank() {
 		
 		List<Document> ranked;
@@ -200,7 +203,7 @@ public class ConsumerTest {
 		assertEquals(0, ranked.get(9).getLikes());		//10th position has no likes
 		
 		
-	}
+	}*/
 	
 	
 	/**

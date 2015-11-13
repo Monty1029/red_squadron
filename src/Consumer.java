@@ -1,13 +1,14 @@
 /* SYSC3110 Software Design Project
  * Team redSquadron
  * Consumer subclass by Monty Dhanani
+ * re-factored by Garrett Steele for Milestone 3
  */
 
 import java.util.*;
 
 /**
  * Sub-class of a User that likes and ranks other documents
- * @author Monty Dhanani, Contributors: Garrett Steele (method refactoring where stated)
+ * @author Monty Dhanani, Garrett Steele (Class refactoring from Milestones 1-2)
  * 
  *
  */
@@ -28,43 +29,16 @@ public class Consumer extends User {
 	 * of Documents with the same taste as the Consumer.
 	 * Method modified by Garrett Steele on Nov 5th, 2015 to reduce duplicate code
 	 * @param allDocs list of all existing documents
+	 * @param n number of documents to return ranked
 	 */
-	public List<Document> act(List<Document> allDocs) {
+	public List<Document> act(List<Document> allDocs, int n) {
 
-		ArrayList<Document> ranked = popularityRank(allDocs);
-		int payoff = this.payoff(ranked);	//rank them and get payoff
+		List<Document> ranked = strat.rank(this, allDocs, n);	//rank them
+		int payoff = this.payoff(ranked);						//do payoff work
+		follow(ranked);											//follow them
 		
-		
-		return basicAct(allDocs);
-	}
-
-	/**
-	 * Ranks all of the documents and returns the top 10
-	 * @param unrankedDocs is the list of unranked documents to rank
-	 * @return a list of ranked documents
-	 */
-	public ArrayList<Document> popularityRank(List<Document> unrankedDocs) {
-		ArrayList<Document> ranked = new ArrayList<Document>();
-		Collections.sort(unrankedDocs);
-		String toprint = "" + super.getName() + " ranked: ";
-		
-		//Collections.reverseOrder(unrankedDocs);
-		for (int i = 0; i < 10; i++) {
-			ranked.add(unrankedDocs.get(i));
-		}
-		
-		
-		for(Document d: ranked){
-			toprint += d.getName() + "(liked: " + d.getLikes() + ") ";
-		}
-		System.out.println(toprint);
 		return ranked;
 	}
-
-	/*
-	 * public ArrayList<Document> followedRank(List<Document> docs) { for
-	 * milestone 2 }
-	 */
 
 	/**
 	 * Cycles through the list of ranked documents and every time it sees

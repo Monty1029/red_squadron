@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * Sub-class of a User that creates Documents and likes them as soon as they are created, can also like and rank other document
- * @author Monty Dhanani, Contributors: Garrett Steele (method refactoring where stated)
+ * @author Monty Dhanani, Garrett Steele (Class re-factoring from Milestones 1-2)
  *
  */
 public class Producer extends User {
@@ -40,14 +40,14 @@ public class Producer extends User {
 	 * Method modified by Garrett Steele on Nov 5th, 2015 to reduce duplicate code
 	 * @param allDocs list of all existing documents
 	 */
-	public List<Document> act(List<Document> allDocs) {
+	public List<Document> act(List<Document> allDocs, int n) {
 
-		produce();									//make a doc
-		ArrayList<Document> ranked = rank(allDocs);
-		int payoff = this.payoff(ranked);	//rank them and get payoff
+		produce();												//make a doc
+		List<Document> ranked = strat.rank(this, allDocs, n);	//rank the document
+		int payoff = this.payoff(ranked);						//do payoff work
+		follow(ranked);											//follow them
 		
-		
-		return basicAct(allDocs);
+		return ranked;
 	}
 	/**
 	 * Creates a new Document of the Producer's favourite taste and adds
@@ -60,12 +60,12 @@ public class Producer extends User {
 		newlyProduced.likeDoc(this);
 	}
 
-	/**
+	/*/**
 	 * Ranks all of the documents and returns the top 10
 	 * @param unrankedDocs is the list of unranked documents
 	 * @return a list of ranked documents
 	 */
-	public ArrayList<Document> rank(List<Document> unrankedDocs) {
+	/*public ArrayList<Document> rank(List<Document> unrankedDocs) {
 		ArrayList<Document> ranked = new ArrayList<Document>();
 		Collections.sort(unrankedDocs);
 		String toprint = "" + super.getName() + " ranked: ";
@@ -82,7 +82,7 @@ public class Producer extends User {
 		}
 		System.out.println(toprint);
 		return ranked;
-	}
+	}*/
 
 	/**
 	 * Calculates a payoff based on followers and documents liked that were produced

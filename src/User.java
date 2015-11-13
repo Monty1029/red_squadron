@@ -37,7 +37,9 @@ public abstract class User {
 	protected int cumulative;				//cumulative payoff
 	protected JFrame frame;					//create a JFrame to update graph
 	protected int payoff;					//the last payoff calculated
-	protected ArrayList<Integer> payoffs;
+	protected ArrayList<Integer> payoffs;	//list of payoffs over time
+	protected Strategy strat;				//the accociated strategy
+	
 	
 	//////////////////////////////////////////////
 	//											//
@@ -48,9 +50,10 @@ public abstract class User {
 	/**
 	 * Method to separately define the action for each subclass of User
 	 * @param documents list of Document objects to perform user's action with
+	 * @param n number of documents to return
 	 * @return list of documents the User likes
 	 */
-	public abstract List<Document> act(List<Document> documents);
+	public abstract List<Document> act(List<Document> documents, int n);
 	
 	/**
 	 * Method to separately define the payoff calculation for each subclass of User
@@ -141,6 +144,19 @@ public abstract class User {
 	 */
 	public int getCumulative(){return cumulative;}
 	
+	/**
+	 * Method to retrieve reference to the Simulation, used by the Strategy Interface
+	 * @return reference to the Simulation
+	 */
+	public Simulation getSim(){return sim;}
+	
+	/**
+	 * Set the Strategy to use
+	 * @param strat the Strategy to set
+	 */
+	public void setStrat(Strategy strat){this.strat = strat;}
+	
+	
 	//////////////////////////////////////////////
 	//											//
 	//			Concrete Methods				//
@@ -148,17 +164,42 @@ public abstract class User {
 	//////////////////////////////////////////////
 	
 	/**
-	 * Method to add a User to the list of followed Users
+	 * Method to add a specific User to the list of followed Users.
 	 * @param user the User that the user the method is called on wishes to follow
 	 */
 	public void follow(User user)
 	{
-		if(!following.contains(user)){
+		if(!following.contains(user)){	//if they have not followed them before
 			user.wasFollowed();			//let them know they were followed
 			following.add(user);		//follow the User
 		}
-		
 	}
+	
+	
+	/**
+	 * Method to follow the User's who have liked a Document from a list of Documents, and to like each of those documents passed.
+	 * @param ranked the list of ranked documents to work with
+	 */
+	public void follow(List<Document> ranked)
+	{
+		for (Document d : ranked) {
+			if (d.getTag().equals(getTaste())) {
+				
+				//follow people who like the document
+				for(User u: d.getLikedUsers())
+				{
+					if(!u.equals(this))	//if that user is not this user
+					{
+						follow(u);
+					}
+				}
+				//tell the document that it has been liked
+				d.likeDoc(this);
+			}
+		}
+	}
+	
+	
 	
 	/**
 	 * If the User is followed, increment the number of people who have followed this User
@@ -175,17 +216,17 @@ public abstract class User {
 		return false;
 	}
 	
-	/**
+	/*/**
 	 * The basic action performed by Users and Consumers in Milestone 2, removing duplication. 
 	 * Based on the code previously in Monty Dhanani's Consumer and Producer classes.
 	 * @param allDocs the list of documents to run through
 	 * @return the list of documents for the User to like
 	 */
-	public List<Document> basicAct(List<Document> allDocs)
+	/*public List<Document> basicAct(List<Document> allDocs)
 	{
 		String toprint = "" + getName() + "(" + getTaste() + ") " + " likes: ";
 		ArrayList<Document> sameTagDocs = new ArrayList<Document>();
-
+		
 		
 		
 		for (Document d : allDocs) {
@@ -210,7 +251,8 @@ public abstract class User {
 		
 		return sameTagDocs;
 		
-	}
+	}*/
+	
 	
 	/**
 	 * Changed toString method()

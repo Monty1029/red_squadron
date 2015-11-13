@@ -1,5 +1,3 @@
-
-
 //Name: Garrett Steele
 //Date: Nov 13, 2015
 //Class: SYSC3110 - Software Development Project
