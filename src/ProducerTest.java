@@ -45,14 +45,14 @@ public class ProducerTest {
 	 * Unit test to ensure the act method returns as expected for a number of test cases.
 	 */
 	@Test
-	public void testAct() {
+	public void testActA() {
 		
 		List<Document> actedOn;												//create a list to hold the documents acted upon
 		
 		Producer producer1 = new Producer("producer1", "taste1",sim);		//create a producer
 		producer1.setStrat(strat);
 		assertEquals(0, producer1.getProduced().size());					//ensure they have made no documents
-		actedOn = producer1.act(docs,10);										//request them to act
+		actedOn = producer1.act(docs,10);									//request them to act
 		
 		//check that produce() works within the act() method
 		assertEquals(1, producer1.getProduced().size());					//should have created and added their own document to their list of produced documents 
@@ -63,9 +63,50 @@ public class ProducerTest {
 		assertEquals(docs.get(0), actedOn.get(0));							//these should reference the same Document object
 		assertEquals(0, producer1.getFollowed());							//the User should not be following itself, and there is no-one else to follow them
 		assertEquals(0, producer1.getFollowing().size());					//nor does the document have any people who like it to follow
+		assertEquals(10, producer1.getLastRanked().size());					//should have kept the top 10 documents in memory after "p1" acts, 
+																				//only the size truly matters as an indication, otherwise it would be 0
+	}
+	
+
+	/**
+	 * Unit test of how a Producer performs under the B strategy for acting, does not have to test all the same things as testActA() because they share the same interior methods.
+	 */
+	@Test
+	public void testActB()
+	{
+		sim.selectTags(2);															//tell the simulation to select 2 tags, that way it can select a tag other than it's own
+		Producer p1 = new Producer("name1", sim.getAvailableTags().get(0), sim);	//create a user to like the first tag of the simulation
+		Producer p2 = new Producer("name2", sim.getAvailableTags().get(0), sim);	//create a user to like the second tag of the simulation
+		Producer p3 = new Producer("name3", sim.getAvailableTags().get(0), sim);	//create a user to like the second tag of the simulation
+		
+		p1.setActStrategy(Producer.STRATEGY_B);										//set the strategy to "B" for "p1", "p3" is then still "A"
+		p2.setActStrategy(Producer.STRATEGY_B);										//set the strategy to "B" for "p2" as well
+		
+		//need  to create a different list of documents for this test as they will be based on the tags from the simulation
+		Document doc1 = new Document("doc1",sim.getAvailableTags().get(0));
+		Document doc2 = new Document("doc1",sim.getAvailableTags().get(0));
+		Document doc3 = new Document("doc1",sim.getAvailableTags().get(1));
+		Document doc4 = new Document("doc1",sim.getAvailableTags().get(1));
+		Document doc5 = new Document("doc1",sim.getAvailableTags().get(1));
+		
+		//add them to the list
+		List<Document> newDocs = new ArrayList<>();
+		newDocs.add(doc1);
+		newDocs.add(doc2);
+		newDocs.add(doc3);
+		newDocs.add(doc4);
+		newDocs.add(doc5);
+		
+		assertNotEquals(sim.getAvailableTags().get(0), p1.act(newDocs, 5).get(0).getTag());	//the tags should be different in each list
+		assertNotEquals(p2.act(newDocs, 5).size(), p3.act(newDocs, 5).size());				//the two act strategies should not give the same size of list in this case
+		
+		assertEquals(5, p1.getLastRanked().size());		//should have kept the top 5 documents in memory after "p1" acts, 
+															//only the size truly matters as an indication, otherwise it would be 0
+		
+		
 		
 	}
-
+	
 	
 	/**
 	 * Tests whether the payoff works as expected for a consumer for pre-made lists of documents.

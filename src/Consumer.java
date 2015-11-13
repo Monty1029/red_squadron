@@ -33,11 +33,12 @@ public class Consumer extends User {
 	 */
 	public List<Document> act(List<Document> allDocs, int n) {
 
-		List<Document> ranked = strat.rank(this, allDocs, n);	//rank them
-		int payoff = this.payoff(ranked);						//do payoff work
-		follow(ranked);											//follow them
+		lastRanked = strat.rank(this, allDocs, n);					//rank them and store the result
+		int payoff = this.payoff(lastRanked);						//do payoff work
+		List<Document> toReturn = matchTaste(lastRanked);			//get which ones will be followed
+		follow(lastRanked);											//follow them
 		
-		return ranked;
+		return toReturn;
 	}
 
 	/**

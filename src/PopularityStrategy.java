@@ -26,9 +26,10 @@ public class PopularityStrategy implements Strategy {
 		ArrayList<Document> ranked = new ArrayList<Document>();		//new list of documents to return ranked
 		Collections.sort(docs);										//the comparable implementation in Document allows this based on number of times the document is liked
 		
-		//retrieve top ranked documents that match the User's taste
+		//retrieve top ranked documents
 		for (int i = 0; i < k; i++) {
-			if(docs.get(i).getTag().equals(u.getTaste())){ranked.add(docs.get(i));}
+			//if(docs.get(i).getTag().equals(u.getTaste())){ranked.add(docs.get(i));}
+			ranked.add(docs.get(i));
 		}
 
 		return ranked;

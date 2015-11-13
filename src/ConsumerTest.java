@@ -66,15 +66,18 @@ public class ConsumerTest {
 		
 		//check list 1
 		assertEquals(1, list1.size());							//size is 1
+		assertEquals(10, consumer1.getLastRanked().size());		//check the size of the last ranked held by the consumer
 		assertEquals(true, list1.contains(docs.get(0)));		//it contains the first element
 		
 		//check list 2
 		assertEquals(2, list2.size());							//size is 2
+		assertEquals(10, consumer2.getLastRanked().size());		//check the size of the last ranked held by the consumer
 		assertEquals(true, list2.contains(docs.get(1)));		//it contains the second element
 		assertEquals(true, list2.contains(docs.get(2)));		//it contains the third element
 		
 		//check list 3
 		assertEquals(4, list3.size());							//size is 4
+		assertEquals(10, consumer3.getLastRanked().size());		//check the size of the last ranked held by the consumer
 		assertEquals(true, list3.contains(docs.get(3)));		//it contains the fourth element
 		assertEquals(true, list3.contains(docs.get(4)));		//it contains the fifth element
 		assertEquals(true, list3.contains(docs.get(5)));		//it contains the sixth element
@@ -82,9 +85,13 @@ public class ConsumerTest {
 		
 		//check that list 4 has size 0
 		assertEquals(0, list4.size());
+		assertEquals(10, consumer4.getLastRanked().size());		//check the size of the last ranked held by the consumer
 		
-	}
-
+		
+		
+		
+	}	
+	
 	
 	/**
 	 * Tests whether the payoff works as expected for a consumer for pre-made lists of documents.

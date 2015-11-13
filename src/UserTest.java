@@ -19,15 +19,14 @@ import org.junit.Test;
 
 
 /**
- * JUnit test class for the User class.
+ * JUnit test class for the User class. PLease note that the getLastRanked is check in Consumer and Producer where act() is actually testes
  * @author Garrett Steele
  *
  */
 public class UserTest {
 
 	//This class does not test it's own constructors as it is an abstract class and can not be instantiated
-
-	
+	@Test
 	public void testSetStrat()
 	{
 		PopularityStrategy strat = new PopularityStrategy();						//create a new strategy
@@ -94,6 +93,7 @@ public class UserTest {
 	/**
 	 * Tests whether the Users that like a list of documents will be followed only once by a user
 	 */
+	@Test
 	public void testFollowDocuments(){
 		
 		//create a simulation to reference
@@ -122,7 +122,7 @@ public class UserTest {
 		//create the Lists of type document
 		List<Document> list1 = new ArrayList<Document>();		//empty list
 		List<Document> list2 = new ArrayList<Document>();		//consists only of doc1
-		list2.add(doc1);
+		list2.add(doc2);
 		List<Document> list3 = new ArrayList<Document>();		//consists of all docs
 		list3.add(doc1);
 		list3.add(doc2);
@@ -136,8 +136,6 @@ public class UserTest {
 		assertEquals(4, consumer1.getFollowing().size());		//consumer1 should now follow 4 people, not itself, and should not have followed anyone again to make it 4
 		
 	}
-	
-	
 	
 	
 	/**
@@ -155,14 +153,17 @@ public class UserTest {
 		Consumer consumer = new Consumer("consumer", "taste1", sim);	//create a user to like the document
 		
 		//check if the user has liked any document
-		assertEquals(false, consumer.hasLikedAny());		//it should not have at this point, so false
+		assertFalse(consumer.hasLikedAny());		//it should not have at this point, so false
 		
 		//like the document in the simulation
 		sim.addLike(consumer, doc);
 		
 		//check if the user has liked any document
-		assertEquals(true, consumer.hasLikedAny());		//it should have like a document at this point
+		assertTrue(consumer.hasLikedAny());		//it should have like a document at this point
 		
 	}
+	
+	
+	
 
 }

@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 
 /**
  * Abstract class with Consumer and Producer inheriting from class User
@@ -35,11 +33,10 @@ public abstract class User {
 	protected int followed;					//number of users this user has followed
 	protected Simulation sim;				//reference to the simulation
 	protected int cumulative;				//cumulative payoff
-	protected JFrame frame;					//create a JFrame to update graph
 	protected int payoff;					//the last payoff calculated
 	protected ArrayList<Integer> payoffs;	//list of payoffs over time
-	protected Strategy strat;				//the accociated strategy
-	
+	protected Strategy strat;				//the associated strategy
+	protected List<Document> lastRanked;	//the last ranked list of documents
 	
 	//////////////////////////////////////////////
 	//											//
@@ -86,6 +83,8 @@ public abstract class User {
 		cumulative = 0;
 		payoff = 0;
 		payoffs = new ArrayList<>();
+		strat = new PopularityStrategy();	//create a strategy for basic use
+		lastRanked = new ArrayList<>();		//make the list non-null
 	}
 	
 	/**
@@ -98,7 +97,7 @@ public abstract class User {
 	
 	//////////////////////////////////////////////
 	//											//
-	//				Accessors					//
+	//			Accessors & Mutators			//
 	//											//
 	//////////////////////////////////////////////
 	
@@ -156,6 +155,11 @@ public abstract class User {
 	 */
 	public void setStrat(Strategy strat){this.strat = strat;}
 	
+	/**
+	 * Method to retrieve the results of the last ranking
+	 * @return the results of the last ranking
+	 */
+	public List<Document> getLastRanked(){return lastRanked;}
 	
 	//////////////////////////////////////////////
 	//											//
@@ -252,6 +256,25 @@ public abstract class User {
 		return sameTagDocs;
 		
 	}*/
+	
+	/**
+	 * Method to determine which documents have the matching tag to the User's taste, and the Uer has not liked
+	 * @param docs list of Documents to pick the matching tags from
+	 * @return the list of Documents with matching tags
+	 */
+	public List<Document> matchTaste(List<Document> docs)
+	{
+		//list to return
+		List<Document> toReturn = new ArrayList<>();
+		
+		//loop through and pick the documents it has not yet liked but matches it's taste
+		for(Document d: docs)
+		{
+			if(!d.hasLiked(this) && d.getTag().equals(this.taste)){toReturn.add(d);}
+		}
+		
+		return toReturn;
+	}
 	
 	
 	/**
