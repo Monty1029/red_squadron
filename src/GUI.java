@@ -28,6 +28,9 @@ public class GUI {
 	private JButton startButton;
 	private JButton selectButton;
 	private JButton stepButton;
+	private JMenuBar menuBar;
+	private JMenu menu;
+	private JMenuItem saveState, loadState, howToUse;
 	private JTextArea textArea;
 	private JFrame frame;
 	private Simulation sim;																					//MONTY, WE HAD TO ADD THIS
@@ -60,6 +63,21 @@ public class GUI {
     	SpinnerModel sm4 = new SpinnerNumberModel(5, 1, 50, 1);
     	SpinnerModel sm5 = new SpinnerNumberModel(1, 1, 50, 1);
     	SpinnerModel sm6 = new SpinnerNumberModel(10, 10, 10, 1);
+    	
+    	menuBar = new JMenuBar();
+    	menu = new JMenu("File");
+    	saveState = new JMenuItem("Save State");
+    	saveState.setEnabled(false);
+    	menu.add(saveState);
+    	loadState = new JMenuItem("Load State");
+    	loadState.setEnabled(false);
+    	menu.add(loadState);
+    	menuBar.add(menu);
+    	menu = new JMenu("Help");
+    	howToUse = new JMenuItem("How To Use");
+    	menu.add(howToUse);
+    	menuBar.add(menu);
+    	frame.setJMenuBar(menuBar);
     	
     	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
@@ -205,7 +223,7 @@ public class GUI {
         //Create and set up the window.
         frame = new JFrame("Social Network");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,352);
+        frame.setSize(600,372);
         Color bgColor = new Color(150,0,0);
         frame.getContentPane().setBackground(bgColor);
         frame.setResizable(false);
