@@ -117,7 +117,7 @@ public abstract class User {
 	 * Method to access the list of Users the User is following, as an ArrayList
 	 * @return a new ArrayList of the Users the User is following
 	 */
-	public List getFollowing(){return new ArrayList<User>(following);}
+	public List<User> getFollowing(){return new ArrayList<User>(following);}
 	
 	/**
 	 * Method to access the number of times a user is followed
