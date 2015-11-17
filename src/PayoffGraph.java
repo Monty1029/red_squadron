@@ -63,9 +63,15 @@ public class PayoffGraph extends JPanel{
 		}
 		
 		//verticle numbers
+		int vScale = 1;
+		if(Collections.max(arr) >=50){
+			vScale = Collections.max(arr)/10;
+		}
 		for(int i = 0; i <= Collections.max(arr); i++)
 		{
-			g.drawString("" + i, 80, bottom - i * height);
+			if((i)%vScale==0){
+				g.drawString("" + i, 80, bottom - i * height);  //need to test
+			}
 		}
 		
 		g.drawLine(100,bottom, 100, bottom - bottom + 100);	//vertical line
@@ -95,7 +101,8 @@ public class PayoffGraph extends JPanel{
 		arr.add(3);
 		arr.add(2);
 		arr.add(5);
-		
+		arr.add(60);
+		arr.add(100);
 		JFrame frame = new JFrame();
 		frame.setSize(500, 700);
 		
