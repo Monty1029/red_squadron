@@ -354,7 +354,7 @@ public class GUI implements Observer{
 		
 		
 		toUpdate += "\n\n";
-		toUpdate += "===========================================================";
+		toUpdate += "=========================================================================================================";
 		toUpdate += "\nUser details\n\n";
 		for(User u: simRef.getAllUser())
 		{
@@ -364,20 +364,23 @@ public class GUI implements Observer{
 		
 		
 		toUpdate += "\n\n";
-		toUpdate += "===========================================================";
+		toUpdate += "=========================================================================================================";
 		toUpdate += "\nUsers and the Documents they like\n\n";
 		toUpdate += simRef.getHash().toString();
 		
 		
 		toUpdate += "\n\n";
-		toUpdate += "===========================================================";
+		toUpdate += "=========================================================================================================";
 		toUpdate += "\nDocuments and the people who like them\n\n";
 		for(Document d: simRef.getAllDoc())
 		{
 			toUpdate += "Document: " + d.getName() + ", Tag: " + d.getTag() + ", Liked: " + d.getLikes() + "\n";
-			toUpdate += "Users who liked this Document: \n\t" + d.getLikedUsers().toString();
+			
+			if(d.getLikedUsers() != null){
+			toUpdate += "Users who liked this Document: \n\t" + d.getLikedUsers().toString() + "\n\n";}
 		}
 		
+		textArea.setText(toUpdate);
 		
 		
 		

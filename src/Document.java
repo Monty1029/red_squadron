@@ -35,6 +35,7 @@ public class Document implements Comparable<Document> {
 		}
 
 		this.producer = producer;															//TODO
+		list = new HashSet<User>();
 	}
 	
 	
@@ -94,6 +95,10 @@ public class Document implements Comparable<Document> {
 	 * @return if the user has liked it
 	 */
 	public boolean hasLiked(User u){
+		
+		if(u == null){System.out.println("user is null");}
+		if(list == null){System.out.println("list is null");}
+		
 		return list.contains(u);
 	}
 	

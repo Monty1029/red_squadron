@@ -24,9 +24,9 @@ public class PayoffGraphUpdatable implements Observer{
 		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		
 		graph.setSize(dub.intValue(), 700);
-		
+		if(((Simulation) o).getGraphable().getPayoffArr().size() != 0){
 		graph.add(new PayoffGraph(((Simulation) o).getGraphable().getPayoffArr(), graph));
-		graph.setVisible(true);
+		graph.setVisible(true);}
 		
 	}
 	

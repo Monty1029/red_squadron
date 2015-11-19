@@ -95,7 +95,7 @@ public class RankingGUI {
     private void createAndShowGUI() {
         //Create and set up the window.
         frame = new JFrame("Ranking Strategy Select");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Color bgColor = new Color(150,0,0);
         frame.getContentPane().setBackground(bgColor);
         frame.setResizable(false);

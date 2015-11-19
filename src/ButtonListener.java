@@ -40,7 +40,7 @@ public class ButtonListener implements ActionListener {
 
         	gui.getSelectButton().setEnabled(true);						//this on line added nov 6 by Garrett and Monty
 
-        	sim.start(n1,n2,n3,n4);
+        	sim.start(n1,n2,n3,n4, n5);
         }
         else if (command.equals("step")) {
         	int n = (int) gui.getIterationsSpinner().getValue();
@@ -67,6 +67,7 @@ public class ButtonListener implements ActionListener {
     				if (mouseEvent.getClickCount() == 2) {
     					sim.setGraphable(userList.getSelectedValue());
     					list.dispose();
+    					RankingGUI ranker = new RankingGUI();
     				}
     			}
     		};

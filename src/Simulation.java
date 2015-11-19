@@ -1,6 +1,7 @@
 //Evan Bottomley
 //Updated Nov. 6, 2015
 
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.*;
 
@@ -11,7 +12,7 @@ import javax.swing.JFrame;
  * @author Evan Bottomley, Contributors: Garrett Steele and Bronwyn Skelley
  *
  */
-public class Simulation {
+public class Simulation extends Observable{
 
 	private List<String> allTags;
 	private List<String> availableTags;
@@ -20,7 +21,8 @@ public class Simulation {
 	private List<User> allUser;
 	private GUI gui;
 	private StringBuffer results;
-	
+	private int ranks = 10;
+	private Producer seed;
 	private JFrame graph;														//added by Garrett and Bronwyn on Nov 6
 	private User graphable;														//added by Garrett and Bronwyn on Nov 6
 	
@@ -55,6 +57,7 @@ public class Simulation {
 	
 	/**
 	 * Primary constructor, create new Simulations, fills out allTags list
+	 * @param n number of different tags that will be used in the simulation
 	 */
 	public Simulation() {
 		allTags = new ArrayList<String>();
@@ -67,16 +70,18 @@ public class Simulation {
 		allTags.add("Metal");
 		allTags.add("Classical");
 		allTags.add("Rock");
-		
+		seed = new Producer("Seed","seed", this);
+		addObserver(new PayoffGraphUpdatable());
 		results = new StringBuffer();
+		
 	}
 	
 	/**
-	 * Method to set the GUI
+	 * Method to add the GUI as an observer
 	 * @param g GUIto reference
 	 */
 	public void setGUI(GUI g) {
-		gui = g;
+		this.addObserver(g);
 	}
 	
 	
@@ -124,6 +129,11 @@ public class Simulation {
 		User u;
 		Random rand = new Random();
 		int r;
+		seed = new Producer("Seed","seed", this);		//seeding producer
+		graphable = seed;								//pick the seed to graph
+		
+		
+		
 		//Add n1 Consumers
 		System.out.print("Consumers:");
 		results.append("Consumers:" );
@@ -150,7 +160,7 @@ public class Simulation {
 		results.append("\nSeed Documents:");
 		for (int i = 0; i < n3; i++) {
 			r = rand.nextInt(availableTags.size());
-			d = new Document(("Doc" + i), availableTags.get(r));
+			d = new Document(("Doc" + i), availableTags.get(r), seed);
 			System.out.print(" " + d.getName() + "(" + d.getTag() + ") ");
 			results.append(" " + d.getName() + "(" + d.getTag() + ") ");
 			allDoc.add(d);
@@ -206,22 +216,25 @@ public class Simulation {
 	 * Print the update to the GUI.
 	 */
 	private void update() {
-		gui.getTextArea().setText(results.toString());
+		/*gui.getTextArea().setText(results.toString());
 		System.out.println(gui.getTextArea().getText());
-
-		if(graphable != null){updateGraph();}					//line added by Garrett and Bronwyn on nov 6
-
+		if(graphable != null){updateGraph();}					//line added by Garrett and Bronwyn on nov 6*/
+		
+		this.setChanged();
+		this.notifyObservers();
+		
+		
 	}
 	
 	/**
 	 * Method to update the graph of a specific User. Added by Garrett and Bronwyn on Nov 6
 	 */
-	private void updateGraph()
+	/*private void updateGraph()
 	{
 		if (graph != null){graph.dispose();}
 		
 		graph = new JFrame("Graph: " + graphable.getName());
-		//graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		
@@ -230,7 +243,7 @@ public class Simulation {
 		graph.add(new PayoffGraph(graphable.getPayoffArr(), graph));
 		graph.setVisible(true);
 		
-	}
+	}*/
 	
 	
 	/**
@@ -240,7 +253,8 @@ public class Simulation {
 	 * @param prods number of producers
 	 * @param docs number of documents
 	 */
-	public void start(int tags, int cons, int prods, int docs) {
+	public void start(int tags, int cons, int prods, int docs, int ranks) {
+		this.ranks = ranks;
 		this.selectTags(tags);
 		this.printTags();
 		this.seed(cons, prods, docs);
@@ -258,7 +272,7 @@ public class Simulation {
 		for (int i = 0; i < n; i++) {
 			x = rand.nextInt(allUser.size());
 			User acting = allUser.get(x);
-			liked = acting.act(allDoc);
+			liked = acting.act(allDoc, ranks);
 			for(Document doc: liked) {
 				addLike(acting, doc);
 			}
@@ -311,5 +325,14 @@ public class Simulation {
 		
 		System.out.println("End simulation.");
 		*/
+	}
+	
+	/**
+	 * Get the graphable User
+	 * @return the graphable User
+	 */
+	public User getGraphable() {
+		
+		return graphable;
 	}
 }
