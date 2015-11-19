@@ -20,6 +20,7 @@ public class Simulation {
 	private List<User> allUser;
 	private GUI gui;
 	private StringBuffer results;
+	private int ranks = 10;
 	
 	private JFrame graph;														//added by Garrett and Bronwyn on Nov 6
 	private User graphable;														//added by Garrett and Bronwyn on Nov 6
@@ -239,7 +240,8 @@ public class Simulation {
 	 * @param prods number of producers
 	 * @param docs number of documents
 	 */
-	public void start(int tags, int cons, int prods, int docs) {
+	public void start(int tags, int cons, int prods, int docs, int ranks) {
+		this.ranks = ranks;
 		this.selectTags(tags);
 		this.printTags();
 		this.seed(cons, prods, docs);
@@ -257,7 +259,7 @@ public class Simulation {
 		for (int i = 0; i < n; i++) {
 			x = rand.nextInt(allUser.size());
 			User acting = allUser.get(x);
-			liked = acting.act(allDoc);
+			liked = acting.act(allDoc, ranks);
 			for(Document doc: liked) {
 				addLike(acting, doc);
 			}

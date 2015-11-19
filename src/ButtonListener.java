@@ -25,7 +25,7 @@ public class ButtonListener implements ActionListener {
         	int n5 = (int) gui.getRankSpinner().getValue();				//implement later
         	gui.getStepButton().setEnabled(true);
         	gui.getSelectButton().setEnabled(true);						//this on line added nov 6 by Garrett and Monty
-        	sim.start(n1,n2,n3,n4);
+        	sim.start(n1,n2,n3,n4, n5);
         }
         else if (command.equals("step")) {
         	int n = (int) gui.getIterationsSpinner().getValue();
