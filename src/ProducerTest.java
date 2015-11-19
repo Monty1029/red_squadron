@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 5, 2015
+//Date: Nov 18, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * JUnit test class for the Producer class.
+ * JUnit test class for the Producer class. Does 
  * @author Garrett Steele
  *
  */
@@ -42,7 +42,7 @@ public class ProducerTest {
 	
 	
 	/**
-	 * Unit test to ensure the act method returns as expected for a number of test cases.
+	 * Unit test to ensure the act method returns as expected for a number of test cases. Also tests that the payoff of a producer is incremented when a new person likes their document
 	 */
 	@Test
 	public void testActA() {
@@ -65,11 +65,18 @@ public class ProducerTest {
 		assertEquals(0, producer1.getFollowing().size());					//nor does the document have any people who like it to follow
 		assertEquals(10, producer1.getLastRanked().size());					//should have kept the top 10 documents in memory after "p1" acts, 
 																				//only the size truly matters as an indication, otherwise it would be 0
+		//do a null document test
+		actedOn  = producer1.act(null, 0);
+		assertEquals(0,producer1.getLastRanked().size());
+		assertEquals(2,producer1.getCumulative());
+		assertEquals(1,producer1.getPayoff());
+		
+		
 	}
 	
 
 	/**
-	 * Unit test of how a Producer performs under the B strategy for acting, does not have to test all the same things as testActA() because they share the same interior methods.
+	 * Unit test of how a Producer performs under the B strategy for acting, does not have to test all the same things as testActA() because they share the same interior method calls.
 	 */
 	@Test
 	public void testActB()
@@ -78,16 +85,17 @@ public class ProducerTest {
 		Producer p1 = new Producer("name1", sim.getAvailableTags().get(0), sim);	//create a user to like the first tag of the simulation
 		Producer p2 = new Producer("name2", sim.getAvailableTags().get(0), sim);	//create a user to like the second tag of the simulation
 		Producer p3 = new Producer("name3", sim.getAvailableTags().get(0), sim);	//create a user to like the second tag of the simulation
+		Producer pro = new Producer(null,null,sim);
 		
 		p1.setActStrategy(Producer.STRATEGY_B);										//set the strategy to "B" for "p1", "p3" is then still "A"
 		p2.setActStrategy(Producer.STRATEGY_B);										//set the strategy to "B" for "p2" as well
 		
 		//need  to create a different list of documents for this test as they will be based on the tags from the simulation
-		Document doc1 = new Document("doc1",sim.getAvailableTags().get(0));
-		Document doc2 = new Document("doc1",sim.getAvailableTags().get(0));
-		Document doc3 = new Document("doc1",sim.getAvailableTags().get(1));
-		Document doc4 = new Document("doc1",sim.getAvailableTags().get(1));
-		Document doc5 = new Document("doc1",sim.getAvailableTags().get(1));
+		Document doc1 = new Document("doc1",sim.getAvailableTags().get(0), pro);
+		Document doc2 = new Document("doc1",sim.getAvailableTags().get(0), pro);
+		Document doc3 = new Document("doc1",sim.getAvailableTags().get(1), pro);
+		Document doc4 = new Document("doc1",sim.getAvailableTags().get(1), pro);
+		Document doc5 = new Document("doc1",sim.getAvailableTags().get(1), pro);
 		
 		//add them to the list
 		List<Document> newDocs = new ArrayList<>();
@@ -109,42 +117,36 @@ public class ProducerTest {
 	
 	
 	/**
-	 * Tests whether the payoff works as expected for a consumer for pre-made lists of documents.
+	 * Tests whether the payoff works as expected for a Producer for pre-made lists of documents.
 	 */
 	@Test
 	public void testPayoff() {
 		
-		//create some producers
+		//create some producers and consumers
 		Producer producer1 = new Producer("producer1", "taste1",sim);
 		Producer producer2 = new Producer("producer2", "taste2",sim);
 		
-		//create some consumers to follow the producers to adjust the payoff expected value
-		Consumer consumer1 = new Consumer("consumer1", "taste1", sim);
-		Consumer consumer2 = new Consumer("consumer2", "taste2", sim);
-		
-		//have both consumers follow producer1
-		consumer1.follow(producer1);
-		consumer2.follow(producer1);
-		
-		//for the following steps no list of type Document actually needs to be passed based on how producers calculate payoff
 		
 		//calculate payoffs for the producers
-		assertEquals(2, producer1.payoff(null));				//followed by 2 people, no produced documents liked
-		assertEquals(0, producer2.payoff(null));				//followed by no people, no produced documents liked
+		assertEquals(0, producer1.getPayoff());					//no produced documents liked
+		assertEquals(0, producer1.getCumulative());				//no produced documents liked
+		assertEquals(0, producer2.payoff(null));				//should always return 0
+		
 		
 		for(int i = 0; i < 3; i++){producer1.produce();}		//have producer1 generate 3 documents
 		for(int i = 0; i < 2; i++){producer2.produce();}		//have producer1 generate 2 documents
 		
 		//calculate payoffs for the producers
-		assertEquals(5, producer1.payoff(null));				//followed by 2 people, 3 produced documents liked
-		assertEquals(2, producer2.payoff(null));				//followed by no people, 2 produced documents liked
-		
+		assertEquals(3, producer1.getCumulative());				//3 produced documents liked
+		assertEquals(2, producer2.getCumulative());				//2 produced documents liked, and liked by 1 consumer
+		assertEquals(0, producer2.payoff(null));				//should always return 0
 		
 	}
 
 	
 	/**
-	 * Tests whether the Consumer constructor acts as expected.
+	 * Tests whether the Producer constructor acts as expected. Does not need to do a null check as this is handled in the User constructor it calls,
+	 *  and is tested in ConsumerTest.java where all it does is call the super constructor.
 	 */
 	@Test
 	public void testProducer() {
@@ -177,7 +179,7 @@ public class ProducerTest {
 
 	
 	/**
-	 * Tests whether the produce method works as intended and creates a new document of the correct attributes, also tests getProduced() as part of the process.
+	 * Tests whether the produce method works as intended and creates a new document of the correct attributes, also tests getProduced() and incrementPayoff() as part of the process.
 	 */
 	@Test
 	public void testProduce() {
@@ -189,6 +191,8 @@ public class ProducerTest {
 		
 		assertEquals(1, producer1.getProduced().size());				//should have added their own document to their list of produced documents 
 		assertEquals(1, producer1.getProduced().get(0).getLikes());		//should have liked their own document
+		assertEquals(1, producer1.getPayoff());							//should have a previous payoff of 1
+		assertEquals(1, producer1.getCumulative());						//should have an updated cumulative payoff of 1
 			
 	}
 
@@ -202,18 +206,19 @@ public class ProducerTest {
 	{
 		//create the list for documents to use
 		List<Document> documents = new ArrayList<>();
+		Producer pro = new Producer(null,null,sim);
 		
 		//create the documents
-		documents.add(new Document("name1", "taste1"));
-		documents.add(new Document("name2", "taste2"));
-		documents.add(new Document("name3", "taste2"));
-		documents.add(new Document("name4", "taste3"));
-		documents.add(new Document("name5", "taste3"));
-		documents.add(new Document("name6", "taste3"));
-		documents.add(new Document("name7", "taste3"));
-		documents.add(new Document("name8", "taste4"));
-		documents.add(new Document("name9", "taste4"));
-		documents.add(new Document("name10", "taste4"));
+		documents.add(new Document("name1", "taste1", pro));
+		documents.add(new Document("name2", "taste2", pro));
+		documents.add(new Document("name3", "taste2", pro));
+		documents.add(new Document("name4", "taste3", pro));
+		documents.add(new Document("name5", "taste3", pro));
+		documents.add(new Document("name6", "taste3", pro));
+		documents.add(new Document("name7", "taste3", pro));
+		documents.add(new Document("name8", "taste4", pro));
+		documents.add(new Document("name9", "taste4", pro));
+		documents.add(new Document("name10", "taste4", pro));
 		
 		return documents;
 

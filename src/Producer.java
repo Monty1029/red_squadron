@@ -1,6 +1,8 @@
 /* SYSC3110 Software Design Project
  * Team redSquadron
  * Producer subclass by Monty Dhanani
+ * Edited and expanded by Garrett Steele for Milestone 3
+ * November 18, 2015
  */
 
 import java.util.*;
@@ -32,12 +34,14 @@ public class Producer extends User {
 		actStrategy = STRATEGY_A;					//default action strategy
 	}
 	
+	
 	/**
 	 * Fetch the number of produced documents.
 	 * Method added Nov 3, 2015 by Garrett Steele during unit testing
 	 * @return the number of documents produced by the producer
 	 */
 	public List<Document> getProduced(){return produced;}
+	
 	
 	/**
 	 * Select the acting strategy to use, but only allow the change to be a valid one
@@ -50,17 +54,24 @@ public class Producer extends User {
 	}
 	
 	
-	
 	/**
 	 * Cycles through all the existing documents and returns an ArrayList
 	 * of Documents with the same taste as the Consumer.
 	 * Producer also likes every Document it creates
-	 * Method modified by Garrett Steele on Nov 5th, 2015 to reduce duplicate code
+	 * Method modified by Garrett Steele on Nov 18th, 2015 to reduce duplicate code
 	 * @param allDocs list of all existing documents
 	 * @param n the number of top documents to rank
 	 */
 	public List<Document> act(List<Document> allDocs, int n) {
 
+		//if null, return an empty list
+		if(allDocs == null){
+			List<Document> docs = new ArrayList<Document>();
+			lastRanked = docs;
+			produce();
+			return docs;
+		}
+		
 		produce();												//make a doc
 		String tempTaste;										//a variable to keep track of a producer's original taste
 		int rand;												//random number to pick another taste to use
@@ -84,10 +95,8 @@ public class Producer extends User {
 			}
 		}
 		
-		
 		//need to do the following actions no matter the action strategy selected for the Producer
 		lastRanked = strat.rank(this, allDocs, n);					//rank the document and store the result
-		int payoff = this.payoff(lastRanked);						//do payoff work
 		List<Document> toReturn = matchTaste(lastRanked);			//get the list to return to the Simulation
 		follow(lastRanked);											//follow them
 		taste = tempTaste;											//reset the Producer's taste
@@ -98,11 +107,11 @@ public class Producer extends User {
 	
 	
 	/**
-	 * Creates a new Document of the Producer's favourite taste and adds
+	 * Creates a new Document of the Producer's favorite taste and adds
 	 * the document to an ArrayList of documents that it has produced.
 	 */
 	public void produce() {
-		Document newlyProduced = new Document("" + super.getName() + "(Doc" +  produced.size() + ")", super.getTaste());
+		Document newlyProduced = new Document("" + super.getName() + "(Doc" +  produced.size() + ")", super.getTaste(), this);
 		produced.add(newlyProduced);
 		super.sim.addDoc(newlyProduced);
 		newlyProduced.likeDoc(this);
@@ -132,15 +141,25 @@ public class Producer extends User {
 		return ranked;
 	}*/
 
+	
 	/**
-	 * Calculates a payoff based on followers and documents liked that were produced
+	 * Method to increment the payoff when someone likes the User's document
+	 */
+	public void incrementPayoff()
+	{
+		payoff = 1;					//update the last payoff to 1
+		this.cumulative++;			//increase the cumulative payoff by 1
+	}
+	
+	
+	/**
+	 * Returns 0 as a payoff as this method is not used by Producers
 	 * @param docs is a list of ranked documents
-	 * @return the number of documents that appear in the ranked list that
-	 * 			match the Producer's taste
+	 * @return a default value of 0
 	 */
 	public int payoff(List<Document> docs) {
 		
-		int pointCounter = super.followed; //keeps track of how many likes there are in the produced documents
+		/*int pointCounter = super.followed; //keeps track of how many likes there are in the produced documents
 		
 		for (Document d : produced) {
 				pointCounter+= d.getLikes();
@@ -148,7 +167,8 @@ public class Producer extends User {
 		System.out.println("" + super.getName() + " payoff: " + pointCounter + "");
 		cumulative += pointCounter;
 		payoff = pointCounter;
-		return pointCounter;
+		return pointCounter;*/
+		return 0;
 	}
 
 }

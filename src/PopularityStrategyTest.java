@@ -19,15 +19,16 @@ public class PopularityStrategyTest {
 		
 		Simulation sim = new Simulation();	//create Simulation to reference				
 		PopularityStrategy strat = new PopularityStrategy();
+		Producer pro = new Producer("name1", "taste1", sim);
 		
 		//create the Consumers to test with
 		Consumer consumer1 = new Consumer("Consumer 1", "taste1", sim);
 		Consumer consumer2 = new Consumer("Consumer 2", "taste1", sim);
 		
 		//create 3 documents, 1 with a different taste
-		Document doc1 = new Document("doc1", "taste1");		//1 like
-		Document doc2 = new Document("doc2", "taste1");		//no likes
-		Document doc3 = new Document("doc3", "taste1");		//2 likes
+		Document doc1 = new Document("doc1", "taste1",pro);		//1 like
+		Document doc2 = new Document("doc2", "taste1",pro);		//no likes
+		Document doc3 = new Document("doc3", "taste1",pro);		//2 likes
 		
 		//like the documents
 		doc3.likeDoc(consumer1);

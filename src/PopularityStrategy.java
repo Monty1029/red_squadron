@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 13, 2015
+//Date: Nov 18, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -16,6 +16,7 @@ public class PopularityStrategy implements Strategy {
 
 	@Override
 	/**
+	 * Ranks a list of "n" documents to return based on the Popularity of the Documents.
 	 * Re-factored from the original code written in consumer and Producer by Monty Dhanani, re-factoring to new method done by Garrett Steele
 	 */
 	public List<Document> rank(User u, List<Document> docs, int n) {

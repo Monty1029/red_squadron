@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 13, 2015
+//Date: Nov 18, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -19,7 +19,7 @@ import org.junit.Test;
 
 
 /**
- * JUnit test class for the User class. PLease note that the getLastRanked is check in Consumer and Producer where act() is actually testes
+ * JUnit test class for the User class. Please note that the getLastRanked)() is checked in Consumer and Producer where act() is actually tested
  * @author Garrett Steele
  *
  */
@@ -39,7 +39,7 @@ public class UserTest {
 	/**
 	 * Tests whether a User successfully follows another user only once, this also tests getFollowing() and getFollowed() as part of the process.
 	 * This also checks that the user in question was followed.
-	 * As one cannot instantiate a User, this test is performed on a Consumer, which has no additions from the User class
+	 * As one cannot instantiate a User, this test is performed on a Consumer, which has no additions from the User class.
 	 */
 	@Test
 	public void testFollowUser() {
@@ -98,6 +98,7 @@ public class UserTest {
 		
 		//create a simulation to reference
 		Simulation sim = new Simulation();
+		Producer pro = new Producer(null,null,sim);
 		
 		//create the consumers to test with, could not pre-create these with "@Before" due to changes in each test case
 		Consumer consumer1 = new Consumer("Consumer 1", "taste1", sim);
@@ -107,9 +108,9 @@ public class UserTest {
 		Consumer consumer5 = new Consumer("Consumer 5", "taste1", sim);
 		
 		//create the documents to test with
-		Document doc1 = new Document("doc1", "taste1");		//liked by no-one
-		Document doc2 = new Document("doc2", "taste1");		//liked by 1 person
-		Document doc3 = new Document("doc3", "taste1");		//liked by 5 people
+		Document doc1 = new Document("doc1", "taste1", pro);		//liked by no-one
+		Document doc2 = new Document("doc2", "taste1", pro);		//liked by 1 person
+		Document doc3 = new Document("doc3", "taste1", pro);		//liked by 5 people
 		
 		//cause the different documents to be liked by varying number of people
 		doc2.likeDoc(consumer2);
@@ -134,6 +135,10 @@ public class UserTest {
 		assertEquals(1,consumer1.getFollowing().size());		//consumer1 should now be following 1 person
 		consumer1.follow(list3);
 		assertEquals(4, consumer1.getFollowing().size());		//consumer1 should now follow 4 people, not itself, and should not have followed anyone again to make it 4
+		consumer1.follow((User)null);							//perform a null test on User passing
+		assertEquals(4, consumer1.getFollowing().size());		//the size should not have changed as method should do nothing in this case
+		consumer1.follow((List<Document>)null);					//perform a null test on List<Document> passing
+		assertEquals(4, consumer1.getFollowing().size());		//the size should not have changed as method should do nothing in this case
 		
 	}
 	
@@ -147,9 +152,9 @@ public class UserTest {
 		
 		//create a simulation to reference
 		Simulation sim = new Simulation();
-		
+		Producer pro = new Producer(null,null,sim);
 		 
-		Document doc = new Document("name1", "taste1");					//create a document to add to the simulation with the consumer
+		Document doc = new Document("name1", "taste1", pro);					//create a document to add to the simulation with the consumer
 		Consumer consumer = new Consumer("consumer", "taste1", sim);	//create a user to like the document
 		
 		//check if the user has liked any document

@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 13, 2015
+//Date: Nov 18, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -75,11 +75,15 @@ public abstract class User {
 	 */
 	User(String username, String taste, Simulation sim)
 	{
-		this.username = username;			//set user's username
-		this.taste = taste;					//set user's taste
+		if(username != null){this.username = username;}			//set user's username
+		else{this.username = "none";}
+		if(taste != null){this.taste = taste;}					//set user's taste
+		else{this.taste = "none";}
 		following = new HashSet<>();		//empty ArrayList to maintain who they follow
 		followed = 0;						//user has not followed anyone as soon as the account is created
-		this.sim = sim;
+		
+		if(sim != null){this.sim = sim;}
+		else{this.sim = new Simulation();}
 		cumulative = 0;
 		payoff = 0;
 		payoffs = new ArrayList<>();
@@ -173,6 +177,9 @@ public abstract class User {
 	 */
 	public void follow(User user)
 	{
+		//do nothing if null
+		if(user == null){return;}
+		
 		if(!following.contains(user)){	//if they have not followed them before
 			user.wasFollowed();			//let them know they were followed
 			following.add(user);		//follow the User
@@ -186,6 +193,9 @@ public abstract class User {
 	 */
 	public void follow(List<Document> ranked)
 	{
+		//do nothing if null
+		if(ranked == null){return;}
+		
 		for (Document d : ranked) {
 			if (d.getTag().equals(getTaste())) {
 				

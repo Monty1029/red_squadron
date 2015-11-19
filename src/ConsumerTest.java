@@ -1,5 +1,5 @@
 //Name: Garrett Steele
-//Date: Nov 5, 2015
+//Date: Nov 18, 2015
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
@@ -52,10 +52,13 @@ public class ConsumerTest {
 		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
 		//no documents will match taste5
 		//also set a PopularityStategy for each consumer
-		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);	consumer1.setStrat(strat);
-		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);	consumer2.setStrat(strat);
-		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);	consumer3.setStrat(strat);
-		Consumer consumer4 = new Consumer("consumer4", "taste5",sim);	consumer4.setStrat(strat);
+		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);	//consumer1.setStrat(strat);
+		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);	//consumer2.setStrat(strat);
+		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);	//consumer3.setStrat(strat);
+		Consumer consumer4 = new Consumer("consumer4", "taste5",sim);	//consumer4.setStrat(strat);
+		
+		//this consumers will be used to test a null document list
+		Consumer consumer5 = new Consumer("consumer5", "taste",sim);
 		
 		
 		//act for each consumer
@@ -63,6 +66,8 @@ public class ConsumerTest {
 		List<Document> list2 = consumer2.act(docs, 10);				//size 2
 		List<Document> list3 = consumer3.act(docs, 10);				//size 4
 		List<Document> list4 = consumer4.act(docs, 10);				//no documents, size 0
+		List<Document> list5 = consumer5.act(null, 10);				//no documents passed test, don't need to test case where no int passed as this is a compile time error
+		
 		
 		//check list 1
 		assertEquals(1, list1.size());							//size is 1
@@ -87,7 +92,9 @@ public class ConsumerTest {
 		assertEquals(0, list4.size());
 		assertEquals(10, consumer4.getLastRanked().size());		//check the size of the last ranked held by the consumer
 		
-		
+		//check that list 5 has size 0, as it was passed null and returns an empty list
+		assertEquals(0, list5.size());
+		assertEquals(0, consumer5.getLastRanked().size());		//check the size of the last ranked held by the consumer
 		
 		
 	}	
@@ -109,6 +116,7 @@ public class ConsumerTest {
 		assertEquals(2, consumer2.payoff(docs));								//payoff is 2
 		assertEquals(4, consumer3.payoff(docs));								//payoff is 4
 		assertEquals(0, consumer4.payoff(docs));								//payoff is 0
+		assertEquals(0, consumer1.payoff(null));								//perform a null test
 	}
 
 	
@@ -125,18 +133,25 @@ public class ConsumerTest {
 		Consumer consumer2 = new Consumer("", "taste2",sim);
 		Consumer consumer3 = new Consumer("consumer3", "",sim);
 		Consumer consumer4 = new Consumer("", "",sim);
+		Consumer consumer5 = new Consumer(null,null,null);
 		
 		//check that the names are correct
 		assertEquals("consumer1", consumer1.getName());
 		assertEquals("", consumer2.getName());
 		assertEquals("consumer3", consumer3.getName());
 		assertEquals("", consumer4.getName());
+		assertEquals("none",consumer5.getName());
 		
 		//check that the tastes are correct
 		assertEquals("taste1",consumer1.getTaste());
 		assertEquals("taste2",consumer2.getTaste());
 		assertEquals("",consumer3.getTaste());
 		assertEquals("",consumer4.getTaste());
+		assertEquals("none",consumer5.getTaste());
+		
+		//check hat there is a simulation held by the consumer with null passed in that field
+		assertNotEquals(null,consumer5.getSim());
+		
 		
 	}
 
@@ -221,19 +236,20 @@ public class ConsumerTest {
 	{
 		//create the list for documents to use.
 		List<Document> documents = new ArrayList<>();
+		//setUp();
+		Producer pro = new Producer("pro", "multiple",sim);
 		
 		//create the documents
-		documents.add(new Document("name1", "taste1"));
-		documents.add(new Document("name2", "taste2"));
-		documents.add(new Document("name3", "taste2"));
-		documents.add(new Document("name4", "taste3"));
-		documents.add(new Document("name5", "taste3"));
-		documents.add(new Document("name6", "taste3"));
-		documents.add(new Document("name7", "taste3"));
-		documents.add(new Document("name8", "taste4"));
-		documents.add(new Document("name9", "taste4"));
-		documents.add(new Document("name10", "taste4"));
-		
+		documents.add(new Document("name1", "taste1", pro));
+		documents.add(new Document("name2", "taste2", pro));
+		documents.add(new Document("name3", "taste2", pro));
+		documents.add(new Document("name4", "taste3", pro));
+		documents.add(new Document("name5", "taste3", pro));
+		documents.add(new Document("name6", "taste3", pro));
+		documents.add(new Document("name7", "taste3", pro));
+		documents.add(new Document("name8", "taste4", pro));
+		documents.add(new Document("name9", "taste4", pro));
+		documents.add(new Document("name10", "taste4", pro));
 		
 		return documents;
 	}

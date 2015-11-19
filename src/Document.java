@@ -14,16 +14,17 @@ public class Document implements Comparable<Document> {
 	private String name;
 	private String tag;
 	private HashSet<User> list;
-	
+	private Producer producer; 																//TODO
 	
 	/**
 	 * Constructor using name and tag to make document
 	 * @param name this is name of document
 	 * @param tag this is tag of document
 	 */
-	public Document(String name, String tag){
+	public Document(String name, String tag, Producer producer){							//TODO
 		this.name = name;
 		this.tag = tag;
+		this.producer = producer;															//TODO
 		list = new HashSet<User>();
 	}
 	
@@ -58,7 +59,7 @@ public class Document implements Comparable<Document> {
 	 * @param u the user liking the document
 	 */
 	public void likeDoc(User u){
-		if(!list.contains(u)){this.like++;list.add(u);}
+		if(!list.contains(u)){this.like++;list.add(u); producer.incrementPayoff();}			//TODO
 	}
 
 	/**

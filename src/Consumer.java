@@ -1,7 +1,8 @@
 /* SYSC3110 Software Design Project
  * Team redSquadron
  * Consumer subclass by Monty Dhanani
- * re-factored by Garrett Steele for Milestone 3
+ * Edited and expanded by Garrett Steele for Milestone 3
+ * November 18, 2015
  */
 
 import java.util.*;
@@ -33,6 +34,13 @@ public class Consumer extends User {
 	 */
 	public List<Document> act(List<Document> allDocs, int n) {
 
+		//if null, return an empty list
+		if(allDocs == null){
+			List<Document> docs = new ArrayList<Document>();
+			lastRanked = docs;
+			return docs;
+		}
+		
 		lastRanked = strat.rank(this, allDocs, n);					//rank them and store the result
 		int payoff = this.payoff(lastRanked);						//do payoff work
 		List<Document> toReturn = matchTaste(lastRanked);			//get which ones will be followed
@@ -49,10 +57,10 @@ public class Consumer extends User {
 	 * @return the number of documents that appear in the ranked list that
 	 * 			match the Producer's taste
 	 */
-	/*NOTE: For now, payoff method in both Consumer and Producer class are copy & pasted code,
-	but they will be different in Milestone 2
-	*/
 	public int payoff(List<Document> docs) {
+		
+		if(docs == null){return 0;}		//payoff is 0 on a list of null documents
+		
 		int pointCounter = 0;
 
 		for (Document d : docs) {
