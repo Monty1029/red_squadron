@@ -18,6 +18,15 @@ public class DocumentTest {
 	}
 
 	/**
+	 * tests to see if null constructor works
+	 */
+	@Test
+	public void testNullDocument() {
+		Document doc = new Document(null, null);
+		assertTrue(doc.getName().equals("none")&&doc.getTag().equals("none"));
+	}
+
+	/**
 	 * tests to see if document has been liked by a consumer, and is contained in the documents lists of which user liked it
 	 */
 	@Test
