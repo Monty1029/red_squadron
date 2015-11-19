@@ -13,6 +13,8 @@ import java.io.IOException;
 public class ButtonListener implements ActionListener {
 	GUI gui;
 	Simulation sim;
+	private JList<User> userList;
+	private JFrame list;
 	
 	/**
 	 * Constructor
@@ -43,6 +45,32 @@ public class ButtonListener implements ActionListener {
         else if (command.equals("step")) {
         	int n = (int) gui.getIterationsSpinner().getValue();
         	sim.step(n);
+        }
+        else if (command.equalsIgnoreCase("select"))
+        {
+        	list = new JFrame("List of Users");
+
+    		DefaultListModel<User> addList = new DefaultListModel<User>();
+    		for (User u : sim.getAllUser()) {
+    			addList.addElement(u);
+    		}
+    		userList = new JList<User>(addList);
+    		list.add(userList);
+    		list.pack();
+    		list.setVisible(true);
+
+    		userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+    		MouseListener mouseListener = new MouseAdapter() {
+    			public void mouseClicked(MouseEvent mouseEvent) {
+    				JList theList = (JList) mouseEvent.getSource();
+    				if (mouseEvent.getClickCount() == 2) {
+    					sim.setGraphable(userList.getSelectedValue());
+    					list.dispose();
+    				}
+    			}
+    		};
+    		userList.addMouseListener(mouseListener);
         }
         
     }

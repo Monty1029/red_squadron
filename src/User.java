@@ -59,6 +59,11 @@ public abstract class User {
 	 */
 	public abstract int payoff(List<Document> documents);
 	
+	/**
+	 * Get the detailed representation of the User
+	 * @return the detailed representation of the User
+	 */
+	public abstract String details();
 	
 	
 	//////////////////////////////////////////////
@@ -164,6 +169,8 @@ public abstract class User {
 	 * @return the results of the last ranking
 	 */
 	public List<Document> getLastRanked(){return lastRanked;}
+	
+	
 	
 	//////////////////////////////////////////////
 	//											//

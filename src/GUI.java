@@ -6,6 +6,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
@@ -14,7 +16,7 @@ import javax.swing.*;
  * @author Monty Dhanani
  *
  */
-public class GUI {
+public class GUI implements Observer{
 	
 	private JLabel consumersLabel;
 	private JSpinner consumersSpinner;
@@ -36,14 +38,13 @@ public class GUI {
 	private JMenuItem saveState, loadState, howToUse;
 	private JTextArea textArea;
 	private JFrame frame;
-	private Simulation sim;																					//MONTY, WE HAD TO ADD THIS
 	private ButtonListener bl;																				//CREATE BUTTON LISTENER
 	/**
 	 * Creates the GUI
 	 * @param sim is the reference to Simulation that will run the operations
 	 */
 	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
-		this.sim = sim;																						//HAD TO SAVE THE SIMULATION
+
 		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
 		createAndShowGUI();
 		
@@ -218,7 +219,7 @@ public class GUI {
     	c.gridy = 6;
     	selectButton.setBackground(new Color(255,200,200));
     	selectButton.setActionCommand("select");
-    	selectButton.addActionListener(new SelectListener(sim));
+    	selectButton.addActionListener(bl);
     	selectButton.setEnabled(false);//ADDED BUTTON LISTENER
     	pane.add(selectButton, c);
     	
@@ -338,6 +339,48 @@ public class GUI {
      */
 	public JTextArea getTextArea() {
 		return textArea;
+	}
+	
+	
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		Simulation simRef = (Simulation) o;
+		String toUpdate  = new String();
+		
+		
+		toUpdate += simRef.getResults();
+		
+		
+		toUpdate += "\n\n";
+		toUpdate += "===========================================================";
+		toUpdate += "\nUser details\n\n";
+		for(User u: simRef.getAllUser())
+		{
+			toUpdate += u.details() + "\n";
+		}
+		
+		
+		
+		toUpdate += "\n\n";
+		toUpdate += "===========================================================";
+		toUpdate += "\nUsers and the Documents they like\n\n";
+		toUpdate += simRef.getHash().toString();
+		
+		
+		toUpdate += "\n\n";
+		toUpdate += "===========================================================";
+		toUpdate += "\nDocuments and the people who like them\n\n";
+		for(Document d: simRef.getAllDoc())
+		{
+			toUpdate += "Document: " + d.getName() + ", Tag: " + d.getTag() + ", Liked: " + d.getLikes() + "\n";
+			toUpdate += "Users who liked this Document: \n\t" + d.getLikedUsers().toString();
+		}
+		
+		
+		
+		
 	}
 
 	

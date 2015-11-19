@@ -170,5 +170,16 @@ public class Producer extends User {
 		return pointCounter;*/
 		return 0;
 	}
+	
+	@Override
+	public String details() {
+		String toReturn = new String();
+		
+		toReturn += "User: " + username + ", Taste: " + taste + ", Followed " + this.followed + " times, Last Payoff: " + payoff + ", Cumulative Payoff: " + cumulative + "\n";
+		toReturn += "Has Produced: " + this.produced.toString() + "\n";
+		
+		return toReturn;
+	}
+	
 
 }

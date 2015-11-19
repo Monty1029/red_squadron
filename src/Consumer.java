@@ -74,4 +74,14 @@ public class Consumer extends User {
 		return pointCounter;
 	}
 
+	@Override
+	public String details() {
+		String toReturn = new String();
+		
+		toReturn += "User: " + username + ", Taste: " + taste + ", Followed " + this.followed + " times, Last Payoff: " + payoff + ", Cumulative Payoff: " + cumulative;
+		
+		
+		return toReturn;
+	}
+
 }
