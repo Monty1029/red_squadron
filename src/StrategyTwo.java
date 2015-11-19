@@ -5,7 +5,7 @@ public class StrategyTwo implements Strategy {
 
 	}
 
-	public ArrayList<Document> rank(User u, ArrayList<Document> docs, int n) {
+	public List<Document> rank(User u, List<Document> docs, int n) {
 		HashSet<User> likedUsers = new HashSet<User>();
 		HashMap<Document, Integer> docLikes = new HashMap<Document, Integer>();
 		LinkedHashMap<Document, Integer> sortedMap = new LinkedHashMap<Document, Integer>();
