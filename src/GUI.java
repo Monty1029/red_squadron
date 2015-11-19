@@ -4,6 +4,9 @@
  */
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /**
@@ -28,6 +31,9 @@ public class GUI {
 	private JButton startButton;
 	private JButton selectButton;
 	private JButton stepButton;
+	private JMenuBar menuBar;
+	private JMenu menu;
+	private JMenuItem saveState, loadState, howToUse;
 	private JTextArea textArea;
 	private JFrame frame;
 	private Simulation sim;																					//MONTY, WE HAD TO ADD THIS
@@ -60,6 +66,52 @@ public class GUI {
     	SpinnerModel sm4 = new SpinnerNumberModel(5, 1, 50, 1);
     	SpinnerModel sm5 = new SpinnerNumberModel(1, 1, 50, 1);
     	SpinnerModel sm6 = new SpinnerNumberModel(10, 10, 10, 1);
+    	
+    	menuBar = new JMenuBar();
+    	menu = new JMenu("File");
+    	saveState = new JMenuItem("Save State");
+    	saveState.setEnabled(false);
+    	menu.add(saveState);
+    	loadState = new JMenuItem("Load State");
+    	loadState.setEnabled(false);
+    	menu.add(loadState);
+    	menuBar.add(menu);
+    	menu = new JMenu("Help");
+    	howToUse = new JMenuItem("How To Use");
+    	menu.add(howToUse);
+    	menuBar.add(menu);
+    	frame.setJMenuBar(menuBar);
+    	
+    	howToUse.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JFrame howToFrame = new JFrame("How To Use");
+				howToFrame.setResizable(false);
+				
+				JTextArea howToText = new JTextArea();
+				howToText.setBackground(new Color(255,235,235));
+				howToText.setEditable(false);
+				howToFrame.add(howToText);
+				
+				String howTo = "Set the number of Consumers, Producers, Documents, Tags, Iterations, and top number of documents to be\n"
+						+ "ranked that you want. The minimum values allowed for the first 5 spinners are 1 and the miniumum value\n"
+						+ "allowed for the last spinner is 10. The maximum values allowed for the first 5 spinners are 50 and the\n"
+						+ "maximum value allowed for the last spinner is 10.\n\n"
+						+ "Click the \"Start Simulation\" button when you have set your desired parameters for the simulation.\n\n"
+						+ "Next click the \"Select User to Graph\" button to bring up a list of Users. Double click on a user to select their\n"
+						+ "ranking strategy via radio buttons. Only one strategy can be selected at a time. The strategy numbers are\n"
+						+ "short for the following ranking criteria:\n"
+						+ "Strategy 1 - Rank based on the number of 'likes' the Document has.\n"
+						+ "Strategy 2 - Rank based on the number of times the User is 'followed'\n"
+						+ "Strategy 3 - Rank based on the distance of the User in the social network.\n\n"
+						+ "Strategy 4 - Rank based on the 'like' similarity of others Users liking the same kinds of Documents.\n"
+						+ "Click the \"Select Ranking Strategy\" button to set that User's ranking strategy to what you selected.\n\n"
+						+ "Click the \"Next Step\" button to step through the simulation and bring up a graph for the selected user\n"
+						+ "that shows their activity.";
+				howToText.setText(howTo);
+				howToFrame.pack();
+				howToFrame.setVisible(true);
+			}
+		});
     	
     	consumersLabel = new JLabel("Number of Consumers");
     	consumersLabel.setForeground(textColor);
@@ -205,7 +257,7 @@ public class GUI {
         //Create and set up the window.
         frame = new JFrame("Social Network");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,352);
+        frame.setSize(600,372);
         Color bgColor = new Color(150,0,0);
         frame.getContentPane().setBackground(bgColor);
         frame.setResizable(false);
