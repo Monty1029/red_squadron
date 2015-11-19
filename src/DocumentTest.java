@@ -13,8 +13,19 @@ public class DocumentTest {
 	 */
 	@Test
 	public void testDocument() {
-		Document doc = new Document("name", "tag");
+		Producer pro = new Producer("name1","taste1", new Simulation());
+		Document doc = new Document("name", "tag", pro);
 		assertTrue(doc.getName().equals("name")&&doc.getTag().equals("tag"));
+	}
+
+	/**
+	 * tests to see if null constructor works
+	 */
+	@Test
+	public void testNullDocument() {
+		Producer pro = new Producer("name1","taste1", new Simulation());
+		Document doc = new Document(null, null, pro);
+		assertTrue(doc.getName().equals("none")&&doc.getTag().equals("none"));
 	}
 
 	/**
@@ -22,7 +33,8 @@ public class DocumentTest {
 	 */
 	@Test
 	public void testGetLikeData() {
-		Document doc = new Document("name", "tag");
+		Producer pro = new Producer("name1","taste1", new Simulation());
+		Document doc = new Document("name", "tag", pro);
 		Simulation sim = new Simulation();
 		Consumer con = new Consumer("user", "tag", sim);
 		doc.likeDoc(con);
@@ -36,8 +48,9 @@ public class DocumentTest {
 	 */
 	@Test
 	public void testCompareTo() {
-		Document doc = new Document("name", "tag");
-		Document doc1 = new Document("name", "tag");
+		Producer pro = new Producer("name1","taste1", new Simulation());
+		Document doc = new Document("name", "tag", pro);
+		Document doc1 = new Document("name", "tag", pro);
 		assertTrue(doc.compareTo(doc1)==0);
 	}
 
