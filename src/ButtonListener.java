@@ -11,8 +11,8 @@ import java.io.IOException;
  *
  */
 public class ButtonListener implements ActionListener {
-	GUI gui;
-	Simulation sim;
+	private GUI gui; 				//made this private as per required fix from Milestone 2 - Monty
+	private Simulation sim;			//made this private as per required fix from Milestone 2 - Monty
 	private JList<User> userList;
 	private JFrame list;
 	
