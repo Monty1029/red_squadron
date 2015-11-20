@@ -49,8 +49,8 @@ public class DistanceStrategy implements Strategy {
 		//Use bubble sort to rearrange arraylists of values and documents
 		int temp;
 		Document tempDoc;
-		for(int i=0; i < n; i++){
-            for(int j=1; j < (n-i); j++){
+		for(int i=0; i < list.size(); i++){
+            for(int j=1; j < (list.size()-i); j++){
             	if(values.get(j-1) < values.get(j)){
             		//swap the elements!
                     temp = values.get(j-1);
