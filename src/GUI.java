@@ -66,7 +66,7 @@ public class GUI implements Observer{
     	SpinnerModel sm3 = new SpinnerNumberModel(10, 1, 50, 1);
     	SpinnerModel sm4 = new SpinnerNumberModel(5, 1, 50, 1);
     	SpinnerModel sm5 = new SpinnerNumberModel(1, 1, 50, 1);
-    	SpinnerModel sm6 = new SpinnerNumberModel(10, 10, 10, 1);
+    	SpinnerModel sm6 = new SpinnerNumberModel(10, 1, 10, 1);
     	
     	menuBar = new JMenuBar();
     	menu = new JMenu("File");
@@ -103,8 +103,8 @@ public class GUI implements Observer{
 						+ "short for the following ranking criteria:\n"
 						+ "Strategy 1 - Rank based on the number of 'likes' the Document has.\n"
 						+ "Strategy 2 - Rank based on the number of times the User is 'followed'\n"
-						+ "Strategy 3 - Rank based on the distance of the User in the social network.\n\n"
-						+ "Strategy 4 - Rank based on the 'like' similarity of others Users liking the same kinds of Documents.\n"
+						+ "Strategy 3 - Rank based on the distance of the User in the social network.\n"
+						+ "Strategy 4 - Rank based on the 'like' similarity of others Users liking the same kinds of Documents.\n\n"
 						+ "Click the \"Select Ranking Strategy\" button to set that User's ranking strategy to what you selected.\n\n"
 						+ "Click the \"Next Step\" button to step through the simulation and bring up a graph for the selected user\n"
 						+ "that shows their activity.";
@@ -189,7 +189,7 @@ public class GUI implements Observer{
     	c.gridy = 4;
     	pane.add(iterationsSpinner, c);
     	
-    	rankLabel = new JLabel("Max Top Ranks");
+    	rankLabel = new JLabel("Max Top Ranks for Seed");
     	rankLabel.setForeground(textColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;

@@ -53,6 +53,12 @@ public class Producer extends User {
 		else if(n == STRATEGY_B){actStrategy = STRATEGY_B;}
 	}
 	
+	/**
+	 * Return what the acting strategy is
+	 * @return the acting strategy
+	 */
+	public int getActStrategy(){return actStrategy;}
+	
 	
 	/**
 	 * Cycles through all the existing documents and returns an ArrayList
