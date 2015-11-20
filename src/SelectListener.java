@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 
 /**
  * Listener for the select button
+ * 
  * @author Garrett Steele and Monty Dhanani
  *
  */
@@ -16,6 +17,7 @@ public class SelectListener implements ActionListener {
 	private Simulation sim;
 	private JList<User> userList;
 	private JFrame list;
+	private RankingGUI rg;
 
 	public SelectListener(Simulation sim) {
 		this.sim = sim;
@@ -43,10 +45,11 @@ public class SelectListener implements ActionListener {
 					sim.setGraphable(userList.getSelectedValue());
 					list.dispose();
 				}
+				rg = new RankingGUI();
 			}
 		};
 		userList.addMouseListener(mouseListener);
-		
+
 	}
 
 }

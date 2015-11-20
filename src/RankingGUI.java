@@ -17,7 +17,11 @@ public class RankingGUI {
 	private JRadioButton strategy2;
 	private JRadioButton strategy3;
 	private JRadioButton strategy4;
+	private JRadioButton strategyA;
+	private JRadioButton strategyB;
 	private JButton finalizeRanking;
+	private JLabel rankStrategy;
+	private JLabel producerStrategy;
 	private JFrame frame;
 	private Simulation sim;																				
 	private ButtonListener bl;	
@@ -43,34 +47,60 @@ public class RankingGUI {
     	
     	Color bgColor = new Color(150,0,0);
     	
+    	rankStrategy = new JLabel("<html><font color=#E1E1E1>Ranking Strategy | </font></html>");
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.gridx = 0;
+    	c.gridy = 0;
+    	pane.add(rankStrategy, c);
+    	
+    	producerStrategy = new JLabel("<html><font color=#E1E1E1>Producer Strategy</font></html>");
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.gridx = 1;
+    	c.gridy = 0;
+    	pane.add(producerStrategy, c);
+    	
     	strategy1 = new JRadioButton("<html><font color=#E1E1E1>Strategy 1</font></html>");
     	strategy1.setBackground(bgColor);
     	strategy1.setSelected(true);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
-    	c.gridy = 0;
+    	c.gridy = 1;
     	pane.add(strategy1, c);
     	
     	strategy2 = new JRadioButton("<html><font color=#E1E1E1>Strategy 2</font></html>");
     	strategy2.setBackground(bgColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
-    	c.gridy = 1;
+    	c.gridy = 2;
     	pane.add(strategy2, c);
     	
     	strategy3 = new JRadioButton("<html><font color=#E1E1E1>Strategy 3</font></html>");
     	strategy3.setBackground(bgColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
-    	c.gridy = 2;
+    	c.gridy = 3;
     	pane.add(strategy3, c);
     	
     	strategy4 = new JRadioButton("<html><font color=#E1E1E1>Strategy 4</font></html>");
     	strategy4.setBackground(bgColor);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
-    	c.gridy = 3;
+    	c.gridy = 4;
     	pane.add(strategy4, c);
+    	
+    	strategyA = new JRadioButton("<html><font color=#E1E1E1>Strategy A</font></html>");
+    	strategyA.setBackground(bgColor);
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.gridx = 1;
+    	c.gridy = 1;
+    	pane.add(strategyA, c);
+    	
+    	strategyB = new JRadioButton("<html><font color=#E1E1E1>Strategy B</font></html>");
+    	strategyB.setBackground(bgColor);
+    	c.fill = GridBagConstraints.HORIZONTAL;
+    	c.gridx = 1;
+    	c.gridy = 2;
+    	pane.add(strategyB, c);
     	
     	ButtonGroup group = new ButtonGroup();
     	group.add(strategy1);
@@ -78,11 +108,16 @@ public class RankingGUI {
     	group.add(strategy3);
     	group.add(strategy4);
     	
+    	ButtonGroup producerGroup = new ButtonGroup();
+    	producerGroup.add(strategyA);
+    	producerGroup.add(strategyB);
+    	
     	finalizeRanking = new JButton("<html><font color=#960000>Select Ranking Strategy</font></html>");
     	finalizeRanking.setBackground(new Color(255,200,200));
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
-    	c.gridy = 4;
+    	c.gridy = 5;
+    	c.gridwidth = 2;
     	pane.add(finalizeRanking, c);
     	
     	frame.setVisible(true);
