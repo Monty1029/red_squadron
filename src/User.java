@@ -52,18 +52,20 @@ public abstract class User {
 	 */
 	public abstract List<Document> act(List<Document> documents, int n);
 	
-	/**
-	 * Method to separately define the payoff calculation for each subclass of User
-	 * @param documents list of Document objects to perform user's action with
-	 * @return the value of the User's payoff for the list of documents passed
-	 */
-	public abstract int payoff(List<Document> documents);
+	
 	
 	/**
 	 * Get the detailed representation of the User
 	 * @return the detailed representation of the User
 	 */
-	public abstract String details();
+	public  String details()
+	{
+		String toReturn = new String();
+		
+		toReturn += "User: " + username + " ||  Taste: " + taste + " ||  Followed " + this.followed + " times ||  Last Payoff: " + payoff + " ||  Cumulative Payoff: " + cumulative;
+		toReturn += "Ranking Strategy: " + strat.toString() + "\n";
+		return toReturn;
+	}
 	
 	
 	//////////////////////////////////////////////

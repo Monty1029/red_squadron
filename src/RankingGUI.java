@@ -114,7 +114,7 @@ public class RankingGUI {
     	
     	finalizeRanking = new JButton("<html><font color=#960000>Select Ranking Strategy</font></html>");
     	finalizeRanking.setBackground(new Color(255,200,200));
-    	finalizeRanking.setActionCommand("goRank");
+    	finalizeRanking.setActionCommand(RankingListener.GORANK);
     				
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
@@ -141,11 +141,16 @@ public class RankingGUI {
         addComponentsToPane(frame.getContentPane());
         
     }
+    
+    /**
+     * Set the RankingListener
+     * @param rankingListener the RankingListener to set
+     */
 	public void setListener(RankingListener rankingListener) {
 		rl = rankingListener;
 		finalizeRanking.addActionListener(rl);
-		
 	}
+	
 	
 	/**
 	 * Returns strategy1
@@ -203,7 +208,4 @@ public class RankingGUI {
 		return frame;
 	}
 	
-    /*public static void main(String[] args) {
-        RankingGUI rg = new RankingGUI();
-    }*/
 }

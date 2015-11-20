@@ -78,12 +78,13 @@ public class Producer extends User {
 			return docs;
 		}
 		
-		produce();												//make a doc
+		
 		String tempTaste;										//a variable to keep track of a producer's original taste
 		int rand;												//random number to pick another taste to use
 		Random randomizer = new Random();						//random number generator
 		tempTaste = taste;										//store the actual taste
 		
+		if(sim.getAvailableTags().size() == 1){actStrategy = STRATEGY_A;}
 		
 		//if the strategy is "B", need to change the taste used
 		if(actStrategy == STRATEGY_B)
@@ -100,7 +101,7 @@ public class Producer extends User {
 				}
 			}
 		}
-		
+		produce();												//make a doc
 		//need to do the following actions no matter the action strategy selected for the Producer
 		lastRanked = strat.rank(this, allDocs, n);					//rank the document and store the result
 		List<Document> toReturn = matchTaste(lastRanked);			//get the list to return to the Simulation
@@ -123,30 +124,6 @@ public class Producer extends User {
 		newlyProduced.likeDoc(this);
 	}
 
-	/*/**
-	 * Ranks all of the documents and returns the top 10
-	 * @param unrankedDocs is the list of unranked documents
-	 * @return a list of ranked documents
-	 */
-	/*public ArrayList<Document> rank(List<Document> unrankedDocs) {
-		ArrayList<Document> ranked = new ArrayList<Document>();
-		Collections.sort(unrankedDocs);
-		String toprint = "" + super.getName() + " ranked: ";
-		
-		
-		//hard-coded limit of 10 for testing purposes
-		for (int i = 0; i < 10; i++) {
-			ranked.add(unrankedDocs.get(i));
-			
-		}
-		
-		for(Document d: ranked){
-			toprint += d.getName() + "(liked: " + d.getLikes() + ") ";
-		}
-		System.out.println(toprint);
-		return ranked;
-	}*/
-
 	
 	/**
 	 * Method to increment the payoff when someone likes the User's document
@@ -157,32 +134,17 @@ public class Producer extends User {
 		this.cumulative++;			//increase the cumulative payoff by 1
 	}
 	
-	
-	/**
-	 * Returns 0 as a payoff as this method is not used by Producers
-	 * @param docs is a list of ranked documents
-	 * @return a default value of 0
-	 */
-	public int payoff(List<Document> docs) {
-		
-		/*int pointCounter = super.followed; //keeps track of how many likes there are in the produced documents
-		
-		for (Document d : produced) {
-				pointCounter+= d.getLikes();
-		}
-		System.out.println("" + super.getName() + " payoff: " + pointCounter + "");
-		cumulative += pointCounter;
-		payoff = pointCounter;
-		return pointCounter;*/
-		return 0;
-	}
+
 	
 	@Override
 	public String details() {
-		String toReturn = new String();
+		String toReturn = "" +  super.details();
 		
-		toReturn += "User: " + username + ", Taste: " + taste + ", Followed " + this.followed + " times, Last Payoff: " + payoff + ", Cumulative Payoff: " + cumulative + "\n";
+		if(actStrategy == Producer.STRATEGY_A){toReturn += "Acting Strategy: A\n";}
+		else if(actStrategy == Producer.STRATEGY_B){toReturn += "Acting Strategy: B\n";}
+		
 		toReturn += "Has Produced: " + this.produced.toString() + "\n";
+		
 		
 		return toReturn;
 	}

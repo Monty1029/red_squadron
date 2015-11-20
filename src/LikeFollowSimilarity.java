@@ -15,8 +15,13 @@ public class LikeFollowSimilarity implements Strategy {
 	 */
 	public List<Document> rank(User u, List<Document> docs, int n){
 		ArrayList<Document> newRank = new ArrayList<Document>();
+		
+		
+		
 		for(User user: u.getFollowing()){
 			ArrayList<Document> liked= 	u.getSim().getHash().get(user);
+			if(liked == null){return newRank;}
+			
 			for(Document d: liked){
 				d.likeDoc(u);
 				if(newRank.size() < n){
@@ -34,4 +39,12 @@ public class LikeFollowSimilarity implements Strategy {
 		
 		return newRank;
 	}
+	
+	
+	/**
+	 * Overwrite, gives strategy name
+	 */
+	public String toString(){ return "Like/Follow Similarity";}
+	
+	
 }

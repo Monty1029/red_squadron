@@ -24,7 +24,8 @@ public class SimulationTest {
 	@Test
 	public void testAddLike() {
 		Simulation sim = new Simulation();
-		Document doc = new Document("name", "tag");
+		Producer pro = new Producer("none","none", sim);
+		Document doc = new Document("name", "tag", pro);
 		Consumer con = new Consumer("name", "tag", sim);
 		sim.addLike(con, doc);
 		assertEquals(1, sim.getHash().size());

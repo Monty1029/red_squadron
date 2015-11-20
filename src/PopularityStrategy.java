@@ -36,5 +36,9 @@ public class PopularityStrategy implements Strategy {
 		return ranked;
 	}
 	
+	/**
+	 * Overwrite, gives strategy name
+	 */
+	public String toString(){ return "Document Popularity Strategy";}
 
 }

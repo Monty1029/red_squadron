@@ -130,7 +130,7 @@ public class ProducerTest {
 		//calculate payoffs for the producers
 		assertEquals(0, producer1.getPayoff());					//no produced documents liked
 		assertEquals(0, producer1.getCumulative());				//no produced documents liked
-		assertEquals(0, producer2.payoff(null));				//should always return 0
+		
 		
 		
 		for(int i = 0; i < 3; i++){producer1.produce();}		//have producer1 generate 3 documents
@@ -139,7 +139,7 @@ public class ProducerTest {
 		//calculate payoffs for the producers
 		assertEquals(3, producer1.getCumulative());				//3 produced documents liked
 		assertEquals(2, producer2.getCumulative());				//2 produced documents liked, and liked by 1 consumer
-		assertEquals(0, producer2.payoff(null));				//should always return 0
+		
 		
 	}
 

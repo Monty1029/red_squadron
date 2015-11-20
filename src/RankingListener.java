@@ -2,13 +2,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
+/**
+ * Class to monitor ranking strategy selection
+ * @author Monty Dhanani
+ *
+ */
 public class RankingListener implements ActionListener {
+	
+	public static final String GORANK = "goRank";
+	
 	private RankingGUI rg;
 	private User u;
+	
+	
+	
+	/**
+	 * Constructor
+	 * @param rg the RankingGUI
+	 * @param u the User in question
+	 */
 	public RankingListener(RankingGUI rg, User u) {
+		
+		//set object variables
 		this.rg = rg;
 		this.u = u;
 
+		//choose which radio button to select based on User's strategy
 		if (u.getRankingStrategy() instanceof PopularityStrategy) {
 			rg.getStrategy1().setSelected(true);
 		} else if (u.getRankingStrategy() instanceof StrategyTwo) {
@@ -19,7 +38,7 @@ public class RankingListener implements ActionListener {
 			rg.getStrategy4().setSelected(true);
 		}
 		
-		
+		//if it is a producer must do the ssame for acting strategies
 		if (u instanceof Producer) {
 			rg.getStrategyA().setEnabled(true);
 			rg.getStrategyB().setEnabled(true);
@@ -33,12 +52,17 @@ public class RankingListener implements ActionListener {
 
 	}
 
+	/**
+	 * Respond to event
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource(); // Get the button pressed and
-													// the action command
-													// (button number).
+	
+		
 		String command = button.getActionCommand();
-		if (command.equals("goRank")) { // Do something
+		
+		//ranking strategy
+		if (command.equals(GORANK)) { // Do something
 			if (rg.getStrategy1().isSelected()) {
 				u.setStrat(new PopularityStrategy());
 			}
@@ -53,6 +77,7 @@ public class RankingListener implements ActionListener {
 			}
 		}
 		
+		//acting strategy of a producer
 		if (u instanceof Producer) {
 			if (rg.getStrategyA().isSelected()) {
 				((Producer) u).setActStrategy(Producer.STRATEGY_A);

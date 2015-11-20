@@ -90,7 +90,7 @@ public class PayoffGraph extends JPanel{
 
 
 	/**
-	 * Test that the graph will build
+	 * Test that the graph will build, left in for testing purposes between Milestones
 	 * @param args not used
 	 */
 	public static void main(String[] args)

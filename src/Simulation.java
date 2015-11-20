@@ -14,7 +14,35 @@ import javax.swing.JFrame;
  */
 public class Simulation extends Observable{
 
-	private List<String> allTags;
+	/**
+	 * The various tags
+	 * @author Evan Bottomley
+	 *
+	 */
+	public enum AllTags{
+		jazz("Jazz"),
+		techno("Techno"),
+		metal("Metal"),
+		classical("Classical"),
+		rock("rock");
+		
+		private final String t;
+		
+		/**
+		 * Constructor
+		 * @param t the String tag
+		 */
+		private AllTags(String t){this.t = t;}
+		
+		/**
+		 * Give the music taste
+		 */
+		public String toString(){return t;}
+	}
+	
+	
+	
+	//private List<String> allTags = new ArrayList<String>({"Jazz"}, {"Techno"});
 	private List<String> availableTags;
 	private HashMap<User, ArrayList<Document>> map;
 	private List<Document> allDoc;
@@ -31,7 +59,10 @@ public class Simulation extends Observable{
 	 * Get the list of all possible tags
 	 * @return all possible tags
 	 */
-	public List<String> getAllTags(){return allTags;}
+	//public Enum getAllTags(){return AllTags;} TODO
+	
+	
+	
 	/**
 	 * Get the list of all Documents
 	 * @return the list of all Documents
@@ -60,16 +91,11 @@ public class Simulation extends Observable{
 	 * @param n number of different tags that will be used in the simulation
 	 */
 	public Simulation() {
-		allTags = new ArrayList<String>();
+		
 		availableTags = new ArrayList<String>();
 		map = new HashMap<User, ArrayList<Document>>();
 		allDoc = new ArrayList<Document>();
 		allUser = new ArrayList<User>();
-		allTags.add("Jazz");
-		allTags.add("Techno");
-		allTags.add("Metal");
-		allTags.add("Classical");
-		allTags.add("Rock");
 		seed = new Producer("Seed","seed", this);
 		addObserver(new PayoffGraphUpdatable());
 		results = new StringBuffer();
@@ -92,13 +118,19 @@ public class Simulation extends Observable{
 	public void selectTags(int n) {
 		Random rand = new Random();
 		int r;
+		int i = 0;
 		String s;
-		if (n > allTags.size()) n = allTags.size(); //n cannot exceed max number of tags
-		for (int i = 0; i < n; i++) {
-			r = rand.nextInt(allTags.size());
-			s = allTags.get(r);
+		ArrayList<String> chosen = new ArrayList<>();
+		if (n > AllTags.values().length) n = AllTags.values().length; //n cannot exceed max number of tags
+		while(i < n) {
+			r = rand.nextInt(AllTags.values().length);
+			s = AllTags.values()[r].toString();
+			
+			
+			if(!chosen.contains(s)){
 			availableTags.add(s);
-			allTags.remove(s);
+			chosen.add(s);
+			i++;}
 		}
 	}
 	/**
@@ -131,7 +163,10 @@ public class Simulation extends Observable{
 		int r;
 		seed = new Producer("Seed","seed", this);		//seeding producer
 		graphable = seed;								//pick the seed to graph
-		
+		map = new HashMap<User, ArrayList<Document>>();
+		allDoc = new ArrayList<Document>();
+		allUser = new ArrayList<User>();
+		results = new StringBuffer();
 		
 		
 		//Add n1 Consumers
@@ -255,6 +290,7 @@ public class Simulation extends Observable{
 	 */
 	public void start(int tags, int cons, int prods, int docs, int ranks) {
 		this.ranks = ranks;
+		availableTags = new ArrayList<>();
 		this.selectTags(tags);
 		this.printTags();
 		this.seed(cons, prods, docs);

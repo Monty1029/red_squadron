@@ -38,22 +38,7 @@ public class Document implements Comparable<Document> {
 		list = new HashSet<User>();
 	}
 	
-	
-	public Document(String name, String tag){
-		if(name!=null){
-			this.name = name;
-		}
-		else{
-			this.name = "none";
-		}
-		if(tag != null){
-			this.tag = tag;
-		}else{
-			this.tag = "none";
-		}
 
-		list = new HashSet<User>();
-	}
 	
 	
 	/**

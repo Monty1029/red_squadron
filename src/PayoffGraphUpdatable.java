@@ -4,17 +4,26 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
-
+/**
+ * Observer to grapg a User's cumulative payoff over time
+ * @author Garrett Steele
+ *
+ */
 public class PayoffGraphUpdatable implements Observer{
 
 	//the graph to show
 	private JFrame graph = null;
 	
 	
-	//default constructor
+	/**
+	 * Default Constructor
+	 */
 	public PayoffGraphUpdatable(){}
 
 	@Override
+	/**
+	 * Create and display the graph
+	 */
 	public void update(Observable o, Object arg) {
 		if (graph != null){graph.dispose();}
 		

@@ -11,6 +11,11 @@ import java.io.IOException;
  *
  */
 public class ButtonListener implements ActionListener {
+	
+	public static final String SELECT = "select";
+	public static final String START = "start";
+	public static final String STEP = "step";
+	
 	private GUI gui; 				//made this private as per required fix from Milestone 2 - Monty
 	private Simulation sim;			//made this private as per required fix from Milestone 2 - Monty
 	private JList<User> userList;
@@ -31,7 +36,7 @@ public class ButtonListener implements ActionListener {
     {
 		JButton but = (JButton) e.getSource(); //Get the button pressed and the action command (button number).
         String command = but.getActionCommand();
-        if (command.equals("start")) { //Do something
+        if (command.equals(START)) { //Do something
         	int n1 = (int) gui.getTagSpinner().getValue();
         	int n2 = (int) gui.getConsumersSpinner().getValue();
         	int n3 = (int) gui.getProducersSpinner().getValue();
@@ -43,11 +48,11 @@ public class ButtonListener implements ActionListener {
 
         	sim.start(n1,n2,n3,n4, n5);
         }
-        else if (command.equals("step")) {
+        else if (command.equals(STEP)) {
         	int n = (int) gui.getIterationsSpinner().getValue();
         	sim.step(n);
         }
-        else if (command.equalsIgnoreCase("select"))
+        else if (command.equalsIgnoreCase(SELECT))
         {
         	list = new JFrame("List of Users");
 

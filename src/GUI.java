@@ -39,6 +39,8 @@ public class GUI implements Observer{
 	private JTextArea textArea;
 	private JFrame frame;
 	private ButtonListener bl;																				//CREATE BUTTON LISTENER
+	
+	
 	/**
 	 * Creates the GUI
 	 * @param sim is the reference to Simulation that will run the operations
@@ -46,9 +48,9 @@ public class GUI implements Observer{
 	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
 
 		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
-		createAndShowGUI();
-		
+		createAndShowGUI();	
 	}
+	
 	/**
 	 * Creates and adds all of the components of the GUI to the Container
 	 * @param pane is the Container that holds all of the components of the GUI
@@ -209,7 +211,7 @@ public class GUI implements Observer{
     	c.gridx = 0;
     	c.gridy = 6;
     	startButton.setBackground(new Color(255,200,200));
-    	startButton.setActionCommand("start");
+    	startButton.setActionCommand(ButtonListener.START);
     	startButton.addActionListener(bl);																		//ADDED BUTTON LISTENER
     	pane.add(startButton, c);
     	
@@ -218,7 +220,7 @@ public class GUI implements Observer{
     	c.gridx = 1;
     	c.gridy = 6;
     	selectButton.setBackground(new Color(255,200,200));
-    	selectButton.setActionCommand("select");
+    	selectButton.setActionCommand(ButtonListener.SELECT);
     	selectButton.addActionListener(bl);
     	selectButton.setEnabled(false);//ADDED BUTTON LISTENER
     	pane.add(selectButton, c);
@@ -230,7 +232,7 @@ public class GUI implements Observer{
     	c.gridx = 2;
     	c.gridy = 6;
     	stepButton.setBackground(new Color(255,200,200));
-    	stepButton.setActionCommand("step");
+    	stepButton.setActionCommand(ButtonListener.STEP);
     	stepButton.addActionListener(bl);																		//ADDED BUTTON LISTENER
     	stepButton.setEnabled(false);
     	pane.add(stepButton, c);    	

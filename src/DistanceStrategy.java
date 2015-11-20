@@ -69,7 +69,10 @@ public class DistanceStrategy implements Strategy {
 		return list.subList(0,k);
 	}
 
-
+	/**
+	 * Overwrite, gives strategy name
+	 */
+	public String toString(){ return "Distance Strategy";}
 	
 
 }
