@@ -366,7 +366,11 @@ public class GUI implements Observer{
 		toUpdate += "\n\n";
 		toUpdate += "=========================================================================================================";
 		toUpdate += "\nUsers and the Documents they like\n\n";
-		toUpdate += simRef.getHash().toString();
+		//toUpdate += simRef.getHash().toString();
+		for(User u: simRef.getHash().keySet())
+		{
+			toUpdate += "User: " + u.toString() + ", Likes: " + simRef.getHash().get(u).toString() + "\n";
+		}
 		
 		
 		toUpdate += "\n\n";
