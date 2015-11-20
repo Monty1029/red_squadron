@@ -22,16 +22,14 @@ public class RankingGUI {
 	private JButton finalizeRanking;
 	private JLabel rankStrategy;
 	private JLabel producerStrategy;
-	private JFrame frame;
-	private Simulation sim;																				
-	private ButtonListener bl;	
+	private JFrame frame;																			
+	private RankingListener rl;	
 	/**
 	 * Creates the GUI
 	 * @param sim is the reference to Simulation that will run the operations
 	 */
-	public RankingGUI(/*Simulation sim*/) {																			
-		//this.sim = sim;																						
-		//bl = new ButtonListener(this, sim);																	
+	public RankingGUI() {																		
+																		
 		createAndShowGUI();
 		
 	}
@@ -90,6 +88,7 @@ public class RankingGUI {
     	
     	strategyA = new JRadioButton("<html><font color=#E1E1E1>Strategy A</font></html>");
     	strategyA.setBackground(bgColor);
+    	strategyA.setEnabled(false);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 1;
     	c.gridy = 1;
@@ -97,6 +96,7 @@ public class RankingGUI {
     	
     	strategyB = new JRadioButton("<html><font color=#E1E1E1>Strategy B</font></html>");
     	strategyB.setBackground(bgColor);
+    	strategyB.setEnabled(false);
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 1;
     	c.gridy = 2;
@@ -114,6 +114,8 @@ public class RankingGUI {
     	
     	finalizeRanking = new JButton("<html><font color=#960000>Select Ranking Strategy</font></html>");
     	finalizeRanking.setBackground(new Color(255,200,200));
+    	finalizeRanking.setActionCommand("goRank");
+    				
     	c.fill = GridBagConstraints.HORIZONTAL;
     	c.gridx = 0;
     	c.gridy = 5;
@@ -139,6 +141,67 @@ public class RankingGUI {
         addComponentsToPane(frame.getContentPane());
         
     }
+	public void setListener(RankingListener rankingListener) {
+		rl = rankingListener;
+		finalizeRanking.addActionListener(rl);
+		
+	}
+	
+	/**
+	 * Returns strategy1
+	 * @return strategy1 
+	 */
+	public JRadioButton getStrategy1() {
+		return strategy1;
+	}
+	
+	/**
+	 * Returns strategy2
+	 * @return strategy2 
+	 */
+	public JRadioButton getStrategy2() {
+		return strategy2;
+	}
+	
+	/**
+	 * Returns strategy3
+	 * @return strategy3 
+	 */
+	public JRadioButton getStrategy3() {
+		return strategy3;
+	}
+	
+	/**
+	 * Returns strategy4
+	 * @return strategy4
+	 */
+	public JRadioButton getStrategy4() {
+		return strategy4;
+	}
+	
+	/**
+	 * Returns strategyA
+	 * @return strategyA
+	 */
+	public JRadioButton getStrategyA() {
+		return strategyA;
+	}
+	
+	/**
+	 * Returns strategyB
+	 * @return strategyB
+	 */
+	public JRadioButton getStrategyB() {
+		return strategyB;
+	}
+	
+	/**
+	 * Returns frame
+	 * @return frame
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
 	
     /*public static void main(String[] args) {
         RankingGUI rg = new RankingGUI();

@@ -15,6 +15,7 @@ public class ButtonListener implements ActionListener {
 	private Simulation sim;			//made this private as per required fix from Milestone 2 - Monty
 	private JList<User> userList;
 	private JFrame list;
+	private RankingGUI rg;
 	
 	/**
 	 * Constructor
@@ -67,8 +68,10 @@ public class ButtonListener implements ActionListener {
     				if (mouseEvent.getClickCount() == 2) {
     					sim.setGraphable(userList.getSelectedValue());
     					list.dispose();
-    					RankingGUI ranker = new RankingGUI();
+    					rg = new RankingGUI();
+        				rg.setListener(new RankingListener(rg, userList.getSelectedValue()));
     				}
+    				
     			}
     		};
     		userList.addMouseListener(mouseListener);

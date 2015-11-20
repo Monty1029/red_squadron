@@ -170,7 +170,11 @@ public abstract class User {
 	 */
 	public List<Document> getLastRanked(){return lastRanked;}
 	
-	
+	/**
+	 * Get reference to the ranking strategy
+	 * @return the ranking strategy reference
+	 */
+	public Strategy getRankingStrategy(){return strat;}
 	
 	//////////////////////////////////////////////
 	//											//

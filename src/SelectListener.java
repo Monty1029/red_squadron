@@ -45,7 +45,6 @@ public class SelectListener implements ActionListener {
 					sim.setGraphable(userList.getSelectedValue());
 					list.dispose();
 				}
-				rg = new RankingGUI();
 			}
 		};
 		userList.addMouseListener(mouseListener);
