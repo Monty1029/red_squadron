@@ -88,7 +88,6 @@ public class Simulation extends Observable{
 	
 	/**
 	 * Primary constructor, create new Simulations, fills out allTags list
-	 * @param n number of different tags that will be used in the simulation
 	 */
 	public Simulation() {
 		
@@ -287,6 +286,7 @@ public class Simulation extends Observable{
 	 * @param cons number of consumers
 	 * @param prods number of producers
 	 * @param docs number of documents
+	 * @param ranks max number of docs to rank
 	 */
 	public void start(int tags, int cons, int prods, int docs, int ranks) {
 		this.ranks = ranks;

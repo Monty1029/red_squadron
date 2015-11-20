@@ -20,6 +20,7 @@ public class Document implements Comparable<Document> {
 	 * Constructor using name and tag to make document
 	 * @param name this is name of document
 	 * @param tag this is tag of document
+	 * @param producer the producer that made it
 	 */
 	public Document(String name, String tag, Producer producer){							//TODO
 		if(name!=null){

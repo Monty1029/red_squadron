@@ -8,7 +8,7 @@ public class StrategyTwo implements Strategy {
 
 	/**
 	 * Ranks the documents based on the number of followers of users that like that particular document
-	 * @reutrn a list of top 'n' documents based on the number of followers of users that like that particular document
+	 * @return a list of top 'n' documents based on the number of followers of users that like that particular document
 	 */
 	public List<Document> rank(User u, List<Document> docs, int n) {
 		HashSet<User> likedUsers = new HashSet<User>();

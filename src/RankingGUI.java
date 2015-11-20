@@ -26,7 +26,6 @@ public class RankingGUI {
 	private RankingListener rl;	
 	/**
 	 * Creates the GUI
-	 * @param sim is the reference to Simulation that will run the operations
 	 */
 	public RankingGUI() {																		
 																		

@@ -9,7 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ ConsumerTest.class, DocumentTest.class, ProducerTest.class,
-		SimulationTest.class, UserTest.class })
+		SimulationTest.class, UserTest.class, PopularityStrategyTest.class, 
+		StrategyTwoTest.class, DistanceStrategyTest.class, LikeFollowSimilarityTest.class })
 public class AllTests {
 
 }

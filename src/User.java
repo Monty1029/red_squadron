@@ -62,7 +62,7 @@ public abstract class User {
 	{
 		String toReturn = new String();
 		
-		toReturn += "User: " + username + " ||  Taste: " + taste + " ||  Followed " + this.followed + " times ||  Last Payoff: " + payoff + " ||  Cumulative Payoff: " + cumulative;
+		toReturn += "User: " + username + " ||  Taste: " + taste + " ||  Followed " + this.followed + " times ||  Last Payoff: " + payoff + " ||  Cumulative Payoff: " + cumulative + "\n";
 		toReturn += "Ranking Strategy: " + strat.toString() + "\n";
 		return toReturn;
 	}
