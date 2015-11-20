@@ -1,10 +1,18 @@
 import java.util.*;
-
+/**
+ * Ranking Strategy Two
+ * @author Monty Dhanani
+ *
+ */
 public class StrategyTwo implements Strategy {
 	public StrategyTwo() {
 
 	}
 
+	/**
+	 * Ranks the documents based on the number of followers of users that like that particular document
+	 * @reutrn a list of top 'n' documents based on the number of followers of users that like that particular document
+	 */
 	public List<Document> rank(User u, List<Document> docs, int n) {
 		HashSet<User> likedUsers = new HashSet<User>();
 		HashMap<Document, Integer> docLikes = new HashMap<Document, Integer>();
@@ -26,6 +34,11 @@ public class StrategyTwo implements Strategy {
 		return sorted;
 	}
 
+	/**
+	 * Sorts a Map of the number of followers of users per document
+	 * @param unsortedMap is the unsorted Map that gets passed in from the rank method above
+	 * @return a sorted LinkedHashMap of the number of followers of users per document
+	 */
 	public Map<Document, Integer> sortDocuments(Map<Document, Integer> unsortedMap) {
 		List<Map.Entry<Document, Integer>> list = new LinkedList<Map.Entry<Document, Integer>>(unsortedMap.entrySet());
 
