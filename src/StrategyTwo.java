@@ -5,9 +5,6 @@ import java.util.*;
  *
  */
 public class StrategyTwo implements Strategy {
-	public StrategyTwo() {
-
-	}
 
 	/**
 	 * Ranks the documents based on the number of followers of users that like that particular document
