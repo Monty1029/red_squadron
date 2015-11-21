@@ -21,7 +21,7 @@
 		//								//
 		//////////////////////////////////
 
-	Readme Author: Garrett Steele
+	Readme Author: Monty Dhanani
 		
 	Team Member:		Student Number:			Carleton Email:						GitHub User-name:
 	Monty Dhanani		100926543				montydhanani@cmail.carleton.ca		Monty1029
