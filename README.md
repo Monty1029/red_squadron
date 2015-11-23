@@ -56,7 +56,7 @@
 	Monty Dhanani:		Additions to the main GUI (JMenuBar, Help options), RankingGUI.java, RankingListener.java, ranking strategy 2 (StrategyTwo.java),
 						unit tests for all classes modified/worked on, README.txt
 	Garrett Steele:		Refactored Producer, Consumer, and User classes, Strategy Interface (Strategy.java), ranking strategy 1 (PopularityStrategy.java),
-						unit tests for all classes modified/worked on, Design_Decisions_M3.pdf
+						unit tests for all classes modified/worked on, PayoffGraphUpdatable.java, Design_Decisions_M3.pdf
 	Bronwyn Skelley:	Additions to the graph (PayoffGraph.java, PayoffGraphUpdatable.java), strategy 4 (LikeFollowSimilarity.java),
 						unit tests for all classes modified/worked on, User_Manual_M3.pdf
 	Evan Bottomley:		Refactored Simulation.java to allow for selecting number of documents to rank, refactored ButtonListener.java,
