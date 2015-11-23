@@ -5,7 +5,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-
+/**
+ * test class
+ * @author Bronwyn
+ *
+ */
 public class LikeFollowSimilarityTest {
 
 	/**

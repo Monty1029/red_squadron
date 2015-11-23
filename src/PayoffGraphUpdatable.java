@@ -5,7 +5,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 /**
- * Observer to grapg a User's cumulative payoff over time
+ * Observer to graph a User's cumulative payoff over time
  * @author Garrett Steele
  *
  */

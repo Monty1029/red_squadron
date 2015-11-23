@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * Listens to the start and step buttons, controlling the Simulation.
- * @author Evan Bottomley
+ * @author Evan Bottomley, Monty Dhanani
  *
  */
 public class ButtonListener implements ActionListener {

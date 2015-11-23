@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Class to represent the Popularity ranking strategy
- * @author Garrett Steele
+ * @author Garrett Steele, Re-factored from the original code written in consumer and Producer by Monty Dhanani
  *
  */
 public class PopularityStrategy implements Strategy {

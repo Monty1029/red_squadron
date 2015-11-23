@@ -2,7 +2,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 /**
- * created test suite
+ * Created test suite
  * @author Bronwyn Skelley
  *
  */

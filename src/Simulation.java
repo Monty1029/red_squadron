@@ -340,27 +340,7 @@ public class Simulation extends Observable{
 		sim.setGUI(g);
 		
 		while(true){} //Loop forever
-		/*
-		sim.selectTags(5);
-		sim.printTags();
-		sim.seed(5, 5, 10);
-		Random rand = new Random();
-		int x;
-		int loops = 0;
-		List<Document> liked;
-		while(loops < 50) {
-			x = rand.nextInt(sim.allUser.size());
-			User acting = sim.allUser.get(x);
-			liked = acting.act(sim.allDoc);
-			for(Document doc: liked) {
-				sim.addLike(acting, doc);
-			}
-			loops++;
-		}
-		
-		
-		System.out.println("End simulation.");
-		*/
+
 	}
 	
 	/**

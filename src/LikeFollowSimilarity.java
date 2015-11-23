@@ -28,10 +28,11 @@ public class LikeFollowSimilarity implements Strategy {
 					newRank.add(d);
 				}
 				else{
-					return newRank;
+					break;
 				}
 			}
 			ArrayList<User> follows = (ArrayList<User>) user.getFollowing();
+			if (follows == null){return newRank;}
 			for(User newUser: follows){
 				u.follow(newUser);
 			}

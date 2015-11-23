@@ -39,4 +39,10 @@ public class StrategyTwoTest {
 		assertEquals(doc1, strat.rank(null, list, 1).get(0));
 	}
 
+	/**
+	 * Return the name
+	 */
+	public String toString(){return "User Popularity";}
+	
+	
 }

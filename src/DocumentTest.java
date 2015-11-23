@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * Test the Document class
- * @author Bronwyn
+ * @author Bronwyn Skelley
  * Tests for Document class
  */
 public class DocumentTest {

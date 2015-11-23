@@ -32,7 +32,8 @@ public class SimulationTest {
 	}
 
 	/**
-	 * seeds a test simulation, checks how many users and documents are in the simulation
+	 * seeds a test simulation, checks how many users and documents are in the simulation. 
+	 * Can't get a null to see in practice because the values of the JSpinners are never null.
 	 */
 	@Test
 	public void testSeed() {

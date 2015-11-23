@@ -6,7 +6,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * Test class
+ * @author Evan Bottomley
+ *
+ */
 public class DistanceStrategyTest {
 
 
