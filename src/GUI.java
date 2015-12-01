@@ -34,8 +34,8 @@ public class GUI implements Observer{
 	private JButton selectButton;
 	private JButton stepButton;
 	private JMenuBar menuBar;
-	private JMenu menu;
-	private JMenuItem saveState, loadState, howToUse;
+	private JMenu menu, loadState;
+	private JMenuItem saveState, howToUse, stepBack;
 	private JTextArea textArea;
 	private JFrame frame;
 	private ButtonListener bl;																				//CREATE BUTTON LISTENER
@@ -48,7 +48,7 @@ public class GUI implements Observer{
 	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
 
 		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
-		mbl = new MenuBarListener(sim);
+		mbl = new MenuBarListener(this, sim, bl);
 		createAndShowGUI();
 	}
 	
@@ -74,16 +74,24 @@ public class GUI implements Observer{
     	menuBar = new JMenuBar();
     	menu = new JMenu("File");
     	saveState = new JMenuItem("Save State");
+    	saveState.setEnabled(false);
     	saveState.setActionCommand(MenuBarListener.SAVE);
     	saveState.addActionListener(mbl);
     	menu.add(saveState);
-    	loadState = new JMenuItem("Load State");
+    	loadState = new JMenu("Load State");
+    	
     	menu.add(loadState);
     	menuBar.add(menu);
     	menu = new JMenu("Help");
     	howToUse = new JMenuItem("How To Use");
     	howToUse.setActionCommand(MenuBarListener.HELP);
     	howToUse.addActionListener(mbl);
+    	stepBack = new JMenuItem("Step Back");
+    	stepBack.setEnabled(false);
+    	stepBack.setActionCommand(MenuBarListener.BACK);
+    	stepBack.addActionListener(mbl);
+    	loadState.add(stepBack);
+    	loadState.addSeparator();
     	menu.add(howToUse);
     	menuBar.add(menu);
     	frame.setJMenuBar(menuBar);
@@ -315,7 +323,45 @@ public class GUI implements Observer{
 		return textArea;
 	}
 	
+	/**
+     * 
+     * @return the Menu
+     */
+	public JMenu getMenu() {
+		return menu;
+	}
 	
+	/**
+     * 
+     * @return the loadState
+     */
+	public JMenu getLoadState() {
+		return loadState;
+	}
+	
+	/**
+     * 
+     * @return the saveState
+     */
+	public JMenuItem getSaveState() {
+		return saveState;
+	}
+	
+	/**
+     * 
+     * @return the stepBack
+     */
+	public JMenuItem getStepBack() {
+		return stepBack;
+	}
+	
+	/**
+     * 
+     * @return the buttonListener bl
+     */
+	public ButtonListener getBl() {
+		return bl;
+	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -365,7 +411,8 @@ public class GUI implements Observer{
 	}
 
 	
-    public static void main(String[] args) {
+	
+    /*public static void main(String[] args) {
         GUI g = new GUI(null);
-    }
+    }*/
 }

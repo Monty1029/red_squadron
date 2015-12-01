@@ -6,13 +6,20 @@ import java.awt.event.*;
 public class MenuBarListener implements ActionListener {
 	
 	private Simulation sim;
+	private GUI gui;
 	private int saveCounter;
+	private ButtonListener bl;
 	public static final String SAVE = "save";
 	public static final String LOAD = "load";
+	public static final String BACK = "back";
 	public static final String HELP = "help";
 	
-	public MenuBarListener(Simulation s) {
+	
+	public MenuBarListener(GUI g, Simulation s, ButtonListener bl) {
 		sim = s;
+		gui = g;
+		saveCounter = 0;
+		this.bl = bl;
 	}
 
 	@Override
@@ -53,7 +60,25 @@ public class MenuBarListener implements ActionListener {
         }
         else if (command.equals(SAVE)) {
 			saveCounter++;
-			sim.saveSim(saveCounter);
+			sim.saveSim(saveCounter, Simulation.FILENAMES);
+			JMenuItem savedState = new JMenuItem("serialized"+saveCounter+".txt");
+			savedState.setActionCommand(LOAD);
+			savedState.addActionListener(this);
+			gui.getLoadState().add(savedState);
+			gui.getStepBack().setEnabled(true);
 		}
+        else if (command.equals(LOAD)) {
+        	String filename = menuItem.getText();
+        	Simulation newSim = Simulation.loadSim(filename, gui);
+        	gui.getBl().setSim(newSim);
+        	newSim.updated();
+        }
+        else if (command.equals(BACK)) {
+        	bl.decrementStack();
+        	String filename = Simulation.STACK.replaceAll("#", "" + bl.getStackCounter());
+        	Simulation newSim = Simulation.loadSim(filename, gui);
+        	gui.getBl().setSim(newSim);
+        	newSim.updated();
+        }
 	}
 }

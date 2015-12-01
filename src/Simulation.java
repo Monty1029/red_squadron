@@ -47,7 +47,8 @@ public class Simulation extends Observable implements Serializable{
 	}
 	
 	
-	public static String FILENAMES = "serialized?.txt";
+	public static String FILENAMES = "serialized#.txt";
+	public static String STACK = "stack#.txt";
 	
 	private List<String> availableTags;
 	private HashMap<User, ArrayList<Document>> map;
@@ -104,7 +105,6 @@ public class Simulation extends Observable implements Serializable{
 		seed = new Producer("Seed","seed", this);
 		addObserver(new PayoffGraphUpdatable());
 		results = new StringBuffer();
-		
 	}
 	
 	/**
@@ -348,14 +348,14 @@ public class Simulation extends Observable implements Serializable{
 	 * Method to save the simulation to a file
 	 * @param saveNum the document number to use in the name
 	 */
-	public void saveSim(int saveNum)
+	public void saveSim(int saveNum, String fileName)
 	{
 		//create the name of the file to write to
-		String fileName = FILENAMES.replaceAll("?", "" + saveNum);
+		String file = fileName.replaceAll("#", "" + saveNum);
 		
 		try {
 			//create an output stream to write the simulation with
-			ObjectOutputStream serialized = new ObjectOutputStream( new FileOutputStream(fileName));
+			ObjectOutputStream serialized = new ObjectOutputStream( new FileOutputStream(file));
 			
 			serialized.writeObject(this);	//write out the Simulation
 			serialized.close();				//close off the output stream
@@ -370,14 +370,15 @@ public class Simulation extends Observable implements Serializable{
 	/**
 	 * Load the simulation stored in the specified file name
 	 * @param fileName the name of the file to read from
+	 * @param gui 
 	 */
-	public static Simulation loadSim(String fileName)
+	public static Simulation loadSim(String fileName, GUI gui)
 	{
 		//create a null simulation reference
 		Simulation sim = null;
 		
 		try {
-			//create an onject input stream to read in the simulation object
+			//create an object input stream to read in the simulation object
 			ObjectInputStream serialized = new ObjectInputStream( new FileInputStream(fileName));
 			
 			
@@ -394,11 +395,25 @@ public class Simulation extends Observable implements Serializable{
 			return null;
 		}
 		
+		
+		if(sim != null)
+		{
+			sim.addObserver(new PayoffGraphUpdatable());
+			sim.addObserver(gui);
+		}
+		
 		//return the simulation
 		return sim;
 	}
 	
-	
+	/**
+	 * Force update the Observers
+	 */
+	public void updated()
+	{
+		setChanged();
+		notifyObservers();
+	}
 	
 	
 }
