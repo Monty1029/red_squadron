@@ -328,20 +328,6 @@ public class Simulation extends Observable{
 	}
 
 	
-	/**
-	 * Main function creates a simulation and GUI
-	 * @param args not used currently
-	 */
-	public static void main(String[] args) {
-		//Create a new simulation and seed the simulation
-		
-		Simulation sim = new Simulation();
-		GUI g = new GUI(sim);
-		sim.setGUI(g);
-		
-		while(true){} //Loop forever
-
-	}
 	
 	/**
 	 * Get the graphable User
@@ -351,4 +337,28 @@ public class Simulation extends Observable{
 		
 		return graphable;
 	}
+	
+	/**
+	 * Method to save the simulation to a file
+	 * @param saveNum the document number to use in the name
+	 */
+	public void saveSim(int saveNum)
+	{
+		
+	}
+	
+	/**
+	 * Load the simulation stored in the specified file name
+	 * @param fileName the name of the file to read from
+	 */
+	public static Simulation loadSim(String fileName)
+	{
+		
+		
+		return null;
+	}
+	
+	
+	
+	
 }
