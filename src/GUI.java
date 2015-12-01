@@ -39,7 +39,7 @@ public class GUI implements Observer{
 	private JTextArea textArea;
 	private JFrame frame;
 	private ButtonListener bl;																				//CREATE BUTTON LISTENER
-	
+	private MenuBarListener mbl;
 	
 	/**
 	 * Creates the GUI
@@ -48,7 +48,8 @@ public class GUI implements Observer{
 	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
 
 		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
-		createAndShowGUI();	
+		mbl = new MenuBarListener(sim);
+		createAndShowGUI();
 	}
 	
 	/**
@@ -74,6 +75,8 @@ public class GUI implements Observer{
     	menu = new JMenu("File");
     	saveState = new JMenuItem("Save State");
     	saveState.setEnabled(false);
+    	saveState.setActionCommand(MenuBarListener.SAVE);
+    	selectButton.addActionListener(mbl);
     	menu.add(saveState);
     	loadState = new JMenuItem("Load State");
     	loadState.setEnabled(false);
