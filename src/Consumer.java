@@ -5,6 +5,7 @@
  * November 18, 2015
  */
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -13,7 +14,7 @@ import java.util.*;
  * 
  *
  */
-public class Consumer extends User {
+public class Consumer extends User implements Serializable{
 	
 	/**
 	 * Creates a Consumer object

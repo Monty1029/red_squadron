@@ -3,6 +3,7 @@
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author Garrett Steele, Re-factored from the original code written in consumer and Producer by Monty Dhanani
  *
  */
-public class PopularityStrategy implements Strategy {
+public class PopularityStrategy implements Strategy, Serializable{
 
 	@Override
 	/**

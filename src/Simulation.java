@@ -3,6 +3,12 @@
 
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
 
 import javax.swing.JFrame;
@@ -12,7 +18,7 @@ import javax.swing.JFrame;
  * @author Evan Bottomley, Contributors: Garrett Steele and Bronwyn Skelley
  *
  */
-public class Simulation extends Observable{
+public class Simulation extends Observable implements Serializable{
 
 	/**
 	 * The various tags
@@ -41,8 +47,8 @@ public class Simulation extends Observable{
 	}
 	
 	
+	public static String FILENAMES = "serialized?.txt";
 	
-	//private List<String> allTags = new ArrayList<String>({"Jazz"}, {"Techno"});
 	private List<String> availableTags;
 	private HashMap<User, ArrayList<Document>> map;
 	private List<Document> allDoc;
@@ -344,7 +350,21 @@ public class Simulation extends Observable{
 	 */
 	public void saveSim(int saveNum)
 	{
+		//create the name of the file to write to
+		String fileName = FILENAMES.replaceAll("?", "" + saveNum);
 		
+		try {
+			//create an output stream to write the simulation with
+			ObjectOutputStream serialized = new ObjectOutputStream( new FileOutputStream(fileName));
+			
+			serialized.writeObject(this);	//write out the Simulation
+			serialized.close();				//close off the output stream
+					
+					
+		} catch (IOException e) {
+			//Output to the console if there is a problem
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -353,9 +373,29 @@ public class Simulation extends Observable{
 	 */
 	public static Simulation loadSim(String fileName)
 	{
+		//create a null simulation reference
+		Simulation sim = null;
 		
+		try {
+			//create an onject input stream to read in the simulation object
+			ObjectInputStream serialized = new ObjectInputStream( new FileInputStream(fileName));
+			
+			
+			sim = (Simulation) serialized.readObject();		//read in the simulation
+			serialized.close();								//close off the input stream
+			
+		} 
+		//output to the console if there is a problem with the read, adn return null
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
-		return null;
+		//return the simulation
+		return sim;
 	}
 	
 	

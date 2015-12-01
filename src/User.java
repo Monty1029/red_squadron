@@ -9,6 +9,7 @@
 	//											//
 	//////////////////////////////////////////////
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  * Abstract class with Consumer and Producer inheriting from class User
  * @author Garrett Steele
  */
-public abstract class User {
+public abstract class User implements Serializable{
 
 	
 	//////////////////////////////////////////////

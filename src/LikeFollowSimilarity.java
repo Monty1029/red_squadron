@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * @author Bronwyn
  *
  */
-public class LikeFollowSimilarity implements Strategy {
+public class LikeFollowSimilarity implements Strategy, Serializable {
 
 	/**
 	 * look through people I follow, like any documents they have liked that I haven't, 

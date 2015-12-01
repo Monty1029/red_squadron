@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 //Author: Bronwyn Skelley
@@ -9,7 +10,7 @@ import java.util.HashSet;
  * @author Bronwyn Skelley
  *
  */
-public class Document implements Comparable<Document> {
+public class Document implements Comparable<Document>, Serializable{
 	private int like;
 	private String name;
 	private String tag;

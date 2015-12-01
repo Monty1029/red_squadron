@@ -5,6 +5,7 @@
  * November 18, 2015
  */
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  * @author Monty Dhanani, Garrett Steele (Class re-factoring and additions from Milestones 1-2)
  *
  */
-public class Producer extends User {
+public class Producer extends User implements Serializable{
 
 	//public boolean values to apply to one of these objects
 	public static final int STRATEGY_A = 1;

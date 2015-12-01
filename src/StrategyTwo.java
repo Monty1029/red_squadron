@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.*;
 /**
  * Ranking Strategy Two
  * @author Monty Dhanani
  *
  */
-public class StrategyTwo implements Strategy {
+public class StrategyTwo implements Strategy, Serializable {
 
 	/**
 	 * Ranks the documents based on the number of followers of users that like that particular document

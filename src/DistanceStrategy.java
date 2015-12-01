@@ -3,6 +3,7 @@
 //Class: SYSC3110 - Software Development Project
 //Git Repository: redSquadron
 
+import java.io.Serializable;
 import java.util.*;
 
 
@@ -12,7 +13,7 @@ import java.util.*;
  * @author Evan Bottomley
  *
  */
-public class DistanceStrategy implements Strategy {
+public class DistanceStrategy implements Strategy,Serializable {
 
 	
 	/**
