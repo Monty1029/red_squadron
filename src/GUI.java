@@ -74,12 +74,10 @@ public class GUI implements Observer{
     	menuBar = new JMenuBar();
     	menu = new JMenu("File");
     	saveState = new JMenuItem("Save State");
-    	saveState.setEnabled(false);
     	saveState.setActionCommand(MenuBarListener.SAVE);
-    	selectButton.addActionListener(mbl);
+    	saveState.addActionListener(mbl);
     	menu.add(saveState);
     	loadState = new JMenuItem("Load State");
-    	loadState.setEnabled(false);
     	menu.add(loadState);
     	menuBar.add(menu);
     	menu = new JMenu("Help");
@@ -401,6 +399,6 @@ public class GUI implements Observer{
 
 	
     /*public static void main(String[] args) {
-        GUI g = new GUI(null);														//HAD TO PUT A NULL HERE, WE KNOW THIS WAS JUST FOR TESTING
+        GUI g = new GUI();
     }*/
 }
