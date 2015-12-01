@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * tests simulation
- * @author Bronwyn Skelley
+ * @author Bronwyn Skelley, testSaveLoadSim() added by Garrett Steele
  *
  */
 public class SimulationTest {
@@ -45,5 +45,27 @@ public class SimulationTest {
 		
 	}
 
+	/**
+	 * method to test if the save an dload features for a simulation work
+	 */
+	@Test
+	public void testSaveLoadSim()
+	{
+		//create a simulation
+		Simulation sim = new Simulation();
+		sim.selectTags(1);
+		sim.seed(1, 1, 1);
+		
+		//save it to a file and read the simulation back in under a new reference
+		sim.saveSim(9000, Simulation.FILENAMES);
+		Simulation copySim = Simulation.loadSim(Simulation.FILENAMES.replaceAll("#", "" + 9000), null);
+		
+		assertEquals(sim.getAllUser().size(), copySim.getAllUser().size());					//should be same number of users
+		assertEquals(sim.getAllDoc().size(), copySim.getAllDoc().size());					//should be same number of documents
+		assertEquals(sim.getAvailableTags().size(), copySim.getAvailableTags().size());		//should be same number of available tags
+		assertEquals("" + sim.getResults(),"" + copySim.getResults());						//should have the same results text
+	}
+	
+	
 
 }
