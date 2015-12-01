@@ -21,6 +21,7 @@ public class ButtonListener implements ActionListener {
 	private JList<User> userList;
 	private JFrame list;
 	private RankingGUI rg;
+	private int stackCounter;
 	
 	/**
 	 * Constructor
@@ -30,6 +31,7 @@ public class ButtonListener implements ActionListener {
 	public ButtonListener(GUI g, Simulation s) {
 		gui = g;
 		sim = s;
+		stackCounter = 0;
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -37,6 +39,7 @@ public class ButtonListener implements ActionListener {
 		JButton but = (JButton) e.getSource(); //Get the button pressed and the action command (button number).
         String command = but.getActionCommand();
         if (command.equals(START)) { //Do something
+        	gui.getSaveState().setEnabled(true);
         	int n1 = (int) gui.getTagSpinner().getValue();
         	int n2 = (int) gui.getConsumersSpinner().getValue();
         	int n3 = (int) gui.getProducersSpinner().getValue();
@@ -51,6 +54,9 @@ public class ButtonListener implements ActionListener {
         else if (command.equals(STEP)) {
         	int n = (int) gui.getIterationsSpinner().getValue();
         	sim.step(n);
+        	sim.saveSim(stackCounter, Simulation.STACK);
+        	stackCounter++;
+        	gui.getStepBack().setEnabled(true);
         }
         else if (command.equalsIgnoreCase(SELECT))
         {
@@ -83,4 +89,21 @@ public class ButtonListener implements ActionListener {
         }
         
     }
+	
+	
+	public void setSim(Simulation sim){this.sim = sim;}
+	
+	public int getStackCounter() {
+		return stackCounter;
+	}
+	
+	public void decrementStack() {
+		if (stackCounter > 0) {
+			stackCounter--;
+		}
+		else {
+			stackCounter = 0;
+		}
+	}
+	
 }
