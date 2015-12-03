@@ -3,6 +3,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 /**
  * Observer to graph a User's cumulative payoff over time
@@ -33,8 +34,13 @@ public class PayoffGraphUpdatable implements Observer{
 		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		
 		graph.setSize(dub.intValue(), 700);
+		JTabbedPane pane = new JTabbedPane();
 		if(((Simulation) o).getGraphable().getPayoffArr().size() != 0){
-		graph.add(new PayoffGraph(((Simulation) o).getGraphable().getPayoffArr(), graph));
+			
+		pane.addTab("Payoff Graph: " + ((Simulation) o).getGraphable().toString(), new PayoffGraph(((Simulation) o).getGraphable().getPayoffArr(), graph));
+		pane.addTab("Users to Documents", new UserDocMap(((Simulation) o).getAllUser(), ((Simulation) o).getAllDoc(), graph));
+		//graph.add(new PayoffGraph(((Simulation) o).getGraphable().getPayoffArr(), graph));
+		graph.add(pane);
 		graph.setVisible(true);}
 		
 	}
