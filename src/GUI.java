@@ -38,16 +38,16 @@ public class GUI implements Observer{
 	private JMenuItem saveState, howToUse, stepBack;
 	private JTextArea textArea;
 	private JFrame frame;
-	private ButtonListener bl;																				//CREATE BUTTON LISTENER
+	private ButtonListener bl;																				
 	private MenuBarListener mbl;
 	
 	/**
 	 * Creates the GUI
 	 * @param sim is the reference to Simulation that will run the operations
 	 */
-	public GUI(Simulation sim) {																			//WE HAD TO GIVE SIMULATION REFERENCE
+	public GUI(Simulation sim) {
 
-		bl = new ButtonListener(this, sim);																	//HAD TO ACTUALLY CREATE A BUTTONLISTENER
+		bl = new ButtonListener(this, sim);
 		mbl = new MenuBarListener(this, sim, bl);
 		createAndShowGUI();
 	}
@@ -64,8 +64,8 @@ public class GUI implements Observer{
     	
     	Color textColor = new Color(225,225,225);
     	
-    	SpinnerModel sm1 = new SpinnerNumberModel(5, 1, 50, 1);
-    	SpinnerModel sm2 = new SpinnerNumberModel(5, 1, 50, 1);
+    	SpinnerModel sm1 = new SpinnerNumberModel(5, 1, 20, 1);
+    	SpinnerModel sm2 = new SpinnerNumberModel(5, 1, 20, 1);
     	SpinnerModel sm3 = new SpinnerNumberModel(10, 1, 50, 1);
     	SpinnerModel sm4 = new SpinnerNumberModel(5, 1, 50, 1);
     	SpinnerModel sm5 = new SpinnerNumberModel(1, 1, 50, 1);
@@ -192,7 +192,7 @@ public class GUI implements Observer{
     	c.gridy = 6;
     	startButton.setBackground(new Color(255,200,200));
     	startButton.setActionCommand(ButtonListener.START);
-    	startButton.addActionListener(bl);																		//ADDED BUTTON LISTENER
+    	startButton.addActionListener(bl);
     	pane.add(startButton, c);
     	
     	selectButton = new JButton("<html><font color=#960000>Select User to Graph</font></html>");
@@ -213,14 +213,14 @@ public class GUI implements Observer{
     	c.gridy = 6;
     	stepButton.setBackground(new Color(255,200,200));
     	stepButton.setActionCommand(ButtonListener.STEP);
-    	stepButton.addActionListener(bl);																		//ADDED BUTTON LISTENER
+    	stepButton.addActionListener(bl);
     	stepButton.setEnabled(false);
     	pane.add(stepButton, c);    	
     	
     	//Text area that will display the output at each step of the simulation
     	textArea = new JTextArea(10,1);
     	c.fill = GridBagConstraints.HORIZONTAL;
-    	c.ipady = 152;																							//HAD TO ADJUST WIDTH OF TEXT AREA
+    	c.ipady = 152;
     	c.gridwidth = 3;
     	c.gridx = 0;
     	c.gridy = 7;
@@ -369,10 +369,10 @@ public class GUI implements Observer{
 		Simulation simRef = (Simulation) o;
 		String toUpdate  = new String();
 		
-		
+		//output the last step results
 		toUpdate += simRef.getResults();
 		
-		
+		//output all user details
 		toUpdate += "\n\n";
 		toUpdate += "=========================================================================================================";
 		toUpdate += "\nUser details\n\n";
@@ -381,8 +381,7 @@ public class GUI implements Observer{
 			toUpdate += u.details() + "\n";
 		}
 		
-		
-		
+		//output all User-Doc likes
 		toUpdate += "\n\n";
 		toUpdate += "=========================================================================================================";
 		toUpdate += "\nUsers and the Documents they like\n\n";
@@ -392,7 +391,7 @@ public class GUI implements Observer{
 			toUpdate += "User: " + u.toString() + ", Likes: " + simRef.getHash().get(u).toString() + "\n";
 		}
 		
-		
+		//output all Doc-User pairs and Doc info
 		toUpdate += "\n\n";
 		toUpdate += "=========================================================================================================";
 		toUpdate += "\nDocuments and the people who like them\n\n";

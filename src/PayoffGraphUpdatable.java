@@ -38,9 +38,10 @@ public class PayoffGraphUpdatable implements Observer{
 		if(((Simulation) o).getGraphable().getPayoffArr().size() != 0){
 			
 		pane.addTab("Payoff Graph: " + ((Simulation) o).getGraphable().toString(), new PayoffGraph(((Simulation) o).getGraphable().getPayoffArr(), graph));
-		pane.addTab("Users to Documents", new UserDocMap(((Simulation) o).getAllUser(), ((Simulation) o).getAllDoc(), graph));
+		pane.addTab("Users to Documents", new UserDocMap(((Simulation) o).getAllUser(), ((Simulation) o).getAllDoc(), graph,((Simulation) o).getGraphable()));
 		//graph.add(new PayoffGraph(((Simulation) o).getGraphable().getPayoffArr(), graph));
 		graph.add(pane);
+		graph.setResizable(false);
 		graph.setVisible(true);}
 		
 	}

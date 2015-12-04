@@ -47,8 +47,6 @@ public class ConsumerTest {
 	@Test
 	public void testAct() {
 		
-		
-		
 		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
 		//no documents will match taste5
 		//also set a PopularityStategy for each consumer
@@ -154,78 +152,6 @@ public class ConsumerTest {
 		
 		
 	}
-
-	
-	/*/**
-	 * Tests whether the popularity ranking acts as intended for a User on a list of pre-made documents.
-	 */
-	/*@Test
-	public void testPopularityRank() {
-		
-		List<Document> ranked;
-		
-		//create 4 consumers to test a variety of cases for the return, could not pre-create these with "@Before" due to changes in each test case
-		Consumer consumer1 = new Consumer("consumer1", "taste1",sim);
-		Consumer consumer2 = new Consumer("consumer2", "taste2",sim);
-		Consumer consumer3 = new Consumer("consumer3", "taste3",sim);
-		Consumer consumer4 = new Consumer("consumer4", "taste4",sim);
-		
-		//any User can like any document regardless of their taste and the tag of the document, this is used in the next steps
-		
-		//////////////////////////////////////////////////////////////
-		//						Ranking test 1						//
-		//////////////////////////////////////////////////////////////
-		//7th document on will have no likes
-		
-		//1st document has 4 likes, this will be the top ranked document
-		docs.get(0).likeDoc(consumer1);
-		docs.get(0).likeDoc(consumer2);
-		docs.get(0).likeDoc(consumer3);
-		docs.get(0).likeDoc(consumer4);
-		
-		//2nd, 3rd, and 4th have 3 likes
-		docs.get(1).likeDoc(consumer1);			//2nd document
-		docs.get(1).likeDoc(consumer2);
-		docs.get(1).likeDoc(consumer3);
-		docs.get(2).likeDoc(consumer1);			//3rd document
-		docs.get(2).likeDoc(consumer2);
-		docs.get(2).likeDoc(consumer3);
-		docs.get(3).likeDoc(consumer1);			//4th document
-		docs.get(3).likeDoc(consumer2);
-		docs.get(3).likeDoc(consumer3);
-		
-		//5th has 2 likes
-		docs.get(4).likeDoc(consumer1);
-		docs.get(4).likeDoc(consumer2);
-		
-		//6th has 1 like
-		docs.get(5).likeDoc(consumer1);
-		
-		
-		ranked = consumer1.popularityRank(docs);			//rank the documents
-		assertEquals(4, ranked.get(0).getLikes());			//1st position is liked 4 times
-		assertEquals(3, ranked.get(1).getLikes());			//2nd position has 3 likes
-		assertEquals(3, ranked.get(3).getLikes());			//4th position has 3 likes
-		assertEquals(2, ranked.get(4).getLikes());			//5th has 2 likes
-		assertEquals(1, ranked.get(5).getLikes());			//6th has 1 like
-		assertEquals(0, ranked.get(6).getLikes());			//7th has no likes
-		assertEquals(0, ranked.get(9).getLikes());			//10th has no likes
-		
-		
-		//////////////////////////////////////////////////////////////
-		//						Ranking test 2						//
-		//////////////////////////////////////////////////////////////
-		//all document have no likes
-		
-		docs = createDocList();							//reset document list
-		ranked = consumer1.popularityRank(docs);		//rank the documents
-		
-		assertEquals(0, ranked.get(0).getLikes());		//1st position has no likes
-		assertEquals(0, ranked.get(4).getLikes());		//5th position has no likes
-		assertEquals(0, ranked.get(9).getLikes());		//10th position has no likes
-		
-		
-	}*/
 	
 	
 	/**

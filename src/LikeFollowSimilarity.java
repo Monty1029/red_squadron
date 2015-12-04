@@ -18,7 +18,6 @@ public class LikeFollowSimilarity implements Strategy, Serializable {
 		ArrayList<Document> newRank = new ArrayList<Document>();
 		
 		
-		
 		for(User user: u.getFollowing()){
 			ArrayList<Document> liked= 	u.getSim().getHash().get(user);
 			if(liked == null){return newRank;}

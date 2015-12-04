@@ -42,7 +42,9 @@ public class StrategyTwoTest {
 		assertEquals(1, strat.rank(null, list, 1).size());
 		assertEquals(doc1, strat.rank(null, list, 1).get(0));
 	}
-	
+	/**
+	 * Tests if the documents properly sort in ascending order, and tests if size of Map is correct
+	 */
 	@Test
 	public void testSortDocuments() {
 		Producer pro = new Producer("pro1","taste1", new Simulation());

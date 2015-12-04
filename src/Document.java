@@ -15,7 +15,7 @@ public class Document implements Comparable<Document>, Serializable{
 	private String name;
 	private String tag;
 	private HashSet<User> list;
-	private Producer producer; 																//TODO
+	private Producer producer; 																
 	
 	/**
 	 * Constructor using name and tag to make document
@@ -23,7 +23,7 @@ public class Document implements Comparable<Document>, Serializable{
 	 * @param tag this is tag of document
 	 * @param producer the producer that made it
 	 */
-	public Document(String name, String tag, Producer producer){							//TODO
+	public Document(String name, String tag, Producer producer){
 		if(name!=null){
 			this.name = name;
 		}
@@ -36,11 +36,9 @@ public class Document implements Comparable<Document>, Serializable{
 			this.tag = "none";
 		}
 
-		this.producer = producer;															//TODO
+		this.producer = producer;
 		list = new HashSet<User>();
 	}
-	
-
 	
 	
 	/**

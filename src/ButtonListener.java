@@ -21,7 +21,7 @@ public class ButtonListener implements ActionListener {
 	private JList<User> userList;
 	private JFrame list;
 	private RankingGUI rg;
-	private int stackCounter;
+	private int stackCounter;		//used for "step back" functionality
 	
 	/**
 	 * Constructor
@@ -34,6 +34,7 @@ public class ButtonListener implements ActionListener {
 		stackCounter = 0;
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e)
     {
 		JButton but = (JButton) e.getSource(); //Get the button pressed and the action command (button number).
@@ -67,7 +68,9 @@ public class ButtonListener implements ActionListener {
     			addList.addElement(u);
     		}
     		userList = new JList<User>(addList);
-    		list.add(userList);
+    		JScrollPane scroll = new JScrollPane (userList,
+        			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    		list.add(scroll);
     		list.pack();
     		list.setVisible(true);
 
@@ -90,13 +93,23 @@ public class ButtonListener implements ActionListener {
         
     }
 	
-	
+	/**
+	 * Set reference to the Simulation
+	 * @param sim the Simulation to set
+	 */
 	public void setSim(Simulation sim){this.sim = sim;}
 	
+	/**
+	 * Get the number of documents that can be "step backed"
+	 * @return the stackCounter
+	 */
 	public int getStackCounter() {
 		return stackCounter;
 	}
 	
+	/**
+	 * Decrement how many "steps back" can be taken
+	 */
 	public void decrementStack() {
 		if (stackCounter > 0) {
 			stackCounter--;

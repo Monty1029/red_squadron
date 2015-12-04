@@ -317,6 +317,7 @@ public class Simulation extends Observable implements Serializable{
 	/**
 	 * Method to save the simulation to a file
 	 * @param saveNum the document number to use in the name
+	 * @param fileName the name of the file to save to
 	 */
 	public void saveSim(int saveNum, String fileName)
 	{
@@ -340,7 +341,8 @@ public class Simulation extends Observable implements Serializable{
 	/**
 	 * Load the simulation stored in the specified file name
 	 * @param fileName the name of the file to read from
-	 * @param gui 
+	 * @param gui reference to the gui to be added as an observer
+	 * @return a new Simulation object as loaded from the file
 	 */
 	public static Simulation loadSim(String fileName, GUI gui)
 	{
