@@ -15,6 +15,10 @@ import java.util.*;
  */
 public class DistanceStrategy implements Strategy,Serializable {
 
+	private static final int bonus1 = 5;
+	private static final int bonus2 = 2;
+	private static final int bonus3 = 1;
+	
 	
 	/**
 	 * Rank documents in provided list according to distance of users who liked them from the user ranking the documents
@@ -32,17 +36,17 @@ public class DistanceStrategy implements Strategy,Serializable {
 			
 			for (User liked: d.getLikedUsers()) {
 				if (u.getFollowing().contains(liked)) {
-					total += 5;
+					total += bonus1;
 				}
 				else {
 					found = false;
 					for (User liked2: u.getFollowing()) {
 						if (liked2.getFollowing().contains(liked) && !found) {
-							total += 2;
+							total += bonus2;
 							found = true;
 						}
 					}
-					if (!found) total += 1;
+					if (!found) total += bonus3;
 				}
 			}
 			values.add(total);
