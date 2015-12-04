@@ -26,6 +26,7 @@ public class StrategyTwo implements Strategy, Serializable {
 		}
 		sortedMap = (LinkedHashMap<Document, Integer>) sortDocuments(docLikes);
 		sorted.addAll(sortedMap.keySet());
+		Collections.reverse(sorted); //Reverses list to get descending order
 		for (int i=sorted.size() - 1; i>n; i--) {
 			sorted.remove(i);
 		}
@@ -33,7 +34,7 @@ public class StrategyTwo implements Strategy, Serializable {
 	}
 
 	/**
-	 * Sorts a Map of the number of followers of users per document
+	 * Sorts a Map of the number of followers of users per document in ascending order
 	 * @param unsortedMap is the unsorted Map that gets passed in from the rank method above
 	 * @return a sorted LinkedHashMap of the number of followers of users per document
 	 */
