@@ -53,8 +53,8 @@ public class ButtonListener implements ActionListener {
         }
         else if (command.equals(STEP)) {
         	int n = (int) gui.getIterationsSpinner().getValue();
-        	sim.step(n);
         	sim.saveSim(stackCounter, Simulation.STACK);
+        	sim.step(n);
         	stackCounter++;
         	gui.getStepBack().setEnabled(true);
         }

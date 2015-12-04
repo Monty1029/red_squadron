@@ -71,14 +71,14 @@ public class MenuBarListener implements ActionListener {
         	String filename = menuItem.getText();
         	Simulation newSim = Simulation.loadSim(filename, gui);
         	gui.getBl().setSim(newSim);
-        	newSim.updated();
+        	newSim.update();
         }
         else if (command.equals(BACK)) {
         	bl.decrementStack();
         	String filename = Simulation.STACK.replaceAll("#", "" + bl.getStackCounter());
         	Simulation newSim = Simulation.loadSim(filename, gui);
         	gui.getBl().setSim(newSim);
-        	newSim.updated();
+        	newSim.update();
         }
 	}
 }

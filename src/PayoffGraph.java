@@ -39,7 +39,7 @@ public class PayoffGraph extends JPanel{
 		
 		int width = (dubWidth.intValue()-150) / arr.size();					//set the width to use, scales horizontally
 															
-		int bottom = dub.intValue() - 100 ;									//the bottom of the graph
+		int bottom = dub.intValue() - 120 ;									//the bottom of the graph
 		int height;
 		if(Collections.max(arr) != 0){
 			height = (bottom-150)/(Collections.max(arr));	//height of each increment for the bars

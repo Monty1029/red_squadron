@@ -123,6 +123,8 @@ public class Producer extends User implements Serializable{
 		produced.add(newlyProduced);
 		super.sim.addDoc(newlyProduced);
 		newlyProduced.likeDoc(this);
+		sim.addLike(this, newlyProduced);
+		
 	}
 
 	

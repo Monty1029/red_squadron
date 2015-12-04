@@ -61,12 +61,6 @@ public class Simulation extends Observable implements Serializable{
 	private JFrame graph;														//added by Garrett and Bronwyn on Nov 6
 	private User graphable;														//added by Garrett and Bronwyn on Nov 6
 	
-	//getters
-	/**
-	 * Get the list of all possible tags
-	 * @return all possible tags
-	 */
-	//public Enum getAllTags(){return AllTags;} TODO
 	
 	
 	
@@ -255,36 +249,12 @@ public class Simulation extends Observable implements Serializable{
 	/**
 	 * Print the update to the GUI.
 	 */
-	private void update() {
-		/*gui.getTextArea().setText(results.toString());
-		System.out.println(gui.getTextArea().getText());
-		if(graphable != null){updateGraph();}					//line added by Garrett and Bronwyn on nov 6*/
-		
+	public void update() {
 		this.setChanged();
 		this.notifyObservers();
 		
 		
 	}
-	
-	/**
-	 * Method to update the graph of a specific User. Added by Garrett and Bronwyn on Nov 6
-	 */
-	/*private void updateGraph()
-	{
-		if (graph != null){graph.dispose();}
-		
-		graph = new JFrame("Graph: " + graphable.getName());
-		graph.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		Double dub = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		
-		graph.setSize(dub.intValue(), 700);
-		
-		graph.add(new PayoffGraph(graphable.getPayoffArr(), graph));
-		graph.setVisible(true);
-		
-	}*/
-	
 	
 	/**
 	 * Starts the simulation
@@ -399,21 +369,14 @@ public class Simulation extends Observable implements Serializable{
 		if(sim != null)
 		{
 			sim.addObserver(new PayoffGraphUpdatable());
-			sim.addObserver(gui);
+			 if (gui != null){sim.addObserver(gui);}
 		}
 		
 		//return the simulation
 		return sim;
 	}
 	
-	/**
-	 * Force update the Observers
-	 */
-	public void updated()
-	{
-		setChanged();
-		notifyObservers();
-	}
+
 	
 	
 }
