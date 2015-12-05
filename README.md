@@ -13,12 +13,7 @@
         //                                                                  //
         //////////////////////////////////////////////////////////////////////
 
-
-    //////////////////////////////////
-    //                              //
-    //      Team Information        //
-    //                              //
-    //////////////////////////////////
+Team Information:
 
 Readme Author: Monty Dhanani
 
@@ -29,28 +24,19 @@ Bronwyn Skelley     100880052               bronwynskelley@cmail.carleton.ca    
 Evan Bottomley      100943340               EvanBottomley@cmail.carleton.ca     evanbottomley
 
 
-    //////////////////////////////////
-    //                              //
-    //      Important Note          //
-    //                              //
-    //////////////////////////////////
 
-    If opening and running the code from within an IDE, the Simulation.java class is the
+Important Note:
+If opening and running the code from within an IDE, the Simulation.java class is the
 start of program execution and contains the main method to be executed. Refer to the "How To Use" in the "Help" option in the Menu Bar on the main GUI,
 for further clarification on how to run the program and what the strategy names are referring to.
 
 
-    //////////////////////////////////////////////////
-    //                                              //
-    //      Responsibilities for Milestone 4        //
-    //                                              //
-    //////////////////////////////////////////////////
 
-   The following are the primary design responsibilities of each team member for "Milestone 4", project code is written individually,
+Responsibilities for Milestone 4:
+The following are the primary design responsibilities of each team member for "Milestone 4", project code is written individually,
 or in pairs where stated in the code. Where stated in the code, another team member has made contribution(s) to another team member's code
 where changes in the contributors class were directly related to that of another team member. The team member who had their code modified then reviewed
 the changes. Debugging activities were performed as a team during team meetings.
-
 
 Monty Dhanani:      Refactored the GUI for more cohesion, MenuBarListener.java, fixed the unit test in StrategyTwoTest, added scrolling bar to JList,
 					README.txt
@@ -64,14 +50,8 @@ where the group reviews and edits the JavaDoc together prior to submission.
 
 
 
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-//              Included Files in Milestone Submission                  //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
-
-   In the ".zip" file submitted to CULearn is:
-
+Included Files in Milestone Submission:
+In the ".zip" file submitted to CULearn is:
    - this "README.txt" file
    - a ".jar" file containing the readable source code for the project(where the name of the student who wrote each class is included at the top of each source code)
    - the same ".jar" is executable from the Java console, or if the computer is set up to do so, by double clicking on the executable
@@ -81,12 +61,7 @@ where the group reviews and edits the JavaDoc together prior to submission.
 
 
 
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-//                    Changes since last Milestone                      //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
-
+Changes since last Milestone:
 Since "Milestone 3", a save and load feature was implemented to select a state from the simulation at any point.
 A "step back" option was also added under the Load submenu. Also, code was refactored in the GUI for more cohesion.
 
@@ -102,11 +77,7 @@ The project documentation comprised of "User_Manual_M4.pdf", "Design_Decisions_M
 have also been updated from those for "Milestone 3" to reflect the above changes.
 
 
-//////////////////////////////////////////////////////////////////////////
-//                                                                      //
-//                            Known Issues                              //
-//                                                                      //
-//////////////////////////////////////////////////////////////////////////
 
-   The project currently has no known issues for "Milestone 4", operating as expected
+Known Issues:
+The project currently has no known issues for "Milestone 4", operating as expected
 when tested with multiple seed values for the number of documents and users.
