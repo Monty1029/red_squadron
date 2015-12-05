@@ -46,7 +46,7 @@ Monty Dhanani:      Refactored the GUI for more cohesion, MenuBarListener.java, 
 Garrett Steele:     Load and save feature, social network graph (with Even Bottomley and Bronwyn Skelley), fixed problems as per TA feedback in DistanceStrategy.java and SimulationTest.java, Milestone4_UML.jpg
 
 
-Bronwyn Skelley:    Social network graph (with Garrett Steele and Evan Bottemley), User_Manual_M4.pdf
+Bronwyn Skelley:    Social network graph (with Garrett Steele and Evan Bottomley), User_Manual_M4.pdf
 
 
 Evan Bottomley:     Social network graph (with Garrett Steele and Bronwyn Skelley), Design_Decisions_M4.pdf
