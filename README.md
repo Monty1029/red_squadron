@@ -1,11 +1,11 @@
-		//////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////
         //                                                                  //
         //              SYSC 3110 - Software Development Project            //
         //                              Fall 2015                           //
         //                                                                  //
         //                  Course Project: Social Network                  //
         //                            Milestone: 4                          //
-        //                            Nov 21, 2015                          //
+        //                            Dec 7, 2015                          //
         //                                                                  //
         //  Monty Dhanani, Garrett Steele, Bronwyn Skelley, Even Bottomley  //
         //                                                                  //
