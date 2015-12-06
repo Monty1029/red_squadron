@@ -24,11 +24,9 @@ public class UserToUserMap extends JPanel{
 	private static int QUAD2 = 90;
 	private static int QUAD3 = 180;
 	private static int QUAD4 = 270;
-	private static int ARROW = 20;
 	
 	
 	private List<User> users;
-	private JFrame frame;
 	private HashMap<User, Pos> userPos;
 	private User graphable;
 	
@@ -42,7 +40,6 @@ public class UserToUserMap extends JPanel{
 	{
 		//set required references
 		this.users = users;
-		this.frame = frame;
 		userPos = new HashMap<>();
 		graphable = g;
 		
