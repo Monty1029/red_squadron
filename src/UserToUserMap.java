@@ -27,7 +27,7 @@ public class UserToUserMap extends JPanel{
 	private HashMap<User, Pos> userPos;
 	private User graphable;
 	
-	private int mapRadius = 100;
+	private int mapRadius = 200;
 	private int radiusOffset = 20;
 	private int spacingDegree = 360;
 	private int width = 20;
@@ -51,8 +51,10 @@ public class UserToUserMap extends JPanel{
 	 */
 	protected void paintComponent(Graphics g)
 	{
+		//positioning variables for calculations
 		int degree = 0;
 		int x, y;
+		
 		
 		super.paintComponent(g); 				//paint JPanel to draw on top of it
 		this.setBackground(Color.BLACK);		//black backdrop
@@ -61,6 +63,10 @@ public class UserToUserMap extends JPanel{
 		//loop through the users and calculate their position
 		for(User u: users)
 		{
+			//change color for the person selected for graphing
+			if(u == graphable){g.setColor(Color.ORANGE);}
+			
+			
 			//the calculation for the position differs based on the degrees around the circle of Users
 			//it is set up in quadrants in terms of calculating x and y position as if (0,0) like in math 2D graphing
 			//these must then be translated by the coordinates of the "center" of the JFrame to figure out what the actual position to draw lines to/from is
@@ -68,8 +74,8 @@ public class UserToUserMap extends JPanel{
 			if(degree == 0)										//its at the top
 			{
 				userPos.put(u, new Pos(center.getX(), center.getY() - mapRadius));
-				g.fillOval(userPos.get(u).getX(), userPos.get(u).getY() - mapRadius - width, width, width);
-				degree += spacingDegree;
+				g.fillOval(userPos.get(u).getX(), userPos.get(u).getY() - width, width, width);
+				
 			}
 			else if(degree > QUAD1_start && degree < QUAD2)		//its in the top right
 			{
@@ -78,6 +84,9 @@ public class UserToUserMap extends JPanel{
 			else if(degree == QUAD2)							//its to the right
 			{
 				//straight forward calculation to position it to the right of the center
+				userPos.put(u, new Pos(center.getX() + mapRadius, center.getY()));
+				g.fillOval(userPos.get(u).getX() + width, userPos.get(u).getY(), width, width);
+				
 			}
 			else if(degree < QUAD3 && degree > QUAD2)			//its to the bottom right
 			{
@@ -85,6 +94,8 @@ public class UserToUserMap extends JPanel{
 			}
 			else if(degree == QUAD3)							//its to the bottom
 			{//straight forward calculation to position it directly down from the center
+				userPos.put(u, new Pos(center.getX(), center.getY() + mapRadius));
+				g.fillOval(userPos.get(u).getX(), userPos.get(u).getY() + width, width, width);
 				
 			}
 			else if(degree < QUAD4 && degree > QUAD3)			//its to the bottom left
@@ -94,11 +105,19 @@ public class UserToUserMap extends JPanel{
 			else if(degree == QUAD4)							//its to the left
 			{
 				//straight forward calculation to position it to the left of the center
+				//straight forward calculation to position it to the right of the center
+				userPos.put(u, new Pos(center.getX() - mapRadius, center.getY()));
+				g.fillOval(userPos.get(u).getX() - width, userPos.get(u).getY(), width, width);
+				
 			}
 			else												//it must then be to the top left
 			{
 				
 			}
+			
+			//increment the degree around the circle
+			degree += spacingDegree;
+			g.setColor(Color.white);
 		}
 	}
 	
