@@ -36,6 +36,7 @@ public class UserDocMap extends JPanel{
 	 * @param users list of all users
 	 * @param docs list of all documents
 	 * @param frame the JFrame to draw in
+	 * @param g the graphable user
 	 */
 	public UserDocMap(List<User> users, List<Document> docs, JFrame frame, User g) 
 	{

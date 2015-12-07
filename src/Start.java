@@ -12,7 +12,6 @@ public class Start {
 		GUI g = new GUI(sim);
 		sim.setGUI(g);
 		
-		//while(true){} //Loop forever
 
 	}
 	
