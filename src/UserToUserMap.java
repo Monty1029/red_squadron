@@ -1,10 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -166,8 +161,9 @@ public class UserToUserMap extends JPanel{
 			}
 		}
 		
-		
-		
+		//make sure the orange lines are on top
+		g.setColor(Color.ORANGE);
+		for(User u: graphable.getFollowing()){connection(g, userPos.get(graphable), userPos.get(u));}
 		
 	
 		
