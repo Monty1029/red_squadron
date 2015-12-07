@@ -28,7 +28,7 @@ Evan Bottomley      100943340               EvanBottomley@cmail.carleton.ca     
 
 
 Important Note:
-If opening and running the code from within an IDE, the Simulation.java class is the
+If opening and running the code from within an IDE, the Start.java class is the
 start of program execution and contains the main method to be executed. Refer to the "How To Use" in the "Help" option in the Menu Bar on the main GUI,
 for further clarification on how to run the program and what the strategy names are referring to.
 
